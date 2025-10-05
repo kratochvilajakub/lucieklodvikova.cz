@@ -1,0 +1,250 @@
+{\rtf1\ansi\ansicpg1250\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!doctype html>\
+<html lang="cs">\
+<head>\
+  <meta charset="utf-8" />\
+  <meta name="viewport" content="width=device-width, initial-scale=1" />\
+  <title>Lucie Klodv\'edkov\'e1 \'96 Svatby & Eventy | Osobn\'ed prezentace</title>\
+  <meta name="description" content="Osobn\'ed mini\uc0\u8209 web Lucie Klodv\'edkov\'e9: svatby & eventy, p\u345 \'edpadovky, zku\'9aenosti, dovednosti a motiva\u269 n\'ed dopis na jednu obrazovku." />\
+  <style>\
+    :root\{\
+      --bg:#fff9fb;            /* jemn\uc0\u283  kr\'e9mov\'e1 r\u367 \'9eov\'e1 */\
+      --ink:#1f1a1c;           /* tmav\'fd inkoust */\
+      --muted:#6f6670;         /* jemn\uc0\u283  \'9aed\'e1 */\
+      --brand:#d16ba5;         /* r\uc0\u367 \'9eov\'e1 pivo\u328 ka */\
+      --brand-2:#86a8e7;       /* jemn\'e1 modr\'e1 */\
+      --accent:#7bc6cc;        /* \'9aalv\uc0\u283 jov\u283  tyrkysov\'e1 */\
+      --card:#ffffff;          /* b\'edl\'e1 karta */\
+      --stroke:rgba(31,26,28,.08);\
+      --shadow:0 8px 28px rgba(209,107,165,.12);\
+      --radius:20px; --radius-sm:14px; --gap:clamp(14px,3vw,28px); --max:1080px;\
+    \}\
+    *\{box-sizing:border-box\}\
+    html,body\{margin:0;padding:0;background:\
+      radial-gradient(900px 600px at 0% 0%, #ffe7f2 0%, transparent 60%),\
+      radial-gradient(900px 600px at 100% 10%, #e8f7f8 0%, transparent 60%),\
+      var(--bg);\
+      color:var(--ink); font:16px/1.6 system-ui, -apple-system, Segoe UI, Inter, Roboto, "Helvetica Neue", Arial, sans-serif;\}\
+    h1,h2,h3\{font-family: Georgia, "Times New Roman", serif; letter-spacing:.2px;\}\
+    a\{color:#0f6b6e;text-decoration:none\}\
+    a:hover\{text-decoration:underline\}\
+    .container\{max-width:var(--max);margin:0 auto;padding:0 var(--gap)\}\
+\
+    header\{position:sticky;top:0;z-index:20;backdrop-filter:saturate(130%) blur(8px);\
+      background:rgba(255,255,255,.75); border-bottom:1px solid var(--stroke)\}\
+    .nav\{display:flex;align-items:center;justify-content:space-between;padding:12px 0\}\
+    .brand\{display:flex;align-items:center;gap:12px;font-weight:700\}\
+    .petal\{width:14px;height:14px;border-radius:6px;transform:rotate(12deg);\
+      background:linear-gradient(135deg,var(--brand),var(--accent));box-shadow:0 0 0 6px rgba(209,107,165,.12)\}\
+\
+    .btn\{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--stroke);\
+      background:#fff;color:var(--ink);padding:10px 14px;border-radius:999px;cursor:pointer;box-shadow:var(--shadow);\
+      transition:transform .12s ease, box-shadow .2s ease\}\
+    .btn:hover\{transform:translateY(-1px); box-shadow:0 10px 34px rgba(134,168,231,.25)\}\
+    .btn.primary\{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border-color:transparent;font-weight:700\}\
+    .btn.ghost\{background:transparent\}\
+\
+    .hero\{padding:clamp(36px,7vw,72px) 0 clamp(18px,5vw,48px)\}\
+    .hero-grid\{display:grid;grid-template-columns: .9fr 1.1fr; gap:var(--gap);align-items:center\}\
+    @media (max-width:900px)\{.hero-grid\{grid-template-columns:1fr;\}\}\
+\
+    .card\{background:var(--card);border:1px solid var(--stroke);border-radius:var(--radius);box-shadow:var(--shadow)\}\
+    .hero .card\{padding:clamp(18px,3vw,28px)\}\
+\
+    h1\{font-size:clamp(28px,4.2vw,44px);line-height:1.1;margin:0 0 6px\}\
+    .subtitle\{color:var(--muted);margin-bottom:14px\}\
+    .chips\{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0 20px\}\
+    .chip\{font-size:14px;padding:8px 12px;border-radius:999px;background:#fff;border:1px solid var(--stroke)\}\
+\
+    .facts\{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0 6px\}\
+    .fact\{background:#fff;border:1px solid var(--stroke);padding:14px;border-radius:var(--radius-sm)\}\
+    .fact b\{display:block;font-size:20px;color:#854a7a\}\
+    @media (max-width:640px)\{.facts\{grid-template-columns:1fr\}\}\
+\
+    .photo-card\{position:relative;overflow:hidden;display:grid;place-items:center;padding:0\}\
+    .photo\{width:100%;height:100%;object-fit:cover;border-radius:var(--radius)\}\
+    .photo-wrap\{aspect-ratio:4/5;width:100%;border-radius:var(--radius);overflow:hidden;border:1px solid var(--stroke)\}\
+\
+    section\{padding:clamp(24px,6vw,56px) 0\}\
+    .section-title\{font-size:clamp(20px,2.6vw,30px);margin:0 0 12px\}\
+    .lead\{color:var(--muted);margin:0 0 20px\}\
+\
+    .grid-3\{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--gap)\}\
+    .grid-2\{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap)\}\
+    @media (max-width:960px)\{.grid-3,.grid-2\{grid-template-columns:1fr\}\}\
+    .list\{display:grid;gap:8px;margin:0;padding:0 0 0 18px\}\
+\
+    .case\{padding:18px\}\
+    .case h3\{margin:6px 0 8px\}\
+    .meta\{color:var(--muted);font-size:14px\}\
+\
+    .letter\{white-space:pre-wrap;background:#fff;border:1px solid var(--stroke);padding:18px;border-radius:var(--radius-sm)\}\
+\
+    .footer\{padding:28px 0 64px;color:var(--muted);font-size:14px\}\
+\
+    @media print\{header,.btn\{display:none!important\} body\{background:#fff\} .card,.letter,.fact\{box-shadow:none\}\}\
+  </style>\
+</head>\
+<body>\
+  <header>\
+    <div class="container nav">\
+      <div class="brand"><span class="petal"></span> Lucie Klodv\'edkov\'e1 \'b7 Svatby & Eventy</div>\
+      <div class="nav-actions">\
+        <button class="btn ghost" id="copyEmail">Zkop\'edrovat e\uc0\u8209 mail</button>\
+        <button class="btn" onclick="window.location.href='mailto:lklodvikova@seznam.cz?subject=Popt\'e1vka%20\'96%20Svatby%20%26%20eventy'">Napsat e\uc0\u8209 mail</button>\
+        <button class="btn primary" onclick="window.print()">St\'e1hnout PDF profilu</button>\
+      </div>\
+    </div>\
+  </header>\
+\
+  <main class="container">\
+    <!-- HERO -->\
+    <section class="hero">\
+      <div class="hero-grid">\
+        <div class="card photo-card">\
+          <div class="photo-wrap">\
+            <img class="photo" alt="Lucie Klodv\'edkov\'e1 \'96 portr\'e9t" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKkAAADyCAIAAAC5/nJMAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAqaADAAQAAAABAAAA8gAAAACEiQH/AABAAElEQVR4Aby9abDlx3XYd/d9f/ub..."\}]\}]\}"/>\
+          </div>\
+        </div>\
+        <div class="card">\
+          <h1>Lucie Klodv\'edkov\'e1</h1>\
+          <div class="subtitle">Event & Wedding Coordinator \'b7 Brno \'b7 AJ B2 \'b7 \uc0\u344 P B</div>\
+          <div class="chips">\
+            <span class="chip">Ex\uc0\u8209 Infinit Maximus (recepce & rezervace)</span>\
+            <span class="chip">Produkce konferenc\'ed \'96 Magnus Regio</span>\
+            <span class="chip">S\'ed\uc0\u357  kontakt\u367  (DJ, viz\'e1\'9eistky, agentury)</span>\
+          </div>\
+          <p class="lead">Spojuji precizn\'ed organizaci velk\'fdch akc\'ed s n\uc0\u283 \'9enou estetikou svateb. Zn\'e1m provoz Maximusu, um\'edm v\'e9st projekt od popt\'e1vky po vy\'fa\u269 tov\'e1n\'ed a postar\'e1m se o to, aby klienti pro\'9eili den, na kter\'fd budou r\'e1di vzpom\'ednat.</p>\
+          <div class="facts">\
+            <div class="fact"><b>7+ let</b> v hotelnictv\'ed & eventech</div>\
+            <div class="fact"><b>0,5\'961 mil. K\uc0\u269 </b> typick\'e9 rozpo\u269 ty akc\'ed</div>\
+            <div class="fact"><b>100%</b> d\uc0\u367 raz na detail a plynulost</div>\
+          </div>\
+        </div>\
+      </div>\
+    </section>\
+\
+    <!-- PRO\uc0\u268  J\'c1 -->\
+    <section>\
+      <div class="grid-2">\
+        <div class="card" style="padding:18px">\
+          <h2 class="section-title">Pro\uc0\u269  j\'e1 pro Maximus</h2>\
+          <ul class="list">\
+            <li><b>Zn\'e1m prost\uc0\u345 ed\'ed</b> \'96 recepce, rezervace, v\'fdpomoc na svatb\'e1ch; rychl\'e1 adaptace bez dlouh\'e9ho za\'9akolen\'ed.</li>\
+            <li><b>Kompletn\'ed svatebn\'ed workflow</b> \'96 popt\'e1vky, prohl\'eddky, nab\'eddky, koordinace dne, vy\'fa\uc0\u269 tov\'e1n\'ed, zp\u283 tn\'e1 vazba.</li>\
+            <li><b>Propojen\'ed s marketingem & obchodem</b> \'96 CRM, soci\'e1ln\'ed s\'edt\uc0\u283 , partnersk\'e9 spolupr\'e1ce, z\'e1\'9atity a dotace.</li>\
+            <li><b>Empatie & estetika</b> \'96 cit pro detail, klid v z\'e1t\uc0\u283 \'9ei, orientace na emoce host\u367 .</li>\
+          </ul>\
+        </div>\
+        <div class="card" style="padding:18px">\
+          <h2 class="section-title">Dovednosti</h2>\
+          <ul class="list">\
+            <li>Koordinace svateb a oslav \'b7 prohl\'eddky prostor \'b7 cenov\'e9 nab\'eddky \'b7 dekor & v\'fdzdoba.</li>\
+            <li>Obchod a vztahy s klienty/partnery \'b7 vyjedn\'e1v\'e1n\'ed \'b7 follow\uc0\u8209 up & zp\u283 tn\'e1 vazba.</li>\
+            <li>Marketing & soci\'e1ln\'ed s\'edt\uc0\u283  \'b7 branding \'b7 pr\'e1ce s AI n\'e1stroji.</li>\
+            <li>MS Office \'b7 CRM \'b7 \uc0\u344 P sk. B \'b7 AJ B2 (jedn\'e1n\'ed s klienty).</li>\
+          </ul>\
+        </div>\
+      </div>\
+    </section>\
+\
+    <!-- CASE STUDIES -->\
+    <section>\
+      <h2 class="section-title">P\uc0\u345 \'edpadovky (v\'fdb\u283 r)</h2>\
+      <p class="lead">T\uc0\u345 i projekty, kter\'e9 ukazuj\'ed rozsah, p\u345 esnost a p\'e9\u269 i o detail.</p>\
+      <div class="grid-3">\
+        <article class="card case">\
+          <h3>Celost\'e1tn\'ed konference pro velitele MP/OP</h3>\
+          <div class="meta">2 dny \'b7 stovky \'fa\uc0\u269 astn\'edk\u367  \'b7 spolupr\'e1ce s MO, SMO \u268 R a Kolegium \u345 editel\u367  MP</div>\
+          <ul class="list">\
+            <li>Kompletn\'ed produkce: harmonogram, registrace, partne\uc0\u345 i, logistika.</li>\
+            <li>Rozpo\uc0\u269 et do 1 mil. K\u269 , smluvn\'ed r\'e1mce a vy\'fa\u269 tov\'e1n\'ed.</li>\
+            <li>Vy\uc0\u345 \'edzen\'ed z\'e1\'9atit a form\'e1ln\'edch n\'e1le\'9eitost\'ed.</li>\
+          </ul>\
+        </article>\
+        <article class="card case">\
+          <h3>Konference \uc0\u345 editel\u367  nemocnic</h3>\
+          <div class="meta">Brno & Praha \'b7 2\'d7 ro\uc0\u269 n\u283  \'b7 MZ\u268 R, \u268 LK, \u268 LnK \'b7 partne\u345 i Veolia, Fortinet</div>\
+          <ul class="list">\
+            <li>Koordinace odborn\'e9ho programu a partnerstv\'ed (EPC, kyberbezpe\uc0\u269 nost).</li>\
+            <li>\uc0\u344 \'edzen\'ed VIP host\u367  a protokolu, PR a follow\u8209 up.</li>\
+          </ul>\
+        </article>\
+        <article class="card case">\
+          <h3>Vernis\'e1\'9e prof. Miroslava B\'e1rty</h3>\
+          <div class="meta">ve spolupr\'e1ci s Medialogue (Olga Menzelov\'e1)</div>\
+          <ul class="list">\
+            <li>Event s medi\'e1ln\'edm dosahem; pr\'e1ce s ve\uc0\u345 ejnost\'ed i VIP hosty.</li>\
+            <li>Koordinace dodavatel\uc0\u367  a vizu\'e1ln\'edho konceptu.</li>\
+          </ul>\
+        </article>\
+      </div>\
+    </section>\
+\
+    <!-- DOPIS -->\
+    <section>\
+      <h2 class="section-title">Motiva\uc0\u269 n\'ed dopis</h2>\
+      <article class="letter">\
+V\'e1\'9een\'e1 pan\'ed / V\'e1\'9een\'fd pane,\
+\
+r\'e1da bych se uch\'e1zela o pozici koordin\'e1torky svateb a oslav v Hotelu Maximus Resort. V\'e1\'9a hotel velmi dob\uc0\u345 e zn\'e1m \'96 n\u283 kolik let jsem zde p\u367 sobila na recepci a v rezerva\u269 n\'edm odd\u283 len\'ed a b\u283 hem svatebn\'edch sez\'f3n jsem pom\'e1hala i p\u345 \'edmo u svateb. D\'edky tomu rozum\'edm vnit\u345 n\'edm proces\u367 m, t\'fdmu i o\u269 ek\'e1v\'e1n\'edm host\u367  a mohu nav\'e1zat bez dlouh\'e9ho za\'9akolen\'ed.\
+\
+Posledn\'ed roky jsem se v\uc0\u283 novala produkci a marketingu odborn\'fdch konferenc\'ed ve spole\u269 nosti Magnus Regio. M\u283 la jsem na starosti dvoudenn\'ed celost\'e1tn\'ed konferenci pro velitele m\u283 stsk\'fdch a obecn\'edch polici\'ed (ve spolupr\'e1ci s Ministerstvem obrany, Svazem m\u283 st a obc\'ed a Kolegiem \u345 editel\u367  MP), d\'e1le pravideln\'e9 konference \u345 editel\u367  nemocnic v Brn\u283  a Praze (s \'fa\u269 ast\'ed Ministerstva zdravotnictv\'ed, profesn\'edch komor a partner\u367  jako Veolia a Fortinet) a tak\'e9 vernis\'e1\'9e v\'fdstavy prof. Miroslava B\'e1rty ve spolupr\'e1ci s Medialogue. Zaji\'9a\u357 ovala jsem kompletn\'ed produkci \'96 od nab\'eddek a harmonogramu p\u345 es vy\u345 izov\'e1n\'ed z\'e1\'9atit a dotac\'ed, koordinaci partner\u367  a dodavatel\u367  a\'9e po vy\'fa\u269 tov\'e1n\'ed a vyhodnocen\'ed.\
+\
+Svatby vn\'edm\'e1m jako osobn\'ed p\uc0\u345 \'edb\u283 h a velkou \u269 \'e1st pr\'e1ce vid\'edm v empatii, estetice a komunikaci. Z\'e1rove\u328  um\'edm dr\'9eet pevn\'fd r\'e1mec \'96 rozpo\u269 et, \u269 asov\'fd pl\'e1n, koordinaci t\'fdm\u367  i tlak dne D. V\u283 \u345 \'edm, \'9ee pr\'e1v\u283  spojen\'ed zku\'9aenost\'ed z velk\'fdch event\u367  s m\'fdm vztahem ke svatebn\'edmu prost\u345 ed\'ed a znalost\'ed Maximusu m\u367 \'9ee b\'fdt p\u345 \'ednosem pro v\'e1\'9a t\'fdm i pro klienty.\
+\
+R\'e1da se s v\'e1mi setk\'e1m osobn\uc0\u283  a proberu, jak mohu pomoci rozv\'edjet svatebn\'ed a eventov\'e9 slu\'9eby Hotelu Maximus Resort.\
+\
+S \'factou\
+Lucie Klodv\'edkov\'e1\
+      </article>\
+    </section>\
+\
+    <!-- KONTAKT -->\
+    <section>\
+      <div class="card" style="padding:18px;display:grid;gap:10px">\
+        <h2 class="section-title">Kontakt</h2>\
+        <div>\uc0\u55357 \u56525  \u268 ern\'e9ho 39/818 \'b7 Brno</div>\
+        <div>\uc0\u55357 \u56542  <a href="tel:+420603248082">+420 603 248 082</a> \'b7 \u9993 \u65039  <a href="mailto:lklodvikova@seznam.cz">lklodvikova@seznam.cz</a></div>\
+        <div class="chips">\
+          <button class="btn primary" onclick="window.location.href='mailto:lklodvikova@seznam.cz?subject=Popt\'e1vka%20\'96%20Svatby%20%26%20eventy'">Domluvit sch\uc0\u367 zku</button>\
+          <button class="btn" onclick="window.print()">St\'e1hnout PDF profilu</button>\
+        </div>\
+      </div>\
+    </section>\
+\
+    <footer class="footer">\'a9 2025 \'b7 Lucie Klodv\'edkov\'e1 \'b7 Mini\uc0\u8209 web pro uchaze\u269 ku \'96 Svatby & Eventy</footer>\
+  </main>\
+\
+  <script>\
+    // Copy email\
+    document.getElementById('copyEmail').addEventListener('click', async () => \{\
+      try \{ await navigator.clipboard.writeText('lklodvikova@seznam.cz');\
+        const btn = document.getElementById('copyEmail');\
+        const old = btn.textContent; btn.textContent = 'Zkop\'edrov\'e1no \uc0\u10003 ';\
+        btn.classList.add('primary'); setTimeout(()=>\{btn.textContent = old; btn.classList.remove('primary');\}, 1400);\
+      \} catch(e) \{ alert('Zkop\'edrujte ru\uc0\u269 n\u283 : lklodvikova@seznam.cz'); \}\
+    \});\
+  </script>\
+\
+  <script type="application/ld+json">\
+  \{\
+    "@context":"https://schema.org",\
+    "@type":"Person",\
+    "name":"Lucie Klodv\'edkov\'e1",\
+    "jobTitle":"Event & Wedding Coordinator",\
+    "address":\{"@type":"PostalAddress","addressLocality":"Brno","streetAddress":"\uc0\u268 ern\'e9ho 39/818","addressCountry":"CZ"\},\
+    "email":"mailto:lklodvikova@seznam.cz",\
+    "telephone":"+420603248082",\
+    "knowsAbout":["weddings","event production","hotel operations","CRM","marketing"]\
+  \}\
+  </script>\
+</body>\
+</html>\
+}
