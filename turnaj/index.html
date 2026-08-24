@@ -1,0 +1,1253 @@
+<title>Freedom Open</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;900&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap">
+
+<style>
+:root{
+  --night:#071A24;      /* Jadran po setmění */
+  --deck:#0F2E3D;       /* paluba */
+  --deck-2:#143C4E;
+  --rule:#1E5468;
+  --bone:#F2EDE3;
+  --bone-dim:#9FB6C0;
+  --chequy:#D6392E;     /* šachovnice */
+  --gold:#E8B33A;       /* pohár */
+  --led:#6FD08C;        /* odehráno / live */
+  --clay:#C4622F;
+  --shadow:0 18px 40px rgba(0,0,0,.45);
+  --f-disp:"Instrument Serif",Georgia,"Times New Roman",serif;
+  --f-ui:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"Space Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--night); color:var(--bone);
+  font-family:var(--f-ui); font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(30,84,104,.55), transparent 60%),
+    radial-gradient(900px 500px at 100% 0%, rgba(214,57,46,.14), transparent 55%);
+}
+.wrap{position:relative; z-index:1; max-width:1120px; margin:0 auto; padding:0 24px 96px}
+
+/* ---------- hlavička ---------- */
+header.masthead{
+  position:relative; z-index:1; max-width:1120px; margin:0 auto; padding:34px 24px 20px;
+  display:flex; gap:22px; align-items:center; flex-wrap:wrap;
+}
+.crest{width:78px;height:78px;flex:none}
+.mast-txt{flex:1 1 320px}
+.eyebrow{
+  font-size:11px; letter-spacing:.34em; text-transform:uppercase;
+  color:var(--bone-dim); font-weight:600; margin:0 0 6px;
+}
+h1.mark{
+  font-family:var(--f-disp); font-size:clamp(38px,6.2vw,68px); line-height:.92;
+  margin:0; letter-spacing:-.01em; text-wrap:balance;
+}
+h1.mark em{font-style:italic; color:var(--gold)}
+.tagline{margin:8px 0 0; color:var(--bone-dim); font-size:15px}
+.mast-meta{
+  display:flex; gap:26px; flex-wrap:wrap; font-family:var(--f-mono);
+  font-size:12px; color:var(--bone-dim); margin-top:12px;
+}
+.mast-meta b{color:var(--bone); font-weight:700}
+
+/* ---------- navigace ---------- */
+nav.tabs{
+  position:sticky; top:0; z-index:20; background:rgba(7,26,36,.93);
+  backdrop-filter:blur(10px); border-block:1px solid var(--rule); margin-bottom:34px;
+}
+.tabs-inner{max-width:1120px;margin:0 auto;padding:0 20px;display:flex;gap:2px;overflow-x:auto}
+.tab{
+  appearance:none; background:none; border:0; border-bottom:2px solid transparent;
+  color:var(--bone-dim); font-family:var(--f-ui); font-weight:600; font-size:12px;
+  letter-spacing:.16em; text-transform:uppercase; padding:15px 16px; cursor:pointer; white-space:nowrap;
+}
+.tab:hover{color:var(--bone)}
+.tab[aria-selected="true"]{color:var(--bone); border-bottom-color:var(--chequy)}
+.tab:focus-visible{outline:2px solid var(--gold); outline-offset:-4px}
+
+/* ---------- obecné ---------- */
+section.panel[hidden]{display:none}
+h2.sec{
+  font-family:var(--f-disp); font-size:30px; margin:44px 0 4px; letter-spacing:-.01em;
+}
+h2.sec:first-child{margin-top:0}
+.sec-note{color:var(--bone-dim); font-size:14px; margin:0 0 20px; max-width:65ch}
+h3.sub{
+  font-size:12px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold);
+  font-weight:700; margin:32px 0 12px;
+}
+.card{
+  background:linear-gradient(180deg,var(--deck),rgba(15,46,61,.55));
+  border:1px solid var(--rule); border-radius:4px; padding:20px 22px;
+}
+.grid{display:grid; gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+p{max-width:68ch}
+a{color:var(--gold)}
+.mono{font-family:var(--f-mono)}
+table{width:100%; border-collapse:collapse; font-size:14px}
+.tablewrap{overflow-x:auto; border:1px solid var(--rule); border-radius:4px; background:rgba(15,46,61,.5)}
+th{
+  text-align:left; font-size:10.5px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--bone-dim); font-weight:700; padding:12px 14px; border-bottom:1px solid var(--rule);
+  white-space:nowrap;
+}
+td{padding:12px 14px; border-bottom:1px solid rgba(30,84,104,.4); vertical-align:middle}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right; font-family:var(--f-mono); font-variant-numeric:tabular-nums}
+
+/* ---------- týmy ---------- */
+.teams{display:grid; gap:14px; grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.team{
+  border:1px solid var(--rule); border-radius:4px; padding:16px 18px;
+  background:linear-gradient(160deg,var(--deck-2),rgba(15,46,61,.4));
+  position:relative; overflow:hidden;
+}
+.team::after{content:""; position:absolute; inset:0 auto 0 0; width:3px; background:var(--chequy)}
+.team .tno{font-family:var(--f-mono); font-size:11px; color:var(--bone-dim); letter-spacing:.1em}
+.team .players{font-family:var(--f-disp); font-size:25px; line-height:1.15; margin:4px 0 6px}
+.team .role{font-size:11.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--bone-dim)}
+.joker{border-color:var(--gold)}
+.joker::after{background:var(--gold)}
+
+/* ---------- rozpis / zápasy ---------- */
+.match{
+  display:grid; grid-template-columns:66px 1fr auto; gap:16px; align-items:center;
+  border:1px solid var(--rule); border-radius:4px; padding:14px 16px; margin-bottom:10px;
+  background:rgba(15,46,61,.45);
+}
+.match.done{border-color:rgba(111,208,140,.45); background:rgba(111,208,140,.06)}
+.match .slot{font-family:var(--f-mono); font-size:13px; color:var(--gold)}
+.match .slot small{display:block; color:var(--bone-dim); font-size:10.5px; letter-spacing:.1em}
+.match .side{font-family:var(--f-disp); font-size:20px; line-height:1.2}
+.match .vs{color:var(--bone-dim); font-family:var(--f-mono); font-size:11px; margin:0 8px}
+.match .note{font-size:11.5px; color:var(--gold); letter-spacing:.06em; margin-top:3px}
+.score-in{display:flex; align-items:center; gap:6px}
+.score-in input{
+  width:52px; padding:8px 6px; text-align:center; background:var(--night); color:var(--bone);
+  border:1px solid var(--rule); border-radius:3px; font-family:var(--f-mono); font-size:18px; font-weight:700;
+}
+.score-in input:focus{outline:2px solid var(--gold); outline-offset:1px}
+.score-in span{color:var(--bone-dim); font-family:var(--f-mono)}
+.phase-head{
+  display:flex; align-items:baseline; gap:12px; margin:30px 0 12px;
+  border-bottom:1px solid var(--rule); padding-bottom:8px;
+}
+.phase-head h3{margin:0; font-family:var(--f-disp); font-size:22px}
+.phase-head span{font-family:var(--f-mono); font-size:11px; color:var(--bone-dim); letter-spacing:.1em}
+
+/* ---------- tlačítka ---------- */
+.btn{
+  appearance:none; border:1px solid var(--rule); background:var(--deck-2); color:var(--bone);
+  font-family:var(--f-ui); font-weight:600; font-size:11.5px; letter-spacing:.14em;
+  text-transform:uppercase; padding:11px 18px; border-radius:3px; cursor:pointer;
+}
+.btn:hover{border-color:var(--gold); color:var(--gold)}
+.btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+.btn.primary{background:var(--chequy); border-color:var(--chequy); color:#fff}
+.btn.primary:hover{background:#e04a3f; color:#fff; border-color:#e04a3f}
+.btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top:22px}
+
+/* ---------- statistiky ---------- */
+.stat{border:1px solid var(--rule); border-radius:4px; padding:16px 18px; background:rgba(15,46,61,.45)}
+.stat .k{font-size:10.5px; letter-spacing:.18em; text-transform:uppercase; color:var(--bone-dim)}
+.stat .v{font-family:var(--f-disp); font-size:40px; line-height:1.05; margin-top:4px}
+.stat .v small{font-family:var(--f-ui); font-size:13px; color:var(--bone-dim); letter-spacing:.05em}
+.bar{height:6px; border-radius:3px; background:rgba(30,84,104,.6); overflow:hidden; margin-top:8px}
+.bar i{display:block; height:100%; background:var(--led)}
+.pill{
+  display:inline-block; font-family:var(--f-mono); font-size:10.5px; letter-spacing:.08em;
+  padding:3px 8px; border-radius:99px; border:1px solid var(--rule); color:var(--bone-dim);
+}
+.pill.gold{border-color:var(--gold); color:var(--gold)}
+.pill.led{border-color:var(--led); color:var(--led)}
+.pill.red{border-color:var(--chequy); color:var(--chequy)}
+.rank1 td:first-child{box-shadow:inset 3px 0 0 var(--gold)}
+.rank2 td:first-child{box-shadow:inset 3px 0 0 var(--bone-dim)}
+.rank3 td:first-child{box-shadow:inset 3px 0 0 var(--clay)}
+
+/* ---------- brand swatche ---------- */
+.swatches{display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+.sw{border:1px solid var(--rule); border-radius:4px; overflow:hidden}
+.sw .chip{height:64px}
+.sw .lab{padding:9px 11px; font-family:var(--f-mono); font-size:10.5px; color:var(--bone-dim); line-height:1.5}
+.sw .lab b{display:block; color:var(--bone); font-family:var(--f-ui); font-size:12px; letter-spacing:.08em; text-transform:uppercase}
+ul.clean{list-style:none; padding:0; margin:0}
+ul.clean li{padding:9px 0; border-bottom:1px solid rgba(30,84,104,.4); display:flex; gap:14px; align-items:baseline}
+ul.clean li:last-child{border-bottom:0}
+ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min-width:58px; flex:none}
+.dl{display:grid; grid-template-columns:auto 1fr; gap:6px 18px; font-size:14.5px; margin:0}
+.dl dt{color:var(--bone-dim); font-size:11px; letter-spacing:.14em; text-transform:uppercase; padding-top:4px}
+.dl dd{margin:0}
+
+/* ---------- start turnaje ---------- */
+.startbox{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  border:1px solid var(--rule); border-left:3px solid var(--gold); border-radius:4px;
+  padding:14px 18px; margin-bottom:16px; background:rgba(15,46,61,.55);
+}
+.startbox label{
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:700;
+}
+.startbox input{
+  background:var(--night); color:var(--bone); border:1px solid var(--rule); border-radius:3px;
+  font-family:var(--f-mono); font-size:20px; font-weight:700; padding:7px 10px;
+}
+.startbox input:focus{outline:2px solid var(--gold); outline-offset:1px}
+.startbox span{font-size:13px; color:var(--bone-dim)}
+.startbox b{color:var(--bone); font-family:var(--f-mono)}
+
+/* ---------- živé sdílení ---------- */
+.livebar{
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  border:1px solid var(--rule); border-radius:4px; padding:11px 16px; margin-bottom:16px;
+  background:rgba(15,46,61,.45); font-size:13px; color:var(--bone-dim);
+}
+.livebar .dot{width:8px;height:8px;border-radius:50%;background:var(--bone-dim);flex:none}
+.livebar.live .dot{background:var(--led); box-shadow:0 0 0 3px rgba(111,208,140,.18)}
+.livebar.scorer .dot{background:var(--chequy); box-shadow:0 0 0 3px rgba(214,57,46,.18)}
+.livebar b{color:var(--bone)}
+.livebar .btn{margin-left:auto; padding:8px 14px}
+.viewonly{font-family:var(--f-mono); font-size:19px; font-weight:700; color:var(--bone)}
+body.viewer .startbox input{pointer-events:none; opacity:.6}
+body.viewer .pphoto .shoot{display:none}
+body.viewer .pedit{border-color:transparent; background:none; pointer-events:none}
+body.viewer .pedit:empty{display:none}
+
+/* ---------- profily hráčů ---------- */
+.roster{display:grid; gap:16px; grid-template-columns:repeat(auto-fill,minmax(232px,1fr))}
+.pcard{
+  border:1px solid var(--rule); border-radius:4px; overflow:hidden;
+  background:linear-gradient(180deg,var(--deck-2),rgba(15,46,61,.35));
+  display:flex; flex-direction:column;
+}
+.pcard.is-seed{border-color:rgba(214,57,46,.55)}
+.pcard.is-joker{border-color:var(--gold)}
+.pphoto{
+  position:relative; aspect-ratio:4/5; background:var(--night);
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.pphoto img{width:100%; height:100%; object-fit:cover; display:block}
+.pphoto .mono-init{
+  font-family:var(--f-disp); font-size:64px; color:var(--rule); line-height:1;
+}
+.pphoto .badge{
+  position:absolute; top:10px; left:10px; font-family:var(--f-mono); font-size:10px;
+  letter-spacing:.1em; padding:3px 8px; border-radius:2px; background:rgba(7,26,36,.82);
+  border:1px solid var(--rule); color:var(--bone-dim);
+}
+.pcard.is-seed .badge{border-color:var(--chequy); color:var(--chequy)}
+.pcard.is-joker .badge{border-color:var(--gold); color:var(--gold)}
+.pphoto .shoot{
+  position:absolute; inset:auto 0 0 0; padding:9px 10px; background:linear-gradient(0deg,rgba(7,26,36,.92),transparent);
+  display:flex; gap:8px; justify-content:center; opacity:0; transition:opacity .18s ease;
+}
+.pphoto:hover .shoot, .pphoto:focus-within .shoot{opacity:1}
+.pphoto .shoot button{
+  font-family:var(--f-ui); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  background:var(--deck-2); color:var(--bone); border:1px solid var(--rule);
+  border-radius:2px; padding:6px 10px; cursor:pointer;
+}
+.pphoto .shoot button:hover{border-color:var(--gold); color:var(--gold)}
+.pbody{padding:14px 15px 16px; display:flex; flex-direction:column; gap:7px; flex:1}
+.pname{font-family:var(--f-disp); font-size:27px; line-height:1; margin:0}
+.pmeta{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.08em; color:var(--bone-dim)}
+.pline{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:auto;
+  border-top:1px solid rgba(30,84,104,.5); padding-top:11px;
+}
+.pline div{text-align:center}
+.pline .kk{font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--bone-dim)}
+.pline .vv{font-family:var(--f-mono); font-size:16px; font-weight:700; font-variant-numeric:tabular-nums}
+.pedit{
+  font-size:13px; color:var(--bone); border:1px dashed rgba(30,84,104,.8); border-radius:3px;
+  padding:6px 8px; min-height:31px; background:rgba(7,26,36,.35);
+}
+.pedit:empty::before{content:attr(data-ph); color:var(--bone-dim); font-style:italic}
+.pedit:focus{outline:2px solid var(--gold); outline-offset:1px; border-style:solid}
+
+/* ---------- pravidla žolíka ---------- */
+.artcl{
+  display:grid; grid-template-columns:52px 1fr; gap:18px; padding:16px 0;
+  border-bottom:1px solid rgba(30,84,104,.45);
+}
+.artcl:last-child{border-bottom:0}
+.artcl .no{
+  font-family:var(--f-mono); font-size:12px; color:var(--gold); letter-spacing:.06em; padding-top:3px;
+}
+.artcl h4{margin:0 0 4px; font-size:14.5px; font-weight:700; letter-spacing:.01em}
+.artcl p{margin:0; font-size:14.5px; color:var(--bone-dim); max-width:62ch}
+.artcl p b{color:var(--bone); font-weight:600}
+
+/* ---------- TV režim ---------- */
+#tv{
+  position:fixed; inset:0; z-index:200; background:var(--night); display:none;
+  flex-direction:column; padding:2.4vh 2.6vw;
+}
+#tv.on{display:flex}
+.tv-top{display:flex; align-items:center; gap:1.4vw; border-bottom:1px solid var(--rule); padding-bottom:1.4vh}
+.tv-top .crest{width:5.2vh;height:5.2vh}
+.tv-top h2{font-family:var(--f-disp); font-size:3.4vh; margin:0; line-height:1}
+.tv-top .sl{margin-left:auto; font-family:var(--f-mono); font-size:1.5vh; color:var(--bone-dim); letter-spacing:.16em}
+.tv-body{flex:1; display:grid; grid-template-columns:1.55fr 1fr; gap:2.2vw; padding-top:2vh; min-height:0}
+.tv-live{display:flex; flex-direction:column; gap:1.6vh; min-height:0}
+.tv-badge{font-family:var(--f-mono); font-size:1.5vh; letter-spacing:.22em; color:var(--chequy)}
+.tv-side{
+  display:grid; grid-template-columns:1fr auto; align-items:center; gap:2vw;
+  border:1px solid var(--rule); border-radius:4px; padding:2.2vh 2vw;
+  background:linear-gradient(120deg,var(--deck),rgba(15,46,61,.35));
+}
+.tv-side.lead{border-color:var(--gold)}
+.tv-side .nm{font-family:var(--f-disp); font-size:5.4vh; line-height:1.02}
+.tv-faces{display:flex; gap:.6vw; margin-bottom:.8vh}
+.tv-faces figure{margin:0; width:7vh; height:7vh; border-radius:50%; overflow:hidden;
+  border:1px solid var(--rule); background:var(--night); display:flex; align-items:center; justify-content:center}
+.tv-side.lead .tv-faces figure{border-color:var(--gold)}
+.tv-faces img{width:100%; height:100%; object-fit:cover}
+.tv-faces span{font-family:var(--f-disp); font-size:3vh; color:var(--rule)}
+.tv-side .sub{font-family:var(--f-mono); font-size:1.4vh; color:var(--bone-dim); letter-spacing:.1em; margin-top:.6vh}
+.tv-side .gm{font-family:var(--f-ui); font-weight:900; font-size:11vh; line-height:.85; font-variant-numeric:tabular-nums}
+.tv-side.lead .gm{color:var(--gold)}
+.tv-ctrl{display:flex; gap:.8vw; flex-wrap:wrap}
+.tv-ctrl .btn{font-size:1.4vh; padding:1.1vh 1.3vw}
+.tv-next{font-family:var(--f-mono); font-size:1.5vh; color:var(--bone-dim); letter-spacing:.06em}
+.tv-panel{border:1px solid var(--rule); border-radius:4px; padding:1.6vh 1.4vw; overflow:auto; min-height:0}
+.tv-panel h4{
+  font-size:1.3vh; letter-spacing:.24em; text-transform:uppercase; color:var(--gold);
+  margin:0 0 1.2vh; font-weight:700;
+}
+.tv-panel table{font-size:1.75vh}
+.tv-panel th{font-size:1.15vh; padding:.7vh .5vw}
+.tv-panel td{padding:.85vh .5vw}
+.tv-close{position:absolute; top:2.4vh; right:2.6vw}
+@media (max-width:760px){
+  .match{grid-template-columns:56px 1fr; }
+  .match .score-in{grid-column:1/-1; justify-content:flex-end}
+  .tv-body{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<header class="masthead">
+  <svg class="crest" viewBox="0 0 100 100" role="img" aria-label="Znak turnaje Freedom Open">
+    <path d="M50 3 92 16v38c0 24-18 38-42 46C26 92 8 78 8 54V16z" fill="#0F2E3D" stroke="#E8B33A" stroke-width="2.5"/>
+    <g>
+      <rect x="8" y="16" width="84" height="7" fill="#D6392E"/>
+      <rect x="8" y="16" width="10.5" height="7" fill="#F2EDE3"/><rect x="29" y="16" width="10.5" height="7" fill="#F2EDE3"/>
+      <rect x="50" y="16" width="10.5" height="7" fill="#F2EDE3"/><rect x="71" y="16" width="10.5" height="7" fill="#F2EDE3"/>
+    </g>
+    <circle cx="50" cy="52" r="19" fill="none" stroke="#E8B33A" stroke-width="2.5"/>
+    <path d="M34 42c9 6 9 14 0 20M66 42c-9 6-9 14 0 20" fill="none" stroke="#E8B33A" stroke-width="2"/>
+    <text x="50" y="87" text-anchor="middle" font-family="Space Mono, monospace" font-size="13" font-weight="700" fill="#F2EDE3">’26</text>
+  </svg>
+  <div class="mast-txt">
+    <p class="eyebrow">Domácí Grand Slam · Masters série · Ročník 2026</p>
+    <h1 class="mark">Freedom <em>Open</em></h1>
+    <p class="tagline">Domácí Grand Slam ve čtyřhře. Jeden kurt, devět mužů, jeden Jadranský pohár.</p>
+    <div class="mast-meta">
+      <span><b>9</b> hráčů</span><span><b>4</b> týmy + Žolík</span>
+      <span><b>8</b> zápasů</span><span>Start <b><span id="metaStart">12:30</span></b></span><span>Kurty <b>1</b></span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="tabs-inner" role="tablist">
+    <button class="tab" role="tab" data-p="draw" aria-selected="true">Los &amp; týmy</button>
+    <button class="tab" role="tab" data-p="players" aria-selected="false">Hráči</button>
+    <button class="tab" role="tab" data-p="schedule" aria-selected="false">Rozpis &amp; skóre</button>
+    <button class="tab" role="tab" data-p="table" aria-selected="false">Tabulka</button>
+    <button class="tab" role="tab" data-p="stats" aria-selected="false">Statistiky</button>
+    <button class="tab" role="tab" data-p="brand" aria-selected="false">Brand &amp; ceremoniál</button>
+    <button class="tab" role="tab" data-p="rules" aria-selected="false">Pravidla</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<div class="livebar" id="livebar" hidden>
+  <span class="dot"></span>
+  <span id="liveText">Připojuji se…</span>
+  <button class="btn" id="scorerBtn">Režim rozhodčího</button>
+</div>
+
+<!-- ============ LOS ============ -->
+<section class="panel" id="p-draw">
+  <h2 class="sec">Los ročníku 2026</h2>
+  <p class="sec-note">Nasazená čtyřka (Andy, Maison, Kužla, Vlčí) se podle rozpisu nesmí potkat v jednom páru — každý nasazený proto dostal losem jednoho nenasazeného partnera. Devátý hráč zůstal bez týmu a dostal roli, která z lichého počtu udělala přednost: <b>Žolík</b>.</p>
+
+  <div class="teams" id="teamCards"></div>
+
+  <h3 class="sub">Role Žolíka</h3>
+  <div class="card">
+    <p style="margin-top:0"><b>Vlasta</b> nemá vlastní tým — odehraje <b>jeden zápas ve skupině za každý ze čtyř týmů</b>. V daném zápase za něj odpočívá kmenový partner nasazeného. Vlasta tak nastoupí do čtyř zápasů (nejvíc ze všech), sbírá vlastní bilanci a hraje o samostatnou trofej <b>Žolík turnaje</b>. V play-off nastupují týmy v základních dvojicích a Vlasta dělá hlavního rozhodčího finále.</p>
+    <p style="margin-bottom:0"><span class="pill gold">Proč to funguje</span> Devět hráčů nejde rozdělit do čtyřher. Místo jednoho hráče navíc, který celý den sedí, má turnaj postavu, která se protočí všemi týmy a rozhoduje o tabulce každého z nich.</p>
+  </div>
+
+  <h3 class="sub">Rozdělení minut na kurtu</h3>
+  <div class="tablewrap"><table id="loadTbl"></table></div>
+</section>
+
+<!-- ============ HRÁČI ============ -->
+<section class="panel" id="p-players" hidden>
+  <h2 class="sec">Startovní listina</h2>
+  <p class="sec-note">Devět karet, devět fotek. Klikni na kartu a nahraj fotku z telefonu nebo počítače — uloží se rovnou do zařízení, se kterým zapisuješ, a objeví se i na TV boardu u probíhajícího zápasu. Přezdívku a hlášku dopiš přímo do karty, ukládá se sama.</p>
+  <div class="btnrow" style="margin-top:0;margin-bottom:22px">
+    <button class="btn" id="exportPhotos">Export profilů</button>
+    <button class="btn" id="importPhotos">Import profilů</button>
+    <button class="btn" id="clearPhotos">Smazat všechny fotky</button>
+  </div>
+  <div class="roster" id="roster"></div>
+  <input type="file" id="photoInput" accept="image/*" hidden>
+  <h3 class="sub">Jak fotky fungují</h3>
+  <div class="card"><p style="margin:0">Fotka se při nahrání zmenší na 640 px a uloží do prohlížeče toho zařízení, kde ji nahráváš — nikam se neodesílá. Když budeš zapisovat z jiného notebooku, použij <b>Export profilů</b> a na druhém zařízení <b>Import profilů</b>. Nejlíp vypadají svislé portréty (poměr 4:5) od pasu nahoru.</p></div>
+</section>
+
+<!-- ============ ROZPIS ============ -->
+<section class="panel" id="p-schedule" hidden>
+  <h2 class="sec">Rozpis &amp; zadávání skóre</h2>
+  <p class="sec-note">Jeden kurt, zápasy jdou po sobě. Časy počítají 25 minut hry + 5 minut na výměnu a pití. Skóre zapisuj v gamech — tabulka, pavouk i statistiky se přepočítají samy a průběžně se ukládají do prohlížeče.</p>
+  <div class="startbox">
+    <label for="startTime">Start turnaje</label>
+    <input type="time" id="startTime" value="12:30" step="300">
+    <span>Celý program se přepočítá — ceremoniál začíná v <b id="endTime">17:45</b>.</span>
+  </div>
+  <div class="btnrow" style="margin-top:0;margin-bottom:24px">
+    <button class="btn primary" id="openTv">▶ Spustit TV board</button>
+    <button class="btn" id="exportBtn">Export výsledků</button>
+    <button class="btn" id="importBtn">Import</button>
+    <button class="btn" id="resetBtn">Vynulovat turnaj</button>
+  </div>
+  <div id="scheduleList"></div>
+</section>
+
+<!-- ============ TABULKA ============ -->
+<section class="panel" id="p-table" hidden>
+  <h2 class="sec">Tabulka skupiny</h2>
+  <p class="sec-note">Výhra 2 body, prohra 0. Při rovnosti bodů rozhoduje vzájemný zápas, pak rozdíl gamů, pak počet vyhraných gamů.</p>
+  <div class="tablewrap"><table id="standTbl"></table></div>
+
+  <h3 class="sub">Play-off</h3>
+  <div id="poBox"></div>
+
+  <h3 class="sub">Konečné pořadí</h3>
+  <div class="tablewrap"><table id="finalTbl"></table></div>
+</section>
+
+<!-- ============ STATISTIKY ============ -->
+<section class="panel" id="p-stats" hidden>
+  <h2 class="sec">Statistiky</h2>
+  <p class="sec-note">Individuální bilance napříč všemi zápasy — u Žolíka se počítají všechny čtyři týmy, za které nastoupil.</p>
+  <div class="grid g4" id="statCards"></div>
+  <h3 class="sub">Hráči</h3>
+  <div class="tablewrap"><table id="playerTbl"></table></div>
+  <h3 class="sub">Ocenění mimo pořadí</h3>
+  <div class="grid g2" id="awardCards"></div>
+</section>
+
+<!-- ============ BRAND ============ -->
+<section class="panel" id="p-brand" hidden>
+  <h2 class="sec">Brand turnaje</h2>
+  <p class="sec-note">Značka stojí na jednom napětí: velký mezinárodní Masters slovník nasazený na dvorek s jedním kurtem. Čím vážněji se to bere, tím lépe to funguje — proto retro ročník 2006, znak, hymna a ceremoniál.</p>
+
+  <div class="grid g2">
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">Jméno a slovník</h3>
+      <dl class="dl">
+        <dt>Název</dt><dd>Freedom Open 2026</dd>
+        <dt>Série</dt><dd>Freedom Open — Masters série</dd>
+        <dt>Claim</dt><dd>„Jeden kurt. Devět mužů. Jeden pohár.“</dd>
+        <dt>Trofej</dt><dd>Jadranský pohár</dd>
+        <dt>Kurt</dt><dd>Centre Court „Jadran“</dd>
+        <dt>Pauza</dt><dd>Freedom Break (14:20)</dd>
+        <dt>Hymna</dt><dd>Jedna skladba z roku 2006, pouští se před finále</dd>
+        <dt>Hashtag</dt><dd>#FreedomOpen2026</dd>
+      </dl>
+    </div>
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">Znak</h3>
+      <p style="font-size:14.5px">Štít, ne kolečko — Masters série má mít erb. Nahoře pruh červenobílé šachovnice (Chorvatsko, čtyři pole = čtyři týmy), uprostřed zlatý míč se švy, dole ročník. Znak funguje v jedné barvě, na medaili i jako razítko na kelímek.</p>
+      <p style="font-size:14.5px;margin-bottom:0"><b>Použití:</b> na tabuli výsledků, na diplomu, jako profilovka skupiny, nálepka na tubu s míči. Nikdy neroztahovat, nikdy nedávat na červené pozadí.</p>
+    </div>
+  </div>
+
+  <h3 class="sub">Barvy</h3>
+  <div class="swatches">
+    <div class="sw"><div class="chip" style="background:#071A24"></div><div class="lab"><b>Jadran noc</b>#071A24<br>základní pozadí</div></div>
+    <div class="sw"><div class="chip" style="background:#D6392E"></div><div class="lab"><b>Šachovnice</b>#D6392E<br>akcent, live prvky</div></div>
+    <div class="sw"><div class="chip" style="background:#E8B33A"></div><div class="lab"><b>Pohár</b>#E8B33A<br>vítěz, ocenění</div></div>
+    <div class="sw"><div class="chip" style="background:#F2EDE3"></div><div class="lab"><b>Kost</b>#F2EDE3<br>text, čáry kurtu</div></div>
+    <div class="sw"><div class="chip" style="background:#1E5468"></div><div class="lab"><b>Hloubka</b>#1E5468<br>linky, rámy</div></div>
+    <div class="sw"><div class="chip" style="background:#C4622F"></div><div class="lab"><b>Antuka</b>#C4622F<br>třetí místo</div></div>
+  </div>
+
+  <h3 class="sub">Písmo</h3>
+  <div class="grid g2">
+    <div class="card"><div style="font-family:var(--f-disp);font-size:34px;line-height:1.1">Instrument Serif</div><p style="font-size:13.5px;color:var(--bone-dim);margin:6px 0 0">Displej: jména hráčů, nadpisy, trofej. Nese tu grandslamovou vážnost.</p></div>
+    <div class="card"><div style="font-family:var(--f-ui);font-weight:900;font-size:30px;letter-spacing:-.01em">Archivo Black</div><p style="font-size:13.5px;color:var(--bone-dim);margin:6px 0 0">Rozhraní a skóre na TV. Číslice tabulkové, aby gamy neposkakovaly.</p></div>
+  </div>
+  <div class="card" style="margin-top:14px"><div style="font-family:var(--f-mono);font-size:19px">SPACE MONO — 12:50 · CENTRE COURT JADRAN</div><p style="font-size:13.5px;color:var(--bone-dim);margin:6px 0 0">Datová vrstva: časy, kódy zápasů, popisky. Dělá z rozpisu oficiální dokument.</p></div>
+
+  <h3 class="sub">Ceremoniál a doprovodný program</h3>
+  <ul class="clean">
+    <li><span class="t">12:30</span><span><b>Slavnostní zahájení.</b> Nástup devíti hráčů na základní čáru, přivítání, přečtení losu z obálky, společné foto pod znakem. Krátká hymna.</span></li>
+    <li><span class="t">12:45</span><span><b>Rozehrání a slib.</b> Nejmladší hráč pronese sportovní slib („budeme hlásit auty poctivě“), Žolík dostane pásku na paži.</span></li>
+    <li><span class="t">14:20</span><span><b>Freedom Break.</b> Grill, dolití vody, průběžné vyhlášení tabulky nahlas z TV boardu.</span></li>
+    <li><span class="t">16:05</span><span><b>Vyhlášení skupiny.</b> Ceremonie nasazení do play-off — kdo je jednička, dostává výběr strany kurtu a nové míče.</span></li>
+    <li><span class="t">16:55</span><span><b>Finálový nástup.</b> Hráči nastupují za sebou s ručníkem, hymna, Žolík jako rozhodčí na vysoké židli (štafle).</span></li>
+    <li><span class="t">17:45</span><span><b>Ceremoniál.</b> Bronz, stříbro, zlato. Jadranský pohár nad hlavu, prosecco, vyhlášení Žolíka turnaje a cen mimo pořadí. Zápis jmen na tabuli vítězů.</span></li>
+    <li><span class="t">18:15</span><span><b>Afterparty.</b> Sestřihy z telefonů a losování pořadatele ročníku 2027.</span></li>
+  </ul>
+
+  <h3 class="sub">Co ještě značku drží pohromadě</h3>
+  <div class="card"><ul style="margin:0;padding-left:20px;font-size:14.5px">
+    <li>Tabule vítězů — jedna deska, každý rok jedna řádka. Bez ní není ročník 2027.</li>
+    <li>Jednotný zápis: každý zápas má kód (Z1–Z6, B, F) a ten se používá i v hovoru.</li>
+    <li>TV board běží celý den, i mezi zápasy — značka je vidět, ne jen slyšet.</li>
+    <li>Fotka po každém zápase se stejným rámováním: vítězná dvojice u sítě.</li>
+    <li>Ročník se nepřejmenovává. Vždycky Freedom Open, mění se jen číslo.</li>
+  </ul></div>
+</section>
+
+<!-- ============ PRAVIDLA ============ -->
+<section class="panel" id="p-rules" hidden>
+  <h2 class="sec">Pravidla a formát</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">Skupina — každý s každým</h3>
+      <p style="font-size:14.5px">Čtyři týmy, 6 zápasů, každý tým hraje 3×. Zápas je <b>jeden set do 4 vítězných gamů</b>, za stavu 4:4 rozhoduje tiebreak do 7. Hraje se <b>bez výhod</b> — za shody rozhodující míč, příjem volí stranu. Time-limit 25 minut: kdo vede v gamech, bere zápas; při rovnosti se dohrává jeden rozhodující game.</p>
+      <p style="font-size:14.5px;margin-bottom:0">Body: výhra 2, prohra 0. Pořadí: body → vzájemný zápas → rozdíl gamů → vyhrané gamy.</p>
+    </div>
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">Play-off</h3>
+      <p style="font-size:14.5px">Ze skupiny postupují všichni. <b>Zápas o 3. místo</b> hraje 3. proti 4., <b>finále</b> 1. proti 2. Finále je set do 6 gamů, tiebreak za stavu 6:6, bez časového limitu. V play-off nastupují jen základní dvojice.</p>
+      <p style="font-size:14.5px;margin-bottom:0">Nové míče do finále. Rozhoduje Žolík, jeho slovo je konečné.</p>
+    </div>
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">Servis a dvorec</h3>
+      <p style="font-size:14.5px;margin-bottom:0">Jedno podání navíc se nedává, druhé podání platí normálně. Nety při podání se opakují. Auty hlásí strana, na které míč dopadl; při sporu se bod opakuje. Střídání stran po lichých gamech, bez sezení.</p>
+    </div>
+    <div class="card">
+      <h3 class="sub" style="margin-top:0">Žolík — ve zkratce</h3>
+      <p style="font-size:14.5px;margin-bottom:0">Vlasta odehraje právě jeden zápas za každý tým, podle rozpisu (Z1, Z2, Z4, Z6). Odpočívající partner v tu dobu nesmí radit od lajny. Body ze zápasu patří týmu, ne Žolíkovi — Žolík si vede vlastní bilanci pro svou trofej. Úplný statut je níže.</p>
+    </div>
+  </div>
+
+  <h2 class="sec" style="margin-top:52px">Statut Žolíka</h2>
+  <p class="sec-note">Deset článků, které řeší každou situaci, jaká může kolem devátého hráče nastat — od nástupu přes body a spory až po zranění a play-off. Když se během dne o něčem strhne debata, platí to, co je tady.</p>
+  <div class="card" style="padding:6px 22px 10px">
+    <div class="artcl"><div class="no">§ 1</div><div>
+      <h4>Kdo je Žolík a proč existuje</h4>
+      <p>Devět hráčů nejde rozdělit do čtyřher. Devátý hráč — <b>Vlasta</b> — proto nemá stálý tým a stává se Žolíkem: samostatnou funkcí s vlastním rozpisem, vlastní bilancí a vlastní trofejí. Role je na celý turnaj, nedá se během dne předat ani vyměnit.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 2</div><div>
+      <h4>Nasazení do zápasů — pevný rozpis</h4>
+      <p>Žolík nastupuje do <b>právě čtyř zápasů skupiny</b> a v každém za jiný tým: <b>Z1 za Tým 1</b> (Andy), <b>Z2 za Tým 3</b> (Kužla), <b>Z4 za Tým 4</b> (Vlčí), <b>Z6 za Tým 2</b> (Maison). Pořadí vzešlo z losu a během turnaje se nemění ani po dohodě — jinak by se dal ovlivnit průběh tabulky.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 3</div><div>
+      <h4>Koho nahrazuje</h4>
+      <p>Vždy <b>nenasazeného partnera</b>, nikdy nasazeného. Nasazený hráč je kapitán týmu a odehraje všechny tři zápasy skupiny bez výjimky. Zápasy Z3 a Z5 se hrají v základních dvojicích — v nich Žolík nenastupuje a je k dispozici jako čárový.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 4</div><div>
+      <h4>Odpočívající partner</h4>
+      <p>Hráč, za kterého Žolík nastoupil, sedí za lavičkou. <b>Nesmí koučovat, radit ani komentovat sporné míče</b> — může podávat míče a nosit vodu. Za porušení dostane jeho tým po napomenutí jeden trestný game. Sledovat a fandit smí kdokoliv.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 5</div><div>
+      <h4>Komu patří body</h4>
+      <p>Výsledek zápasu patří <b>týmu</b>, za který Žolík zrovna hrál — body i gamy jdou do tabulky týmu úplně stejně, jako by hrála základní dvojice. Žolík sám do tabulky skupiny nezasahuje a nemůže v ní skončit.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 6</div><div>
+      <h4>Vlastní bilance a trofej</h4>
+      <p>Žolíkovi se paralelně počítá <b>osobní bilance V–P a rozdíl gamů</b> ze všech čtyř zápasů — systém ji vede automaticky v záložce Statistiky. Z ní se na ceremoniálu vyhlašuje <b>Žolík turnaje</b> — páska na paži a vlastní řádek na tabuli vítězů. Bilance 4–0 se vyhlašuje jako <b>Perfect Round</b>.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 7</div><div>
+      <h4>Podání, strany, rozehrání</h4>
+      <p>V zápase s Žolíkem otevírá podání <b>nasazený hráč jeho týmu</b>, Žolík podává jako druhý v pořadí své strany — aby si tým nemusel kvůli střídání přehazovat rozestavení. Stranu kurtu losí soupeř mincí. Žolík má nárok na <b>3 minuty rozehrání navíc</b>, pokud jde do zápasu přímo z předchozího (Z1 → Z2); ostatní na něj počkají.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 8</div><div>
+      <h4>Zranění a výpadky</h4>
+      <p>Když nemůže <b>Žolík</b>, zápas se odehraje v základní dvojici a Žolíkovi se do bilance nezapíše nic. Když nemůže <b>kmenový partner</b>, může za něj Žolík nastoupit i mimo svůj rozpis — nejvýš jednou za turnaj a jen se souhlasem soupeře; takový zápas se mu do bilance počítá normálně. Když vypadne <b>nasazený</b>, jeho tým dohrává s Žolíkem a partnerem, ale za snížený zisk 1 bodu za výhru.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 9</div><div>
+      <h4>Play-off a role rozhodčího</h4>
+      <p>V play-off Žolík <b>nehraje</b> — zápas o 3. místo i finále se hrají v základních dvojicích. Místo toho dělá <b>hlavního rozhodčího</b>: sedí na štaflích, hlásí stav, rozhoduje sporné míče a jeho výrok je konečný. Zároveň obsluhuje TV board a odstartuje hymnu.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 10</div><div>
+      <h4>Střet zájmů</h4>
+      <p>Žolík hrál za všechny čtyři týmy a zná je zevnitř — proto <b>nemůže rozhodovat o vlastní trofeji</b> ani hlasovat v Ceně fair play. Když v play-off soudí zápas týmu, se kterým sám vyhrál skupinový zápas, nahlásí to před začátkem a sporný míč se na vyžádání opakuje.</p></div></div>
+  </div>
+
+  <h3 class="sub">Průběh zápasu s Žolíkem — krok za krokem</h3>
+  <ul class="clean">
+    <li><span class="t">−5 min</span><span>Hlášení z TV boardu: kdo hraje, za jaký tým Žolík nastupuje a kdo odpočívá.</span></li>
+    <li><span class="t">−3 min</span><span>Odpočívající partner odevzdá Žolíkovi pásku a odchází za lavičku.</span></li>
+    <li><span class="t">−2 min</span><span>Los stran mincí, rozehrání. Nasazený hráč Žolíkova týmu si bere první podání.</span></li>
+    <li><span class="t">0</span><span>Zápas — set do 4 gamů, bez výhod, limit 25 minut.</span></li>
+    <li><span class="t">Konec</span><span>Zápis skóre do boardu, fotka vítězné dvojice u sítě, Žolíkovi se připíše bilance.</span></li>
+  </ul>
+
+  <h3 class="sub">Časový harmonogram dne</h3>
+  <div class="tablewrap"><table id="dayTbl"></table></div>
+</section>
+
+</div>
+
+<!-- ============ TV BOARD ============ -->
+<div id="tv" aria-hidden="true">
+  <button class="btn tv-close" id="closeTv">Zavřít ✕</button>
+  <div class="tv-top">
+    <svg class="crest" viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M50 3 92 16v38c0 24-18 38-42 46C26 92 8 78 8 54V16z" fill="#0F2E3D" stroke="#E8B33A" stroke-width="2.5"/>
+      <rect x="8" y="16" width="84" height="7" fill="#D6392E"/>
+      <rect x="8" y="16" width="10.5" height="7" fill="#F2EDE3"/><rect x="29" y="16" width="10.5" height="7" fill="#F2EDE3"/>
+      <rect x="50" y="16" width="10.5" height="7" fill="#F2EDE3"/><rect x="71" y="16" width="10.5" height="7" fill="#F2EDE3"/>
+      <circle cx="50" cy="52" r="19" fill="none" stroke="#E8B33A" stroke-width="2.5"/>
+      <path d="M34 42c9 6 9 14 0 20M66 42c-9 6-9 14 0 20" fill="none" stroke="#E8B33A" stroke-width="2"/>
+    </svg>
+    <h2>Freedom Open 2026</h2>
+    <div class="sl">Centre Court Jadran · <span id="tvClock"></span></div>
+  </div>
+  <div class="tv-body">
+    <div class="tv-live">
+      <div class="tv-badge" id="tvBadge">● ŽIVĚ</div>
+      <div class="tv-side" id="tvA"></div>
+      <div class="tv-side" id="tvB"></div>
+      <div class="tv-ctrl" id="tvCtrl"></div>
+      <div class="tv-next" id="tvNext"></div>
+    </div>
+    <div class="tv-panel">
+      <h4>Tabulka</h4>
+      <table id="tvStand"></table>
+      <h4 style="margin-top:2.4vh">Výsledky</h4>
+      <table id="tvRes"></table>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ---------------- data ---------------- */
+const TEAMS = [
+  {id:1, seed:"Andy",   sn:1, partner:"Kraťas",  pn:8},
+  {id:2, seed:"Maison", sn:2, partner:"Kloubek", pn:6},
+  {id:3, seed:"Kužla",  sn:3, partner:"Šali",    pn:7},
+  {id:4, seed:"Vlčí",   sn:4, partner:"Djeržík", pn:9}
+];
+const JOKER = "Vlasta";
+// celá jména podle startovní listiny
+const NAMES = {
+  "Andy":    {full:"Ondřej Vícha",       titul:"EFA"},
+  "Maison":  {full:"Ondřej Maison",      titul:""},
+  "Kužla":   {full:"Lukáš Kužel",        titul:"Ing., EFP"},
+  "Vlčí":    {full:"Jan Vlček",          titul:"EFA"},
+  "Vlasta":  {full:"Vlastimil Drábek",   titul:"PFP"},
+  "Kloubek": {full:"Petr Klobouk",       titul:"Mgr., PFP"},
+  "Šali":    {full:"Radek Šalena",       titul:"Ing., EFP"},
+  "Kraťas":  {full:"Jakub Kratochvíla",  titul:"Ing., EFP"},
+  "Djeržík": {full:"Martin Dzierža",     titul:"Ing., EFP"}
+};
+// joker = id týmu, za který v tom zápase nastupuje Žolík
+const GROUP = [
+  {id:"Z1", off:20,  a:1, b:2, joker:1},
+  {id:"Z2", off:50,  a:3, b:4, joker:3},
+  {id:"Z3", off:80,  a:1, b:3, joker:0},
+  {id:"Z4", off:125, a:2, b:4, joker:4},
+  {id:"Z5", off:155, a:1, b:4, joker:0},
+  {id:"Z6", off:185, a:2, b:3, joker:2}
+];
+const PO = [
+  {id:"B", off:230, label:"Zápas o 3. místo", from:[3,4], to:6},
+  {id:"F", off:265, label:"FINÁLE — Jadranský pohár", from:[1,2], to:6}
+];
+const DAY = [
+  [0,  "Slavnostní zahájení, nástup, los z obálky, foto"],
+  [15, "Rozehrání, sportovní slib, páska pro Žolíka"],
+  [20, "Z1 — Tým 1 vs Tým 2"],
+  [50, "Z2 — Tým 3 vs Tým 4"],
+  [80, "Z3 — Tým 1 vs Tým 3"],
+  [110,"Freedom Break — grill, voda, průběžná tabulka"],
+  [125,"Z4 — Tým 2 vs Tým 4"],
+  [155,"Z5 — Tým 1 vs Tým 4"],
+  [185,"Z6 — Tým 2 vs Tým 3"],
+  [215,"Konec skupiny, vyhlášení nasazení do play-off, kropení kurtu"],
+  [230,"Zápas o 3. místo (do 6 gamů)"],
+  [265,"FINÁLE (do 6 gamů, tiebreak 6:6)"],
+  [315,"Ceremoniál — medaile, Jadranský pohár, Žolík turnaje, ceny mimo pořadí"],
+  [345,"Afterparty a losování pořadatele ročníku 2027"]
+];
+const ALL = [...GROUP, ...PO];
+const START_DEFAULT = "12:30";
+function startTime(){
+  const v = S.__start;
+  return (typeof v === "string" && /^\d{1,2}:\d{2}$/.test(v)) ? v : START_DEFAULT;
+}
+function fmt(off){
+  const [h,m] = startTime().split(":").map(Number);
+  const tot = ((h*60+m+off) % 1440 + 1440) % 1440;
+  return String(Math.floor(tot/60)).padStart(2,"0")+":"+String(tot%60).padStart(2,"0");
+}
+const KEY = "krojs-master-2026";
+
+/* ---------------- stav ---------------- */
+let S = {};
+try{ S = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; }catch(e){ S = {}; }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} schedulePush(); }
+function res(id){ return S[id] || {a:0,b:0,done:false}; }
+function setRes(id,r){ S[id]=r; save(); renderAll(); }
+
+/* ---------------- pomocné ---------------- */
+const T = id => TEAMS.find(t=>t.id===id);
+const teamName = id => { const t=T(id); return t ? `${t.seed} / ${t.partner}` : "—"; };
+function lineup(mid, teamId){
+  const t = T(teamId); if(!t) return "—";
+  const m = ALL.find(x=>x.id===mid);
+  if(m && m.joker === teamId) return `${t.seed} / ${JOKER}`;
+  return `${t.seed} / ${t.partner}`;
+}
+function esc(s){ return String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
+
+/* ---------------- tabulka skupiny ---------------- */
+function standings(){
+  const st = TEAMS.map(t=>({id:t.id, name:teamName(t.id), p:0, w:0, l:0, gf:0, ga:0, pts:0}));
+  const by = id => st.find(s=>s.id===id);
+  GROUP.forEach(m=>{
+    const r = res(m.id); if(!r.done) return;
+    const A=by(m.a), B=by(m.b);
+    A.p++; B.p++; A.gf+=r.a; A.ga+=r.b; B.gf+=r.b; B.ga+=r.a;
+    if(r.a>r.b){ A.w++; B.l++; A.pts+=2; } else if(r.b>r.a){ B.w++; A.l++; B.pts+=2; }
+  });
+  st.sort((x,y)=>{
+    if(y.pts!==x.pts) return y.pts-x.pts;
+    const h = GROUP.find(m=>(m.a===x.id&&m.b===y.id)||(m.a===y.id&&m.b===x.id));
+    if(h){ const r=res(h.id);
+      if(r.done){ const xw = (h.a===x.id ? r.a>r.b : r.b>r.a); const yw = (h.a===y.id ? r.a>r.b : r.b>r.a);
+        if(xw!==yw) return xw?-1:1; } }
+    const dx=x.gf-x.ga, dy=y.gf-y.ga;
+    if(dy!==dx) return dy-dx;
+    return y.gf-x.gf;
+  });
+  return st;
+}
+const groupDone = () => GROUP.every(m=>res(m.id).done);
+function poTeams(m){
+  if(!groupDone()) return [null,null];
+  const st = standings();
+  return [st[m.from[0]-1].id, st[m.from[1]-1].id];
+}
+
+/* ---------------- statistiky hráčů ---------------- */
+function playerStats(){
+  const P = {};
+  const add = n => P[n] || (P[n]={name:n, mp:0, w:0, l:0, gf:0, ga:0, joker:0});
+  TEAMS.forEach(t=>{ add(t.seed); add(t.partner); }); add(JOKER);
+  ALL.forEach(m=>{
+    const r = res(m.id); if(!r.done) return;
+    let ta, tb;
+    if(m.from){ [ta,tb] = poTeams(m); if(!ta) return; } else { ta=m.a; tb=m.b; }
+    const side = (tid, gf, ga) => {
+      const t=T(tid); if(!t) return;
+      const names = (m.joker===tid) ? [t.seed, JOKER] : [t.seed, t.partner];
+      names.forEach(n=>{ const p=add(n); p.mp++; p.gf+=gf; p.ga+=ga;
+        if(gf>ga) p.w++; else if(ga>gf) p.l++;
+        if(n===JOKER) p.joker++; });
+    };
+    side(ta, r.a, r.b); side(tb, r.b, r.a);
+  });
+  return Object.values(P).sort((a,b)=> b.w-a.w || (b.gf-b.ga)-(a.gf-a.ga) || b.gf-a.gf);
+}
+
+/* ---------------- profily hráčů ---------------- */
+const PKEY = KEY + "-profiles";
+let PRO = {};
+try{ PRO = JSON.parse(localStorage.getItem(PKEY) || "{}") || {}; }catch(e){ PRO = {}; }
+function savePro(){
+  schedulePush();
+  try{ localStorage.setItem(PKEY, JSON.stringify(PRO)); }
+  catch(e){ alert("Fotky se nevešly do úložiště prohlížeče. Odeber některou starší fotku a zkus to znovu."); }
+}
+function pro(n){ return PRO[n] || (PRO[n]={photo:"",nick:"",motto:""}); }
+
+// fotky uložené přímo v projektu (složka turnaj/foto) — vidí je každý, kdo otevře odkaz
+const SLUG = {
+  "Andy":"andy", "Maison":"maison", "Kužla":"kuzla", "Vlčí":"vlci", "Vlasta":"vlasta",
+  "Kloubek":"kloubek", "Šali":"sali", "Kraťas":"kratas", "Djeržík":"djerzik"
+};
+const REPO = {};
+function probeFotos(){
+  Object.keys(SLUG).forEach(n=>{
+    ["jpg","png","webp"].forEach(ext=>{
+      const url = "foto/"+SLUG[n]+"."+ext, im = new Image();
+      im.onload = () => { if(!REPO[n]){ REPO[n]=url; renderPlayers(); if(tvOn) renderTV(); } };
+      im.src = url;
+    });
+  });
+}
+function photoSrc(n){
+  const p = PRO[n];
+  if(p && p.photo) return p.photo;      // ruční nahrání na tomhle zařízení má přednost
+  return REPO[n] || "";
+}
+
+function roster(){
+  const list = [];
+  TEAMS.forEach(t=>list.push({name:t.seed, kind:"seed", label:"Nasazený "+t.sn, mp:3}));
+  TEAMS.forEach(t=>list.push({name:t.partner, kind:"partner", label:"Tým "+t.id, mp:2}));
+  list.push({name:JOKER, kind:"joker", label:"Žolík", mp:4});
+  return list;
+}
+function initials(n){
+  const f = NAMES[n];
+  if(!f) return n.slice(0,1).toUpperCase();
+  return f.full.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
+}
+function faceOf(n){
+  const src = photoSrc(n);
+  return src
+    ? `<figure><img src="${src}" alt="${esc(n)}"></figure>`
+    : `<figure><span>${esc(initials(n))}</span></figure>`;
+}
+function renderPlayers(){
+  const ps = playerStats();
+  document.getElementById("roster").innerHTML = roster().map(r=>{
+    const p = pro(r.name), st = ps.find(x=>x.name===r.name) || {mp:0,w:0,l:0,gf:0,ga:0};
+    const nm = NAMES[r.name] || {full:r.name, titul:""};
+    const cls = r.kind==="seed" ? "is-seed" : (r.kind==="joker" ? "is-joker" : "");
+    const src = photoSrc(r.name);
+    const photo = src
+      ? `<img src="${src}" alt="${esc(nm.full)}">`
+      : `<div class="mono-init">${esc(initials(r.name))}</div>`;
+    return `<article class="pcard ${cls}">
+      <div class="pphoto">
+        ${photo}
+        <div class="badge">${esc(r.label)}</div>
+        <div class="shoot">
+          <button data-photo="${esc(r.name)}">${p.photo?"Vyměnit":"Nahrát fotku"}</button>
+          ${p.photo?`<button data-unphoto="${esc(r.name)}">Odebrat</button>`:""}
+        </div>
+      </div>
+      <div class="pbody">
+        <h3 class="pname">${esc(r.name)}</h3>
+        <div class="pmeta">${esc(nm.full)}${nm.titul?" · "+esc(nm.titul):""}</div>
+        <div class="pedit" contenteditable="true" data-f="nick" data-n="${esc(r.name)}" data-ph="Přezdívka na kurtu…">${esc(p.nick)}</div>
+        <div class="pedit" contenteditable="true" data-f="motto" data-n="${esc(r.name)}" data-ph="Hláška do ceremoniálu…">${esc(p.motto)}</div>
+        <div class="pline">
+          <div><div class="kk">Zápasy</div><div class="vv">${st.mp}<span style="color:var(--bone-dim);font-size:11px">/${r.mp}</span></div></div>
+          <div><div class="kk">V–P</div><div class="vv">${st.w}–${st.l}</div></div>
+          <div><div class="kk">Gamy</div><div class="vv">${st.gf}:${st.ga}</div></div>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+let photoTarget = null;
+document.addEventListener("click", e=>{
+  const up = e.target.closest("[data-photo]");
+  if(up){ photoTarget = up.dataset.photo; document.getElementById("photoInput").click(); return; }
+  const rm = e.target.closest("[data-unphoto]");
+  if(rm){ pro(rm.dataset.unphoto).photo=""; savePro(); renderPlayers(); if(tvOn) renderTV(); }
+});
+document.getElementById("photoInput").addEventListener("change", ev=>{
+  const f = ev.target.files && ev.target.files[0];
+  ev.target.value = "";
+  if(!f || !photoTarget) return;
+  const rd = new FileReader();
+  rd.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const M = 640, sc = Math.min(1, M/Math.max(img.width, img.height));
+      const w = Math.round(img.width*sc), h = Math.round(img.height*sc);
+      const c = document.createElement("canvas"); c.width=w; c.height=h;
+      c.getContext("2d").drawImage(img,0,0,w,h);
+      pro(photoTarget).photo = c.toDataURL("image/jpeg", .82);
+      savePro(); renderPlayers(); if(tvOn) renderTV(); photoTarget=null;
+    };
+    img.onerror = () => alert("Soubor se nepodařilo načíst jako obrázek. Zkus jpg nebo png.");
+    img.src = rd.result;
+  };
+  rd.readAsDataURL(f);
+});
+document.addEventListener("input", e=>{
+  const el = e.target;
+  if(el.dataset && el.dataset.f && el.dataset.n){
+    pro(el.dataset.n)[el.dataset.f] = el.textContent.trim(); savePro();
+  }
+});
+document.getElementById("exportPhotos").addEventListener("click",()=>{
+  prompt("Zkopíruj si profily (fotky + přezdívky) a na druhém zařízení je vlož přes Import profilů:", JSON.stringify(PRO));
+});
+document.getElementById("importPhotos").addEventListener("click",()=>{
+  const v=prompt("Vlož dříve exportované profily:"); if(!v) return;
+  try{ PRO=JSON.parse(v)||{}; savePro(); renderPlayers(); if(tvOn) renderTV(); }
+  catch(err){ alert("Profily se nepodařilo přečíst. Zkontroluj, že jsi vložil celý text z exportu."); }
+});
+document.getElementById("clearPhotos").addEventListener("click",()=>{
+  if(confirm("Opravdu smazat všechny fotky? Přezdívky a hlášky zůstanou.")){
+    Object.keys(PRO).forEach(k=>PRO[k].photo=""); savePro(); renderPlayers(); if(tvOn) renderTV();
+  }
+});
+
+/* ---------------- render ---------------- */
+function renderTeams(){
+  document.getElementById("teamCards").innerHTML = TEAMS.map(t=>`
+    <div class="team">
+      <div class="tno">TÝM ${t.id}</div>
+      <div class="players">${esc(t.seed)}<br>${esc(t.partner)}</div>
+      <div class="role" style="text-transform:none;letter-spacing:0;font-size:12px;color:var(--bone-dim);margin-bottom:6px">
+        ${esc(NAMES[t.seed].full)} · ${esc(NAMES[t.partner].full)}</div>
+      <div class="role">Nasazení ${t.sn} · los č. ${t.pn}</div>
+    </div>`).join("") + `
+    <div class="team joker">
+      <div class="tno">BEZ TÝMU</div>
+      <div class="players">${esc(JOKER)}</div>
+      <div class="role" style="text-transform:none;letter-spacing:0;font-size:12px;color:var(--bone-dim);margin-bottom:6px">${esc(NAMES[JOKER].full)}</div>
+      <div class="role">Žolík · hraje za všechny čtyři</div>
+    </div>`;
+
+  const rows = [
+    ...TEAMS.map(t=>[t.seed, `Nasazený ${t.sn}`, "Tým "+t.id, 3]),
+    ...TEAMS.map(t=>[t.partner, "Partner", "Tým "+t.id, 2]),
+    [JOKER, "Žolík", "Tým 1–4", 4]
+  ];
+  document.getElementById("loadTbl").innerHTML =
+    `<tr><th>Hráč</th><th>Role</th><th>Tým</th><th class="num">Zápasů ve skupině</th></tr>` +
+    rows.map(r=>`<tr><td><b>${esc(r[0])}</b></td><td>${esc(r[1])}</td><td class="mono">${esc(r[2])}</td><td class="num">${r[3]}</td></tr>`).join("") +
+    `<tr><td colspan="3"><b>Celkem odehraných míst na kurtu</b></td><td class="num"><b>24</b></td></tr>`;
+}
+
+function matchRow(m){
+  const r = res(m.id);
+  let na, nb, note = "";
+  if(m.from){
+    const [ta,tb] = poTeams(m);
+    na = ta ? teamName(ta) : `${m.from[0]}. ze skupiny`;
+    nb = tb ? teamName(tb) : `${m.from[1]}. ze skupiny`;
+    note = m.label + " · set do 6 gamů";
+  } else {
+    na = lineup(m.id, m.a); nb = lineup(m.id, m.b);
+    if(m.joker) note = `Žolík ${JOKER} nastupuje za Tým ${m.joker} — odpočívá ${T(m.joker).partner}`;
+  }
+  return `<div class="match ${r.done?"done":""}">
+    <div class="slot">${fmt(m.off)}<small>${m.id}</small></div>
+    <div>
+      <div class="side">${esc(na)} <span class="vs">vs</span> ${esc(nb)}</div>
+      ${note?`<div class="note">${esc(note)}</div>`:""}
+    </div>
+    <div class="score-in">${SYNC.scorer ? `
+      <input type="number" min="0" max="15" value="${r.a}" data-m="${m.id}" data-s="a" aria-label="Gamy ${esc(na)}">
+      <span>:</span>
+      <input type="number" min="0" max="15" value="${r.b}" data-m="${m.id}" data-s="b" aria-label="Gamy ${esc(nb)}">
+      <button class="btn" data-done="${m.id}">${r.done?"✓ Hotovo":"Uzavřít"}</button>`
+      : `<span class="viewonly">${r.done ? r.a+":"+r.b : "—:—"}</span>`}
+    </div>
+  </div>`;
+}
+
+function renderSchedule(){
+  document.getElementById("scheduleList").innerHTML =
+    `<div class="phase-head"><h3>Skupina — každý s každým</h3><span>6 ZÁPASŮ · SET DO 4 GAMŮ</span></div>` +
+    GROUP.map(matchRow).join("") +
+    `<div class="phase-head"><h3>Play-off</h3><span>2 ZÁPASY · SET DO 6 GAMŮ</span></div>` +
+    PO.map(matchRow).join("");
+}
+
+function renderTable(){
+  const st = standings();
+  document.getElementById("standTbl").innerHTML =
+    `<tr><th>#</th><th>Tým</th><th class="num">Z</th><th class="num">V</th><th class="num">P</th><th class="num">Gamy</th><th class="num">±</th><th class="num">Body</th></tr>` +
+    st.map((s,i)=>`<tr class="rank${i+1}"><td class="mono">${i+1}</td><td><b>${esc(s.name)}</b></td>
+      <td class="num">${s.p}</td><td class="num">${s.w}</td><td class="num">${s.l}</td>
+      <td class="num">${s.gf}:${s.ga}</td><td class="num">${s.gf-s.ga>0?"+":""}${s.gf-s.ga}</td>
+      <td class="num"><b>${s.pts}</b></td></tr>`).join("");
+
+  document.getElementById("poBox").innerHTML = PO.map(m=>{
+    const [ta,tb]=poTeams(m); const r=res(m.id);
+    const done = r.done && ta;
+    return `<div class="match ${done?"done":""}">
+      <div class="slot">${fmt(m.off)}<small>${m.id}</small></div>
+      <div><div class="side">${esc(ta?teamName(ta):m.from[0]+". ze skupiny")} <span class="vs">vs</span> ${esc(tb?teamName(tb):m.from[1]+". ze skupiny")}</div>
+      <div class="note">${esc(m.label)}</div></div>
+      <div class="score-in"><span class="mono" style="font-size:19px">${done?`${r.a}:${r.b}`:"—:—"}</span></div>
+    </div>`;
+  }).join("");
+
+  const fin = document.getElementById("finalTbl");
+  const bR=res("B"), fR=res("F"), [b3,b4]=poTeams(PO[0]), [f1,f2]=poTeams(PO[1]);
+  if(!(bR.done && fR.done && b3 && f1)){
+    fin.innerHTML = `<tr><td style="color:var(--bone-dim)">Konečné pořadí se zobrazí po dohrání finále.</td></tr>`;
+  } else {
+    const gold = fR.a>fR.b ? f1 : f2, silver = fR.a>fR.b ? f2 : f1;
+    const bronze = bR.a>bR.b ? b3 : b4, four = bR.a>bR.b ? b4 : b3;
+    const order=[[1,gold,"Jadranský pohár a titul"],[2,silver,"Stříbrné medaile"],[3,bronze,"Bronzové medaile"],[4,four,"Odveta příští ročník"]];
+    fin.innerHTML = `<tr><th>Pořadí</th><th>Tým</th><th>Zisk</th></tr>` +
+      order.map(o=>`<tr class="rank${o[0]}"><td class="mono">${o[0]}.</td><td><b>${esc(teamName(o[1]))}</b></td><td>${esc(o[2])}</td></tr>`).join("");
+  }
+}
+
+function renderStats(){
+  const ps = playerStats();
+  const played = ALL.filter(m=>res(m.id).done).length;
+  const games = ALL.reduce((s,m)=>{const r=res(m.id); return s + (r.done ? r.a+r.b : 0);},0);
+  const best = ps[0];
+  const jk = ps.find(p=>p.name===JOKER);
+  document.getElementById("statCards").innerHTML = `
+    <div class="stat"><div class="k">Odehráno zápasů</div><div class="v">${played} <small>/ 8</small></div>
+      <div class="bar"><i style="width:${played/8*100}%"></i></div></div>
+    <div class="stat"><div class="k">Gamů celkem</div><div class="v">${games}</div></div>
+    <div class="stat"><div class="k">Nejlepší bilance</div><div class="v" style="font-size:26px">${played?esc(best.name):"—"}
+      <small>${played?best.w+"–"+best.l:""}</small></div></div>
+    <div class="stat"><div class="k">Žolík ${esc(JOKER)}</div><div class="v" style="font-size:26px">${jk.w}–${jk.l}
+      <small>${jk.mp} zápasů</small></div></div>`;
+
+  document.getElementById("playerTbl").innerHTML =
+    `<tr><th>Hráč</th><th>Role</th><th class="num">Z</th><th class="num">V</th><th class="num">P</th><th class="num">Úspěšnost</th><th class="num">Gamy</th><th class="num">±</th></tr>` +
+    ps.map(p=>{
+      const t = TEAMS.find(x=>x.seed===p.name);
+      const t2 = TEAMS.find(x=>x.partner===p.name);
+      const role = p.name===JOKER ? `<span class="pill gold">Žolík</span>` :
+        t ? `<span class="pill red">Nasazený ${t.sn}</span>` : `<span class="pill">Tým ${t2?t2.id:"—"}</span>`;
+      const pct = p.mp ? Math.round(p.w/p.mp*100) : 0;
+      const fn = NAMES[p.name];
+      return `<tr><td><b>${esc(p.name)}</b>${fn?`<div style="font-size:11.5px;color:var(--bone-dim)">${esc(fn.full)}</div>`:""}</td><td>${role}</td><td class="num">${p.mp}</td>
+        <td class="num">${p.w}</td><td class="num">${p.l}</td>
+        <td class="num">${p.mp?pct+" %":"—"}</td><td class="num">${p.gf}:${p.ga}</td>
+        <td class="num">${p.gf-p.ga>0?"+":""}${p.gf-p.ga}</td></tr>`;
+    }).join("");
+
+  const top = n => { const a=[...ps].filter(p=>p.mp); if(!a.length) return "—"; a.sort(n); return a[0].name+" "; };
+  document.getElementById("awardCards").innerHTML = `
+    <div class="card"><h3 class="sub" style="margin-top:0">Žolík turnaje</h3>
+      <p style="margin:0;font-size:14.5px"><b>${esc(JOKER)}</b> — bilance ${jk.w}–${jk.l}, gamy ${jk.gf}:${jk.ga}. Páska na paži a řádek na tabuli vítězů. Vítězí vždy, protože je jediný.</p></div>
+    <div class="card"><h3 class="sub" style="margin-top:0">Železný muž</h3>
+      <p style="margin:0;font-size:14.5px">Nejvíc odehraných gamů: <b>${esc(top((a,b)=>(b.gf+b.ga)-(a.gf+a.ga)))}</b></p></div>
+    <div class="card"><h3 class="sub" style="margin-top:0">Nejlepší rozdíl gamů</h3>
+      <p style="margin:0;font-size:14.5px"><b>${esc(top((a,b)=>(b.gf-b.ga)-(a.gf-a.ga)))}</b></p></div>
+    <div class="card"><h3 class="sub" style="margin-top:0">Cena fair play</h3>
+      <p style="margin:0;font-size:14.5px">Uděluje se hlasováním na ceremoniálu. Nesmí ji dostat vítěz.</p></div>`;
+}
+
+function renderDay(){
+  document.getElementById("dayTbl").innerHTML =
+    `<tr><th>Čas</th><th>Program</th></tr>` +
+    DAY.map(d=>`<tr><td class="mono" style="color:var(--gold);white-space:nowrap">${fmt(d[0])}</td><td>${esc(d[1])}</td></tr>`).join("");
+}
+
+/* ---------------- TV ---------------- */
+function currentMatch(){
+  return ALL.find(m=>!res(m.id).done) || ALL[ALL.length-1];
+}
+function renderTV(){
+  const m = currentMatch(); const r = res(m.id);
+  let ta, tb, na, nb;
+  if(m.from){ [ta,tb]=poTeams(m); na = ta?teamName(ta):`${m.from[0]}. ze skupiny`; nb = tb?teamName(tb):`${m.from[1]}. ze skupiny`; }
+  else { ta=m.a; tb=m.b; na=lineup(m.id,m.a); nb=lineup(m.id,m.b); }
+  const subA = m.from ? m.label : (m.joker===ta ? "s Žolíkem "+JOKER : "Tým "+ta);
+  const subB = m.from ? m.label : (m.joker===tb ? "s Žolíkem "+JOKER : "Tým "+tb);
+  const A=document.getElementById("tvA"), B=document.getElementById("tvB");
+  A.className = "tv-side"+(r.a>r.b?" lead":""); B.className = "tv-side"+(r.b>r.a?" lead":"");
+  const faces = s => {
+    const ns = s.split(" / ").filter(x=>NAMES[x]);
+    return ns.length ? `<div class="tv-faces">${ns.map(faceOf).join("")}</div>` : "";
+  };
+  A.innerHTML = `<div>${faces(na)}<div class="nm">${esc(na)}</div><div class="sub">${esc(subA)}</div></div><div class="gm">${r.a}</div>`;
+  B.innerHTML = `<div>${faces(nb)}<div class="nm">${esc(nb)}</div><div class="sub">${esc(subB)}</div></div><div class="gm">${r.b}</div>`;
+  document.getElementById("tvBadge").textContent = r.done ? "● UKONČENO" : `● ${m.id} · ${fmt(m.off)} · ${m.from ? "SET DO 6" : "SET DO 4"}`;
+  document.getElementById("tvCtrl").innerHTML = `
+    <button class="btn" data-tv="a+">+ game ${esc(na.split(" / ")[0])}</button>
+    <button class="btn" data-tv="a-">−</button>
+    <button class="btn" data-tv="b+">+ game ${esc(nb.split(" / ")[0])}</button>
+    <button class="btn" data-tv="b-">−</button>
+    <button class="btn primary" data-tv="done">${r.done?"Znovu otevřít":"Ukončit zápas"}</button>`;
+  const idx = ALL.indexOf(m); const nx = ALL[idx+1];
+  document.getElementById("tvNext").textContent = nx
+    ? `DALŠÍ · ${fmt(nx.off)} ${nx.id} — ${nx.from ? nx.label : lineup(nx.id,nx.a)+" vs "+lineup(nx.id,nx.b)}`
+    : `POSLEDNÍ ZÁPAS TURNAJE — po něm ceremoniál v ${fmt(315)}`;
+
+  const st = standings();
+  document.getElementById("tvStand").innerHTML =
+    `<tr><th>#</th><th>Tým</th><th class="num">V–P</th><th class="num">±</th><th class="num">B</th></tr>` +
+    st.map((s,i)=>`<tr class="rank${i+1}"><td class="mono">${i+1}</td><td>${esc(s.name)}</td>
+      <td class="num">${s.w}–${s.l}</td><td class="num">${s.gf-s.ga>0?"+":""}${s.gf-s.ga}</td><td class="num"><b>${s.pts}</b></td></tr>`).join("");
+  document.getElementById("tvRes").innerHTML = ALL.map(x=>{
+    const rr=res(x.id); if(!rr.done) return "";
+    let n1,n2;
+    if(x.from){ const [p,q]=poTeams(x); n1=p?teamName(p):"?"; n2=q?teamName(q):"?"; }
+    else { n1=lineup(x.id,x.a); n2=lineup(x.id,x.b); }
+    return `<tr><td class="mono" style="color:var(--gold)">${x.id}</td><td>${esc(n1)}</td>
+      <td class="num"><b>${rr.a}:${rr.b}</b></td><td>${esc(n2)}</td></tr>`;
+  }).join("") || `<tr><td style="color:var(--bone-dim)">Zatím se nehrálo.</td></tr>`;
+
+  const d=new Date();
+  document.getElementById("tvClock").textContent = String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
+}
+
+/* ---------------- události ---------------- */
+function renderAll(){ renderSchedule(); renderTable(); renderStats(); renderPlayers(); renderDay(); if(tvOn) renderTV(); }
+let tvOn=false, tvTimer=null;
+
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected", x===b ? "true":"false"));
+  document.querySelectorAll(".panel").forEach(p=>p.hidden = p.id !== "p"+"-"+b.dataset.p);
+  window.scrollTo({top:0,behavior:"smooth"});
+}));
+
+document.addEventListener("input", e=>{
+  const el=e.target; if(!el.dataset || !el.dataset.m) return;
+  const r=res(el.dataset.m); r[el.dataset.s]=Math.max(0,parseInt(el.value||"0",10));
+  S[el.dataset.m]=r; save(); renderTable(); renderStats(); if(tvOn) renderTV();
+});
+document.addEventListener("click", e=>{
+  const b=e.target.closest("[data-done]");
+  if(b){ const r=res(b.dataset.done); r.done=!r.done; setRes(b.dataset.done,r); return; }
+  const tv=e.target.closest("[data-tv]");
+  if(tv){
+    const m=currentMatch(), r=res(m.id), k=tv.dataset.tv;
+    if(k==="done"){ r.done=!r.done; }
+    else { const s=k[0], d=k[1]==="+"?1:-1; r[s]=Math.max(0,(r[s]||0)+d); }
+    setRes(m.id,r); return;
+  }
+});
+
+document.getElementById("openTv").addEventListener("click",()=>{
+  tvOn=true; const tv=document.getElementById("tv");
+  tv.classList.add("on"); tv.setAttribute("aria-hidden","false");
+  renderTV(); tvTimer=setInterval(renderTV,20000);
+  if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
+});
+document.getElementById("closeTv").addEventListener("click",()=>{
+  tvOn=false; const tv=document.getElementById("tv");
+  tv.classList.remove("on"); tv.setAttribute("aria-hidden","true");
+  clearInterval(tvTimer);
+  if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
+});
+document.addEventListener("keydown", e=>{ if(e.key==="Escape" && tvOn) document.getElementById("closeTv").click(); });
+
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  if(confirm("Opravdu vynulovat všechny výsledky turnaje?")){ S={}; save(); renderAll(); }
+});
+document.getElementById("exportBtn").addEventListener("click",()=>{
+  prompt("Zkopíruj a ulož si výsledky (import je na druhém tlačítku):", JSON.stringify(S));
+});
+document.getElementById("importBtn").addEventListener("click",()=>{
+  const v=prompt("Vlož dříve exportovaná data:"); if(!v) return;
+  try{ S=JSON.parse(v)||{}; save(); renderAll(); }catch(err){ alert("Data se nepodařilo přečíst. Zkontroluj, že jsi vložil celý text z exportu."); }
+});
+
+
+/* ---------------- start turnaje ---------------- */
+function syncStartInput(){
+  const el = document.getElementById("startTime"); if(el && el.value !== startTime()) el.value = startTime();
+  const ms = document.getElementById("metaStart"); if(ms) ms.textContent = startTime();
+  const et = document.getElementById("endTime");  if(et) et.textContent = fmt(315);
+}
+document.getElementById("startTime").addEventListener("change", e=>{
+  const v = e.target.value;
+  if(!/^\d{1,2}:\d{2}$/.test(v)){ syncStartInput(); return; }
+  S.__start = v; save(); renderAll(); syncStartInput();
+});
+
+/* ---------------- živé sdílení ---------------- */
+const SYNC = {enabled:false, scorer:true, pin:""};
+try{
+  SYNC.pin = localStorage.getItem(KEY+"-pin") || "";
+}catch(e){}
+
+function nickBundle(){
+  const o = {};
+  Object.keys(PRO).forEach(k=>{ const v = PRO[k]; if(v && (v.nick || v.motto)) o[k] = {nick:v.nick||"", motto:v.motto||""}; });
+  return o;
+}
+function applyNicks(nk){
+  if(!nk) return;
+  Object.keys(nk).forEach(k=>{ const t = pro(k); t.nick = nk[k].nick || ""; t.motto = nk[k].motto || ""; });
+  try{ localStorage.setItem(PKEY, JSON.stringify(PRO)); }catch(e){}
+}
+function liveBar(){
+  const bar = document.getElementById("livebar"), txt = document.getElementById("liveText"),
+        btn = document.getElementById("scorerBtn");
+  bar.hidden = false;
+  bar.classList.toggle("live", SYNC.enabled && !SYNC.scorer);
+  bar.classList.toggle("scorer", SYNC.enabled && SYNC.scorer);
+  document.body.classList.toggle("viewer", SYNC.enabled && !SYNC.scorer);
+  if(!SYNC.enabled){
+    txt.innerHTML = "<b>Offline režim.</b> Výsledky se ukládají jen v tomhle prohlížeči a nikam se neodesílají.";
+    btn.hidden = true;
+  } else if(SYNC.scorer){
+    txt.innerHTML = "<b>Režim rozhodčího.</b> Co zapíšeš, uvidí během pár vteřin všichni na odkazu.";
+    btn.hidden = false; btn.textContent = "Přepnout na diváka";
+  } else {
+    txt.innerHTML = "<b>Živý přenos.</b> Sleduješ zápis rozhodčího, obnovuje se každých 6 vteřin.";
+    btn.hidden = false; btn.textContent = "Režim rozhodčího";
+  }
+}
+async function pullState(){
+  try{
+    const r = await fetch("api/state", {cache:"no-store"});
+    if(!r.ok) throw new Error("http "+r.status);
+    const j = await r.json();
+    if(j.disabled){ SYNC.enabled = false; liveBar(); return; }
+    SYNC.enabled = true;
+    if(!SYNC.scorer){
+      const inc = JSON.stringify(j.state || {});
+      if(inc !== JSON.stringify(S)){
+        S = j.state || {};
+        try{ localStorage.setItem(KEY, inc); }catch(e){}
+        applyNicks(j.nicks); renderAll(); syncStartInput();
+      } else applyNicks(j.nicks);
+    }
+    liveBar();
+  }catch(e){ SYNC.enabled = false; liveBar(); }
+}
+let pushTimer = null;
+function schedulePush(){
+  if(!SYNC.enabled || !SYNC.scorer) return;
+  clearTimeout(pushTimer);
+  pushTimer = setTimeout(pushState, 600);
+}
+async function pushState(){
+  try{
+    const r = await fetch("api/state", {
+      method:"POST",
+      headers:{"Content-Type":"application/json", "x-pin":SYNC.pin},
+      body: JSON.stringify({state:S, nicks:nickBundle()})
+    });
+    if(r.status === 403){
+      SYNC.scorer = false;
+      try{ localStorage.removeItem(KEY+"-scorer"); }catch(e){}
+      alert("Kód rozhodčího neplatí. Přepínám tě zpátky na diváka.");
+      liveBar(); renderAll();
+    }
+  }catch(e){}
+}
+document.getElementById("scorerBtn").addEventListener("click", ()=>{
+  if(SYNC.scorer){
+    SYNC.scorer = false;
+    try{ localStorage.removeItem(KEY+"-scorer"); }catch(e){}
+    liveBar(); renderAll(); pullState();
+    return;
+  }
+  const v = prompt("Kód rozhodčího:", SYNC.pin || "");
+  if(v === null) return;
+  SYNC.pin = v.trim();
+  try{ localStorage.setItem(KEY+"-pin", SYNC.pin); localStorage.setItem(KEY+"-scorer","1"); }catch(e){}
+  SYNC.scorer = true; liveBar(); renderAll(); pushState();
+});
+function initSync(){
+  if(location.protocol === "file:"){ SYNC.enabled = false; liveBar(); return; }
+  let remembered = false;
+  try{ remembered = localStorage.getItem(KEY+"-scorer") === "1"; }catch(e){}
+  SYNC.scorer = remembered;
+  pullState().then(()=>{ if(!SYNC.enabled){ SYNC.scorer = true; liveBar(); renderAll(); } });
+  setInterval(()=>{ if(!SYNC.scorer) pullState(); }, 6000);
+}
+
+renderTeams(); renderDay(); renderAll(); syncStartInput(); probeFotos(); initSync();
+</script>
