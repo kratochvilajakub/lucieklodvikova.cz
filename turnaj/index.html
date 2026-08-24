@@ -1,4 +1,4 @@
-<title>Croatia Masters ’06</title>
+<title>Krojš Master 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;900&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap">
@@ -188,6 +188,71 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
 .dl dt{color:var(--bone-dim); font-size:11px; letter-spacing:.14em; text-transform:uppercase; padding-top:4px}
 .dl dd{margin:0}
 
+/* ---------- profily hráčů ---------- */
+.roster{display:grid; gap:16px; grid-template-columns:repeat(auto-fill,minmax(232px,1fr))}
+.pcard{
+  border:1px solid var(--rule); border-radius:4px; overflow:hidden;
+  background:linear-gradient(180deg,var(--deck-2),rgba(15,46,61,.35));
+  display:flex; flex-direction:column;
+}
+.pcard.is-seed{border-color:rgba(214,57,46,.55)}
+.pcard.is-joker{border-color:var(--gold)}
+.pphoto{
+  position:relative; aspect-ratio:4/5; background:var(--night);
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.pphoto img{width:100%; height:100%; object-fit:cover; display:block}
+.pphoto .mono-init{
+  font-family:var(--f-disp); font-size:64px; color:var(--rule); line-height:1;
+}
+.pphoto .badge{
+  position:absolute; top:10px; left:10px; font-family:var(--f-mono); font-size:10px;
+  letter-spacing:.1em; padding:3px 8px; border-radius:2px; background:rgba(7,26,36,.82);
+  border:1px solid var(--rule); color:var(--bone-dim);
+}
+.pcard.is-seed .badge{border-color:var(--chequy); color:var(--chequy)}
+.pcard.is-joker .badge{border-color:var(--gold); color:var(--gold)}
+.pphoto .shoot{
+  position:absolute; inset:auto 0 0 0; padding:9px 10px; background:linear-gradient(0deg,rgba(7,26,36,.92),transparent);
+  display:flex; gap:8px; justify-content:center; opacity:0; transition:opacity .18s ease;
+}
+.pphoto:hover .shoot, .pphoto:focus-within .shoot{opacity:1}
+.pphoto .shoot button{
+  font-family:var(--f-ui); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  background:var(--deck-2); color:var(--bone); border:1px solid var(--rule);
+  border-radius:2px; padding:6px 10px; cursor:pointer;
+}
+.pphoto .shoot button:hover{border-color:var(--gold); color:var(--gold)}
+.pbody{padding:14px 15px 16px; display:flex; flex-direction:column; gap:7px; flex:1}
+.pname{font-family:var(--f-disp); font-size:27px; line-height:1; margin:0}
+.pmeta{font-family:var(--f-mono); font-size:10.5px; letter-spacing:.08em; color:var(--bone-dim)}
+.pline{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:auto;
+  border-top:1px solid rgba(30,84,104,.5); padding-top:11px;
+}
+.pline div{text-align:center}
+.pline .kk{font-size:9px; letter-spacing:.16em; text-transform:uppercase; color:var(--bone-dim)}
+.pline .vv{font-family:var(--f-mono); font-size:16px; font-weight:700; font-variant-numeric:tabular-nums}
+.pedit{
+  font-size:13px; color:var(--bone); border:1px dashed rgba(30,84,104,.8); border-radius:3px;
+  padding:6px 8px; min-height:31px; background:rgba(7,26,36,.35);
+}
+.pedit:empty::before{content:attr(data-ph); color:var(--bone-dim); font-style:italic}
+.pedit:focus{outline:2px solid var(--gold); outline-offset:1px; border-style:solid}
+
+/* ---------- pravidla žolíka ---------- */
+.artcl{
+  display:grid; grid-template-columns:52px 1fr; gap:18px; padding:16px 0;
+  border-bottom:1px solid rgba(30,84,104,.45);
+}
+.artcl:last-child{border-bottom:0}
+.artcl .no{
+  font-family:var(--f-mono); font-size:12px; color:var(--gold); letter-spacing:.06em; padding-top:3px;
+}
+.artcl h4{margin:0 0 4px; font-size:14.5px; font-weight:700; letter-spacing:.01em}
+.artcl p{margin:0; font-size:14.5px; color:var(--bone-dim); max-width:62ch}
+.artcl p b{color:var(--bone); font-weight:600}
+
 /* ---------- TV režim ---------- */
 #tv{
   position:fixed; inset:0; z-index:200; background:var(--night); display:none;
@@ -208,6 +273,12 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
 }
 .tv-side.lead{border-color:var(--gold)}
 .tv-side .nm{font-family:var(--f-disp); font-size:5.4vh; line-height:1.02}
+.tv-faces{display:flex; gap:.6vw; margin-bottom:.8vh}
+.tv-faces figure{margin:0; width:7vh; height:7vh; border-radius:50%; overflow:hidden;
+  border:1px solid var(--rule); background:var(--night); display:flex; align-items:center; justify-content:center}
+.tv-side.lead .tv-faces figure{border-color:var(--gold)}
+.tv-faces img{width:100%; height:100%; object-fit:cover}
+.tv-faces span{font-family:var(--f-disp); font-size:3vh; color:var(--rule)}
 .tv-side .sub{font-family:var(--f-mono); font-size:1.4vh; color:var(--bone-dim); letter-spacing:.1em; margin-top:.6vh}
 .tv-side .gm{font-family:var(--f-ui); font-weight:900; font-size:11vh; line-height:.85; font-variant-numeric:tabular-nums}
 .tv-side.lead .gm{color:var(--gold)}
@@ -232,7 +303,7 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
 </style>
 
 <header class="masthead">
-  <svg class="crest" viewBox="0 0 100 100" role="img" aria-label="Znak turnaje Croatia Masters ’06">
+  <svg class="crest" viewBox="0 0 100 100" role="img" aria-label="Znak turnaje Krojš Master 2026">
     <path d="M50 3 92 16v38c0 24-18 38-42 46C26 92 8 78 8 54V16z" fill="#0F2E3D" stroke="#E8B33A" stroke-width="2.5"/>
     <g>
       <rect x="8" y="16" width="84" height="7" fill="#D6392E"/>
@@ -241,11 +312,11 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
     </g>
     <circle cx="50" cy="52" r="19" fill="none" stroke="#E8B33A" stroke-width="2.5"/>
     <path d="M34 42c9 6 9 14 0 20M66 42c-9 6-9 14 0 20" fill="none" stroke="#E8B33A" stroke-width="2"/>
-    <text x="50" y="87" text-anchor="middle" font-family="Space Mono, monospace" font-size="13" font-weight="700" fill="#F2EDE3">’06</text>
+    <text x="50" y="87" text-anchor="middle" font-family="Space Mono, monospace" font-size="13" font-weight="700" fill="#F2EDE3">’26</text>
   </svg>
   <div class="mast-txt">
-    <p class="eyebrow">Grand Slam Croatia · Masters série · Ročník 2006 (retro)</p>
-    <h1 class="mark">Croatia Masters <em>’06</em></h1>
+    <p class="eyebrow">Grand Slam Krojš · Masters série · Ročník 2026</p>
+    <h1 class="mark">Krojš Master <em>2026</em></h1>
     <p class="tagline">Domácí Grand Slam ve čtyřhře. Jeden kurt, devět mužů, jeden Jadranský pohár.</p>
     <div class="mast-meta">
       <span><b>9</b> hráčů</span><span><b>4</b> týmy + Žolík</span>
@@ -257,6 +328,7 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
 <nav class="tabs">
   <div class="tabs-inner" role="tablist">
     <button class="tab" role="tab" data-p="draw" aria-selected="true">Los &amp; týmy</button>
+    <button class="tab" role="tab" data-p="players" aria-selected="false">Hráči</button>
     <button class="tab" role="tab" data-p="schedule" aria-selected="false">Rozpis &amp; skóre</button>
     <button class="tab" role="tab" data-p="table" aria-selected="false">Tabulka</button>
     <button class="tab" role="tab" data-p="stats" aria-selected="false">Statistiky</button>
@@ -270,7 +342,7 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
 
 <!-- ============ LOS ============ -->
 <section class="panel" id="p-draw">
-  <h2 class="sec">Los ročníku 2006</h2>
+  <h2 class="sec">Los ročníku 2026</h2>
   <p class="sec-note">Nasazená čtyřka (Andy, Maison, Kužla, Vlčí) se podle rozpisu nesmí potkat v jednom páru — každý nasazený proto dostal losem jednoho nenasazeného partnera. Devátý hráč zůstal bez týmu a dostal roli, která z lichého počtu udělala přednost: <b>Žolík</b>.</p>
 
   <div class="teams" id="teamCards"></div>
@@ -283,6 +355,21 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
 
   <h3 class="sub">Rozdělení minut na kurtu</h3>
   <div class="tablewrap"><table id="loadTbl"></table></div>
+</section>
+
+<!-- ============ HRÁČI ============ -->
+<section class="panel" id="p-players" hidden>
+  <h2 class="sec">Startovní listina</h2>
+  <p class="sec-note">Devět karet, devět fotek. Klikni na kartu a nahraj fotku z telefonu nebo počítače — uloží se rovnou do zařízení, se kterým zapisuješ, a objeví se i na TV boardu u probíhajícího zápasu. Přezdívku a hlášku dopiš přímo do karty, ukládá se sama.</p>
+  <div class="btnrow" style="margin-top:0;margin-bottom:22px">
+    <button class="btn" id="exportPhotos">Export profilů</button>
+    <button class="btn" id="importPhotos">Import profilů</button>
+    <button class="btn" id="clearPhotos">Smazat všechny fotky</button>
+  </div>
+  <div class="roster" id="roster"></div>
+  <input type="file" id="photoInput" accept="image/*" hidden>
+  <h3 class="sub">Jak fotky fungují</h3>
+  <div class="card"><p style="margin:0">Fotka se při nahrání zmenší na 640 px a uloží do prohlížeče toho zařízení, kde ji nahráváš — nikam se neodesílá. Když budeš zapisovat z jiného notebooku, použij <b>Export profilů</b> a na druhém zařízení <b>Import profilů</b>. Nejlíp vypadají svislé portréty (poměr 4:5) od pasu nahoru.</p></div>
 </section>
 
 <!-- ============ ROZPIS ============ -->
@@ -343,12 +430,12 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
     <tr><td><b>Žolík turnaje</b></td><td>Samostatná cena pro Vlastu dle jeho bilance</td><td class="num">200</td></tr>
     <tr><td>Míče</td><td>3 tuby, nové na finále</td><td class="num">750</td></tr>
     <tr><td>Poháry, medaile, plaketa</td><td>1 pohár + 8 medailí + tabule vítězů</td><td class="num">500</td></tr>
-    <tr><td>Občerstvení, led, voda</td><td>Croatia Break ve 14:20</td><td class="num">450</td></tr>
+    <tr><td>Občerstvení, led, voda</td><td>Krojš Break ve 14:20</td><td class="num">450</td></tr>
     <tr><td colspan="2"><b>Celkem</b></td><td class="num"><b>4 500</b></td></tr>
   </table></div>
 
   <h3 class="sub">Divácký fond (vstupné 100 Kč)</h3>
-  <div class="card"><p style="margin:0">Vstupné je dobrovolné a jde celé na grill a nápoje po ceremoniálu. Při 8 divácích ≈ 800 Kč. Přebytek se nevrací — převádí se jako základ do ročníku ’07 (<b>fond obhajoby</b>). Kdo přinese vlastní pití nebo maso, má vstup zdarma.</p></div>
+  <div class="card"><p style="margin:0">Vstupné je dobrovolné a jde celé na grill a nápoje po ceremoniálu. Při 8 divácích ≈ 800 Kč. Přebytek se nevrací — převádí se jako základ do ročníku 2027 (<b>fond obhajoby</b>). Kdo přinese vlastní pití nebo maso, má vstup zdarma.</p></div>
 
   <h3 class="sub">Bonusová sázková kasička (nepovinná)</h3>
   <div class="card"><p style="margin:0">Každý může před startem vsadit 100 Kč na vítězný tým (na sebe se sázet nesmí). Celý bank bere ten, kdo trefil vítěze; při více trefách se dělí rovným dílem, při žádné trefě propadá do fondu obhajoby.</p></div>
@@ -363,14 +450,14 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
     <div class="card">
       <h3 class="sub" style="margin-top:0">Jméno a slovník</h3>
       <dl class="dl">
-        <dt>Název</dt><dd>Croatia Masters ’06</dd>
-        <dt>Série</dt><dd>Grand Slam Croatia — Masters série</dd>
+        <dt>Název</dt><dd>Krojš Master 2026</dd>
+        <dt>Série</dt><dd>Grand Slam Krojš — Masters série</dd>
         <dt>Claim</dt><dd>„Jeden kurt. Devět mužů. Jeden pohár.“</dd>
         <dt>Trofej</dt><dd>Jadranský pohár</dd>
         <dt>Kurt</dt><dd>Centre Court „Jadran“</dd>
-        <dt>Pauza</dt><dd>Croatia Break (14:20)</dd>
+        <dt>Pauza</dt><dd>Krojš Break (14:20)</dd>
         <dt>Hymna</dt><dd>Jedna skladba z roku 2006, pouští se před finále</dd>
-        <dt>Hashtag</dt><dd>#CroatiaMasters06</dd>
+        <dt>Hashtag</dt><dd>#KrojsMaster2026</dd>
       </dl>
     </div>
     <div class="card">
@@ -401,20 +488,20 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
   <ul class="clean">
     <li><span class="t">12:30</span><span><b>Slavnostní zahájení.</b> Nástup devíti hráčů na základní čáru, přivítání, přečtení losu z obálky, společné foto pod znakem. Krátká hymna.</span></li>
     <li><span class="t">12:45</span><span><b>Rozehrání a slib.</b> Nejmladší hráč pronese sportovní slib („budeme hlásit auty poctivě“), Žolík dostane pásku na paži.</span></li>
-    <li><span class="t">14:20</span><span><b>Croatia Break.</b> Grill, dolití vody, průběžné vyhlášení tabulky nahlas z TV boardu.</span></li>
+    <li><span class="t">14:20</span><span><b>Krojš Break.</b> Grill, dolití vody, průběžné vyhlášení tabulky nahlas z TV boardu.</span></li>
     <li><span class="t">16:05</span><span><b>Vyhlášení skupiny.</b> Ceremonie nasazení do play-off — kdo je jednička, dostává výběr strany kurtu a nové míče.</span></li>
     <li><span class="t">16:55</span><span><b>Finálový nástup.</b> Hráči nastupují za sebou s ručníkem, hymna, Žolík jako rozhodčí na vysoké židli (štafle).</span></li>
     <li><span class="t">17:45</span><span><b>Ceremoniál.</b> Bronz, stříbro, zlato. Jadranský pohár nad hlavu, prosecco, vyhlášení Žolíka turnaje a cen mimo pořadí. Zápis jmen na tabuli vítězů.</span></li>
-    <li><span class="t">18:15</span><span><b>Afterparty.</b> Sestřihy z telefonů, vsazení fondu obhajoby a losování pořadatele ročníku ’07.</span></li>
+    <li><span class="t">18:15</span><span><b>Afterparty.</b> Sestřihy z telefonů, vsazení fondu obhajoby a losování pořadatele ročníku 2027.</span></li>
   </ul>
 
   <h3 class="sub">Co ještě značku drží pohromadě</h3>
   <div class="card"><ul style="margin:0;padding-left:20px;font-size:14.5px">
-    <li>Tabule vítězů — jedna deska, každý rok jedna řádka. Bez ní není ročník ’07.</li>
+    <li>Tabule vítězů — jedna deska, každý rok jedna řádka. Bez ní není ročník 2027.</li>
     <li>Jednotný zápis: každý zápas má kód (Z1–Z6, B, F) a ten se používá i v hovoru.</li>
     <li>TV board běží celý den, i mezi zápasy — značka je vidět, ne jen slyšet.</li>
     <li>Fotka po každém zápase se stejným rámováním: vítězná dvojice u sítě.</li>
-    <li>Ročník se nepřejmenovává. Vždycky Croatia Masters, mění se jen číslo.</li>
+    <li>Ročník se nepřejmenovává. Vždycky Krojš Master, mění se jen číslo.</li>
   </ul></div>
 </section>
 
@@ -437,10 +524,63 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
       <p style="font-size:14.5px;margin-bottom:0">Jedno podání navíc se nedává, druhé podání platí normálně. Nety při podání se opakují. Auty hlásí strana, na které míč dopadl; při sporu se bod opakuje. Střídání stran po lichých gamech, bez sezení.</p>
     </div>
     <div class="card">
-      <h3 class="sub" style="margin-top:0">Žolík — přesná pravidla</h3>
-      <p style="font-size:14.5px;margin-bottom:0">Vlasta odehraje právě jeden zápas za každý tým, podle rozpisu (Z1, Z2, Z4, Z6). Odpočívající partner v tu dobu nesmí radit od lajny. Body ze zápasu patří týmu, ne Žolíkovi — Žolík si vede vlastní bilanci pro svou trofej.</p>
+      <h3 class="sub" style="margin-top:0">Žolík — ve zkratce</h3>
+      <p style="font-size:14.5px;margin-bottom:0">Vlasta odehraje právě jeden zápas za každý tým, podle rozpisu (Z1, Z2, Z4, Z6). Odpočívající partner v tu dobu nesmí radit od lajny. Body ze zápasu patří týmu, ne Žolíkovi — Žolík si vede vlastní bilanci pro svou trofej. Úplný statut je níže.</p>
     </div>
   </div>
+
+  <h2 class="sec" style="margin-top:52px">Statut Žolíka</h2>
+  <p class="sec-note">Deset článků, které řeší každou situaci, jaká může kolem devátého hráče nastat — od nástupu přes body a spory až po zranění a play-off. Když se během dne o něčem strhne debata, platí to, co je tady.</p>
+  <div class="card" style="padding:6px 22px 10px">
+    <div class="artcl"><div class="no">§ 1</div><div>
+      <h4>Kdo je Žolík a proč existuje</h4>
+      <p>Devět hráčů nejde rozdělit do čtyřher. Devátý hráč — <b>Vlasta</b> — proto nemá stálý tým a stává se Žolíkem: samostatnou funkcí s vlastním rozpisem, vlastní bilancí a vlastní trofejí. Role je na celý turnaj, nedá se během dne předat ani vyměnit.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 2</div><div>
+      <h4>Nasazení do zápasů — pevný rozpis</h4>
+      <p>Žolík nastupuje do <b>právě čtyř zápasů skupiny</b> a v každém za jiný tým: <b>Z1 za Tým 1</b> (Andy), <b>Z2 za Tým 3</b> (Kužla), <b>Z4 za Tým 4</b> (Vlčí), <b>Z6 za Tým 2</b> (Maison). Pořadí vzešlo z losu a během turnaje se nemění ani po dohodě — jinak by se dal ovlivnit průběh tabulky.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 3</div><div>
+      <h4>Koho nahrazuje</h4>
+      <p>Vždy <b>nenasazeného partnera</b>, nikdy nasazeného. Nasazený hráč je kapitán týmu a odehraje všechny tři zápasy skupiny bez výjimky. Zápasy Z3 a Z5 se hrají v základních dvojicích — v nich Žolík nenastupuje a je k dispozici jako čárový.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 4</div><div>
+      <h4>Odpočívající partner</h4>
+      <p>Hráč, za kterého Žolík nastoupil, sedí za lavičkou. <b>Nesmí koučovat, radit ani komentovat sporné míče</b> — může podávat míče a nosit vodu. Za porušení dostane jeho tým po napomenutí jeden trestný game. Sledovat a fandit smí kdokoliv.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 5</div><div>
+      <h4>Komu patří body</h4>
+      <p>Výsledek zápasu patří <b>týmu</b>, za který Žolík zrovna hrál — body i gamy jdou do tabulky týmu úplně stejně, jako by hrála základní dvojice. Žolík sám do tabulky skupiny nezasahuje a nemůže v ní skončit.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 6</div><div>
+      <h4>Vlastní bilance a trofej</h4>
+      <p>Žolíkovi se paralelně počítá <b>osobní bilance V–P a rozdíl gamů</b> ze všech čtyř zápasů — systém ji vede automaticky v záložce Statistiky. Z ní se na ceremoniálu vyhlašuje <b>Žolík turnaje</b>: 200 Kč a páska na paži. Bilance 4–0 se vyhlašuje jako <b>Perfect Round</b> a přidává se k ní lahev.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 7</div><div>
+      <h4>Podání, strany, rozehrání</h4>
+      <p>V zápase s Žolíkem otevírá podání <b>nasazený hráč jeho týmu</b>, Žolík podává jako druhý v pořadí své strany — aby si tým nemusel kvůli střídání přehazovat rozestavení. Stranu kurtu losí soupeř mincí. Žolík má nárok na <b>3 minuty rozehrání navíc</b>, pokud jde do zápasu přímo z předchozího (Z1 → Z2); ostatní na něj počkají.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 8</div><div>
+      <h4>Zranění a výpadky</h4>
+      <p>Když nemůže <b>Žolík</b>, zápas se odehraje v základní dvojici a Žolíkovi se do bilance nezapíše nic. Když nemůže <b>kmenový partner</b>, může za něj Žolík nastoupit i mimo svůj rozpis — nejvýš jednou za turnaj a jen se souhlasem soupeře; takový zápas se mu do bilance počítá normálně. Když vypadne <b>nasazený</b>, jeho tým dohrává s Žolíkem a partnerem, ale za snížený zisk 1 bodu za výhru.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 9</div><div>
+      <h4>Play-off a role rozhodčího</h4>
+      <p>V play-off Žolík <b>nehraje</b> — zápas o 3. místo i finále se hrají v základních dvojicích. Místo toho dělá <b>hlavního rozhodčího</b>: sedí na štaflích, hlásí stav, rozhoduje sporné míče a jeho výrok je konečný. Zároveň obsluhuje TV board a odstartuje hymnu.</p></div></div>
+
+    <div class="artcl"><div class="no">§ 10</div><div>
+      <h4>Střet zájmů</h4>
+      <p>Žolík se <b>nesmí účastnit sázkové kasičky</b> — hrál za všechny čtyři týmy a zná je zevnitř. Zároveň nemůže dostat Cenu fair play (tu uděluje hlasování hráčů) a nemůže rozhodovat o vlastní trofeji. Vše ostatní má stejné jako kdokoliv jiný, včetně nároku na podíl z grillu.</p></div></div>
+  </div>
+
+  <h3 class="sub">Průběh zápasu s Žolíkem — krok za krokem</h3>
+  <ul class="clean">
+    <li><span class="t">−5 min</span><span>Hlášení z TV boardu: kdo hraje, za jaký tým Žolík nastupuje a kdo odpočívá.</span></li>
+    <li><span class="t">−3 min</span><span>Odpočívající partner odevzdá Žolíkovi pásku a odchází za lavičku.</span></li>
+    <li><span class="t">−2 min</span><span>Los stran mincí, rozehrání. Nasazený hráč Žolíkova týmu si bere první podání.</span></li>
+    <li><span class="t">0</span><span>Zápas — set do 4 gamů, bez výhod, limit 25 minut.</span></li>
+    <li><span class="t">Konec</span><span>Zápis skóre do boardu, fotka vítězné dvojice u sítě, Žolíkovi se připíše bilance.</span></li>
+  </ul>
 
   <h3 class="sub">Časový harmonogram dne</h3>
   <div class="tablewrap"><table id="dayTbl"></table></div>
@@ -460,7 +600,7 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
       <circle cx="50" cy="52" r="19" fill="none" stroke="#E8B33A" stroke-width="2.5"/>
       <path d="M34 42c9 6 9 14 0 20M66 42c-9 6-9 14 0 20" fill="none" stroke="#E8B33A" stroke-width="2"/>
     </svg>
-    <h2>Croatia Masters ’06</h2>
+    <h2>Krojš Master 2026</h2>
     <div class="sl">Centre Court Jadran · <span id="tvClock"></span></div>
   </div>
   <div class="tv-body">
@@ -490,6 +630,18 @@ const TEAMS = [
   {id:4, seed:"Vlčí",   sn:4, partner:"Djeržík", pn:9}
 ];
 const JOKER = "Vlasta";
+// celá jména podle startovní listiny
+const NAMES = {
+  "Andy":    {full:"Ondřej Vícha",       titul:"EFA"},
+  "Maison":  {full:"Ondřej Maison",      titul:""},
+  "Kužla":   {full:"Lukáš Kužel",        titul:"Ing., EFP"},
+  "Vlčí":    {full:"Jan Vlček",          titul:"EFA"},
+  "Vlasta":  {full:"Vlastimil Drábek",   titul:"PFP"},
+  "Kloubek": {full:"Petr Klobouk",       titul:"Mgr., PFP"},
+  "Šali":    {full:"Radek Šalena",       titul:"Ing., EFP"},
+  "Kraťas":  {full:"Jakub Kratochvíla",  titul:"Ing., EFP"},
+  "Djeržík": {full:"Martin Dzierža",     titul:"Ing., EFP"}
+};
 // joker = id týmu, za který v tom zápase nastupuje Žolík
 const GROUP = [
   {id:"Z1", t:"12:50", a:1, b:2, joker:1},
@@ -509,7 +661,7 @@ const DAY = [
   ["12:50","Z1 — Tým 1 vs Tým 2"],
   ["13:20","Z2 — Tým 3 vs Tým 4"],
   ["13:50","Z3 — Tým 1 vs Tým 3"],
-  ["14:20","Croatia Break — grill, voda, průběžná tabulka"],
+  ["14:20","Krojš Break — grill, voda, průběžná tabulka"],
   ["14:35","Z4 — Tým 2 vs Tým 4"],
   ["15:05","Z5 — Tým 1 vs Tým 4"],
   ["15:35","Z6 — Tým 2 vs Tým 3"],
@@ -517,10 +669,10 @@ const DAY = [
   ["16:20","Zápas o 3. místo (do 6 gamů)"],
   ["16:55","FINÁLE (do 6 gamů, tiebreak 6:6)"],
   ["17:45","Ceremoniál — medaile, Jadranský pohár, Žolík turnaje, ceny mimo pořadí"],
-  ["18:15","Afterparty, fond obhajoby, losování pořadatele ročníku ’07"]
+  ["18:15","Afterparty, fond obhajoby, losování pořadatele ročníku 2027"]
 ];
 const ALL = [...GROUP, ...PO];
-const KEY = "croatia-masters-06";
+const KEY = "krojs-master-2026";
 
 /* ---------------- stav ---------------- */
 let S = {};
@@ -590,17 +742,128 @@ function playerStats(){
   return Object.values(P).sort((a,b)=> b.w-a.w || (b.gf-b.ga)-(a.gf-a.ga) || b.gf-a.gf);
 }
 
+/* ---------------- profily hráčů ---------------- */
+const PKEY = KEY + "-profiles";
+let PRO = {};
+try{ PRO = JSON.parse(localStorage.getItem(PKEY) || "{}") || {}; }catch(e){ PRO = {}; }
+function savePro(){
+  try{ localStorage.setItem(PKEY, JSON.stringify(PRO)); }
+  catch(e){ alert("Fotky se nevešly do úložiště prohlížeče. Odeber některou starší fotku a zkus to znovu."); }
+}
+function pro(n){ return PRO[n] || (PRO[n]={photo:"",nick:"",motto:""}); }
+
+function roster(){
+  const list = [];
+  TEAMS.forEach(t=>list.push({name:t.seed, kind:"seed", label:"Nasazený "+t.sn, mp:3}));
+  TEAMS.forEach(t=>list.push({name:t.partner, kind:"partner", label:"Tým "+t.id, mp:2}));
+  list.push({name:JOKER, kind:"joker", label:"Žolík", mp:4});
+  return list;
+}
+function initials(n){
+  const f = NAMES[n];
+  if(!f) return n.slice(0,1).toUpperCase();
+  return f.full.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
+}
+function faceOf(n){
+  const p = PRO[n];
+  return p && p.photo
+    ? `<figure><img src="${p.photo}" alt="${esc(n)}"></figure>`
+    : `<figure><span>${esc(initials(n))}</span></figure>`;
+}
+function renderPlayers(){
+  const ps = playerStats();
+  document.getElementById("roster").innerHTML = roster().map(r=>{
+    const p = pro(r.name), st = ps.find(x=>x.name===r.name) || {mp:0,w:0,l:0,gf:0,ga:0};
+    const nm = NAMES[r.name] || {full:r.name, titul:""};
+    const cls = r.kind==="seed" ? "is-seed" : (r.kind==="joker" ? "is-joker" : "");
+    const photo = p.photo
+      ? `<img src="${p.photo}" alt="${esc(nm.full)}">`
+      : `<div class="mono-init">${esc(initials(r.name))}</div>`;
+    return `<article class="pcard ${cls}">
+      <div class="pphoto">
+        ${photo}
+        <div class="badge">${esc(r.label)}</div>
+        <div class="shoot">
+          <button data-photo="${esc(r.name)}">${p.photo?"Vyměnit":"Nahrát fotku"}</button>
+          ${p.photo?`<button data-unphoto="${esc(r.name)}">Odebrat</button>`:""}
+        </div>
+      </div>
+      <div class="pbody">
+        <h3 class="pname">${esc(r.name)}</h3>
+        <div class="pmeta">${esc(nm.full)}${nm.titul?" · "+esc(nm.titul):""}</div>
+        <div class="pedit" contenteditable="true" data-f="nick" data-n="${esc(r.name)}" data-ph="Přezdívka na kurtu…">${esc(p.nick)}</div>
+        <div class="pedit" contenteditable="true" data-f="motto" data-n="${esc(r.name)}" data-ph="Hláška do ceremoniálu…">${esc(p.motto)}</div>
+        <div class="pline">
+          <div><div class="kk">Zápasy</div><div class="vv">${st.mp}<span style="color:var(--bone-dim);font-size:11px">/${r.mp}</span></div></div>
+          <div><div class="kk">V–P</div><div class="vv">${st.w}–${st.l}</div></div>
+          <div><div class="kk">Gamy</div><div class="vv">${st.gf}:${st.ga}</div></div>
+        </div>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+let photoTarget = null;
+document.addEventListener("click", e=>{
+  const up = e.target.closest("[data-photo]");
+  if(up){ photoTarget = up.dataset.photo; document.getElementById("photoInput").click(); return; }
+  const rm = e.target.closest("[data-unphoto]");
+  if(rm){ pro(rm.dataset.unphoto).photo=""; savePro(); renderPlayers(); if(tvOn) renderTV(); }
+});
+document.getElementById("photoInput").addEventListener("change", ev=>{
+  const f = ev.target.files && ev.target.files[0];
+  ev.target.value = "";
+  if(!f || !photoTarget) return;
+  const rd = new FileReader();
+  rd.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      const M = 640, sc = Math.min(1, M/Math.max(img.width, img.height));
+      const w = Math.round(img.width*sc), h = Math.round(img.height*sc);
+      const c = document.createElement("canvas"); c.width=w; c.height=h;
+      c.getContext("2d").drawImage(img,0,0,w,h);
+      pro(photoTarget).photo = c.toDataURL("image/jpeg", .82);
+      savePro(); renderPlayers(); if(tvOn) renderTV(); photoTarget=null;
+    };
+    img.onerror = () => alert("Soubor se nepodařilo načíst jako obrázek. Zkus jpg nebo png.");
+    img.src = rd.result;
+  };
+  rd.readAsDataURL(f);
+});
+document.addEventListener("input", e=>{
+  const el = e.target;
+  if(el.dataset && el.dataset.f && el.dataset.n){
+    pro(el.dataset.n)[el.dataset.f] = el.textContent.trim(); savePro();
+  }
+});
+document.getElementById("exportPhotos").addEventListener("click",()=>{
+  prompt("Zkopíruj si profily (fotky + přezdívky) a na druhém zařízení je vlož přes Import profilů:", JSON.stringify(PRO));
+});
+document.getElementById("importPhotos").addEventListener("click",()=>{
+  const v=prompt("Vlož dříve exportované profily:"); if(!v) return;
+  try{ PRO=JSON.parse(v)||{}; savePro(); renderPlayers(); if(tvOn) renderTV(); }
+  catch(err){ alert("Profily se nepodařilo přečíst. Zkontroluj, že jsi vložil celý text z exportu."); }
+});
+document.getElementById("clearPhotos").addEventListener("click",()=>{
+  if(confirm("Opravdu smazat všechny fotky? Přezdívky a hlášky zůstanou.")){
+    Object.keys(PRO).forEach(k=>PRO[k].photo=""); savePro(); renderPlayers(); if(tvOn) renderTV();
+  }
+});
+
 /* ---------------- render ---------------- */
 function renderTeams(){
   document.getElementById("teamCards").innerHTML = TEAMS.map(t=>`
     <div class="team">
       <div class="tno">TÝM ${t.id}</div>
       <div class="players">${esc(t.seed)}<br>${esc(t.partner)}</div>
+      <div class="role" style="text-transform:none;letter-spacing:0;font-size:12px;color:var(--bone-dim);margin-bottom:6px">
+        ${esc(NAMES[t.seed].full)} · ${esc(NAMES[t.partner].full)}</div>
       <div class="role">Nasazení ${t.sn} · los č. ${t.pn}</div>
     </div>`).join("") + `
     <div class="team joker">
       <div class="tno">BEZ TÝMU</div>
       <div class="players">${esc(JOKER)}</div>
+      <div class="role" style="text-transform:none;letter-spacing:0;font-size:12px;color:var(--bone-dim);margin-bottom:6px">${esc(NAMES[JOKER].full)}</div>
       <div class="role">Žolík · hraje za všechny čtyři</div>
     </div>`;
 
@@ -706,7 +969,8 @@ function renderStats(){
       const role = p.name===JOKER ? `<span class="pill gold">Žolík</span>` :
         t ? `<span class="pill red">Nasazený ${t.sn}</span>` : `<span class="pill">Tým ${t2?t2.id:"—"}</span>`;
       const pct = p.mp ? Math.round(p.w/p.mp*100) : 0;
-      return `<tr><td><b>${esc(p.name)}</b></td><td>${role}</td><td class="num">${p.mp}</td>
+      const fn = NAMES[p.name];
+      return `<tr><td><b>${esc(p.name)}</b>${fn?`<div style="font-size:11.5px;color:var(--bone-dim)">${esc(fn.full)}</div>`:""}</td><td>${role}</td><td class="num">${p.mp}</td>
         <td class="num">${p.w}</td><td class="num">${p.l}</td>
         <td class="num">${p.mp?pct+" %":"—"}</td><td class="num">${p.gf}:${p.ga}</td>
         <td class="num">${p.gf-p.ga>0?"+":""}${p.gf-p.ga}</td></tr>`;
@@ -743,8 +1007,12 @@ function renderTV(){
   const subB = m.from ? m.label : (m.joker===tb ? "s Žolíkem "+JOKER : "Tým "+tb);
   const A=document.getElementById("tvA"), B=document.getElementById("tvB");
   A.className = "tv-side"+(r.a>r.b?" lead":""); B.className = "tv-side"+(r.b>r.a?" lead":"");
-  A.innerHTML = `<div><div class="nm">${esc(na)}</div><div class="sub">${esc(subA)}</div></div><div class="gm">${r.a}</div>`;
-  B.innerHTML = `<div><div class="nm">${esc(nb)}</div><div class="sub">${esc(subB)}</div></div><div class="gm">${r.b}</div>`;
+  const faces = s => {
+    const ns = s.split(" / ").filter(x=>NAMES[x]);
+    return ns.length ? `<div class="tv-faces">${ns.map(faceOf).join("")}</div>` : "";
+  };
+  A.innerHTML = `<div>${faces(na)}<div class="nm">${esc(na)}</div><div class="sub">${esc(subA)}</div></div><div class="gm">${r.a}</div>`;
+  B.innerHTML = `<div>${faces(nb)}<div class="nm">${esc(nb)}</div><div class="sub">${esc(subB)}</div></div><div class="gm">${r.b}</div>`;
   document.getElementById("tvBadge").textContent = r.done ? "● UKONČENO" : `● ${m.id} · ${m.t} · ${m.from ? "SET DO 6" : "SET DO 4"}`;
   document.getElementById("tvCtrl").innerHTML = `
     <button class="btn" data-tv="a+">+ game ${esc(na.split(" / ")[0])}</button>
@@ -776,7 +1044,7 @@ function renderTV(){
 }
 
 /* ---------------- události ---------------- */
-function renderAll(){ renderSchedule(); renderTable(); renderStats(); if(tvOn) renderTV(); }
+function renderAll(){ renderSchedule(); renderTable(); renderStats(); renderPlayers(); if(tvOn) renderTV(); }
 let tvOn=false, tvTimer=null;
 
 document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
