@@ -632,8 +632,11 @@ body.viewer .pedit:empty{display:none}
   </div>
 </div>
 
+<script type="application/json" id="tstate">{}</script>
+
 <script>
 "use strict";
+const PRISTINE = "<!doctype html>\n" + document.documentElement.outerHTML;
 /* ---------------- data ---------------- */
 const TEAMS = [
   {id:1, seed:"Andy",   sn:1, partner:"Kraťas",  pn:8},
@@ -697,8 +700,14 @@ function fmt(off){
 const KEY = "krojs-master-2026";
 
 /* ---------------- stav ---------------- */
-let S = {};
-try{ S = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; }catch(e){ S = {}; }
+let S = {}, EMBED = null;
+try{
+  const el = document.getElementById("tstate");
+  const d = el ? JSON.parse(el.textContent || "{}") : {};
+  if(d && d.v) EMBED = d;
+}catch(e){}
+if(EMBED && EMBED.state) S = EMBED.state;
+else { try{ S = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; }catch(e){ S = {}; } }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} schedulePush(); }
 function res(id){ return S[id] || {a:0,b:0,done:false}; }
 function setRes(id,r){ S[id]=r; save(); renderAll(); }
@@ -1093,11 +1102,20 @@ function renderTV(){
 function renderAll(){ renderSchedule(); renderTable(); renderStats(); renderPlayers(); renderDay(); if(tvOn) renderTV(); }
 let tvOn=false, tvTimer=null;
 
-document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
-  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected", x===b ? "true":"false"));
-  document.querySelectorAll(".panel").forEach(p=>p.hidden = p.id !== "p"+"-"+b.dataset.p);
-  window.scrollTo({top:0,behavior:"smooth"});
-}));
+function showPanel(name, scroll){
+  document.querySelectorAll(".tab").forEach(x=>x.setAttribute("aria-selected", x.dataset.p===name ? "true":"false"));
+  document.querySelectorAll(".panel").forEach(p=>p.hidden = p.id !== "p-"+name);
+  try{ localStorage.setItem(KEY+"-tab", name); }catch(e){}
+  if(scroll) window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>showPanel(b.dataset.p, true)));
+function restoreView(){
+  try{
+    const t = localStorage.getItem(KEY+"-tab");
+    if(t && document.getElementById("p-"+t)) showPanel(t, false);
+    if(localStorage.getItem(KEY+"-tv") === "1") openTvBoard(false);
+  }catch(e){}
+}
 
 document.addEventListener("input", e=>{
   const el=e.target; if(!el.dataset || !el.dataset.m) return;
@@ -1116,16 +1134,20 @@ document.addEventListener("click", e=>{
   }
 });
 
-document.getElementById("openTv").addEventListener("click",()=>{
+function openTvBoard(fullscreen){
   tvOn=true; const tv=document.getElementById("tv");
   tv.classList.add("on"); tv.setAttribute("aria-hidden","false");
-  renderTV(); tvTimer=setInterval(renderTV,20000);
-  if(document.documentElement.requestFullscreen) document.documentElement.requestFullscreen().catch(()=>{});
-});
+  renderTV(); clearInterval(tvTimer); tvTimer=setInterval(renderTV,20000);
+  try{ localStorage.setItem(KEY+"-tv","1"); }catch(e){}
+  if(fullscreen && document.documentElement.requestFullscreen)
+    document.documentElement.requestFullscreen().catch(()=>{});
+}
+document.getElementById("openTv").addEventListener("click",()=>openTvBoard(true));
 document.getElementById("closeTv").addEventListener("click",()=>{
   tvOn=false; const tv=document.getElementById("tv");
   tv.classList.remove("on"); tv.setAttribute("aria-hidden","true");
   clearInterval(tvTimer);
+  try{ localStorage.removeItem(KEY+"-tv"); }catch(e){}
   if(document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(()=>{});
 });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape" && tvOn) document.getElementById("closeTv").click(); });
@@ -1155,7 +1177,7 @@ document.getElementById("startTime").addEventListener("change", e=>{
 });
 
 /* ---------------- živé sdílení ---------------- */
-const SYNC = {enabled:false, scorer:true, pin:""};
+const SYNC = {enabled:false, scorer:true, pin:"", mode:"off"};
 try{
   SYNC.pin = localStorage.getItem(KEY+"-pin") || "";
 }catch(e){}
@@ -1181,10 +1203,12 @@ function liveBar(){
     txt.innerHTML = "<b>Offline režim.</b> Výsledky se ukládají jen v tomhle prohlížeči a nikam se neodesílají.";
     btn.hidden = true;
   } else if(SYNC.scorer){
-    txt.innerHTML = "<b>Režim rozhodčího.</b> Co zapíšeš, uvidí během pár vteřin všichni na odkazu.";
+    txt.innerHTML = "<b>Režim rozhodčího.</b> Co zapíšeš, uvidí všichni, kdo mají odkaz otevřený.";
     btn.hidden = false; btn.textContent = "Přepnout na diváka";
   } else {
-    txt.innerHTML = "<b>Živý přenos.</b> Sleduješ zápis rozhodčího, obnovuje se každých 6 vteřin.";
+    txt.innerHTML = SYNC.mode === "artifact"
+      ? "<b>Živý přenos.</b> Stránka se sama obnoví, jakmile rozhodčí zapíše výsledek."
+      : "<b>Živý přenos.</b> Sleduješ zápis rozhodčího, obnovuje se každých 6 vteřin.";
     btn.hidden = false; btn.textContent = "Režim rozhodčího";
   }
 }
@@ -1210,7 +1234,29 @@ let pushTimer = null;
 function schedulePush(){
   if(!SYNC.enabled || !SYNC.scorer) return;
   clearTimeout(pushTimer);
-  pushTimer = setTimeout(pushState, 600);
+  pushTimer = setTimeout(SYNC.mode === "artifact" ? publishState : pushState, SYNC.mode === "artifact" ? 2000 : 600);
+}
+let ART = null;
+function buildDoc(){
+  const data = JSON.stringify({v:1, state:S, nicks:nickBundle()}).replace(/</g, "\\u003c");
+  return PRISTINE.replace(
+    /(<script type="application\/json" id="tstate">)[\s\S]*?(<\/script>)/,
+    (all, open, close) => open + data + close
+  );
+}
+async function publishState(){
+  if(!ART) return;
+  try{
+    await ART.publish(buildDoc());
+  }catch(err){
+    const code = err && err.code;
+    if(code === "not_writer" || code === "not_granted"){
+      SYNC.scorer = false;
+      try{ localStorage.removeItem(KEY+"-scorer"); }catch(e){}
+      alert("Zápis do turnaje může měnit jen jeho vlastník. Přepínám tě na diváka.");
+      liveBar(); renderAll();
+    }
+  }
 }
 async function pushState(){
   try{
@@ -1231,23 +1277,42 @@ document.getElementById("scorerBtn").addEventListener("click", ()=>{
   if(SYNC.scorer){
     SYNC.scorer = false;
     try{ localStorage.removeItem(KEY+"-scorer"); }catch(e){}
-    liveBar(); renderAll(); pullState();
+    liveBar(); renderAll();
+    if(SYNC.mode === "api") pullState();
     return;
   }
-  const v = prompt("Kód rozhodčího:", SYNC.pin || "");
-  if(v === null) return;
-  SYNC.pin = v.trim();
+  if(SYNC.mode !== "artifact"){
+    const v = prompt("Kód rozhodčího:", SYNC.pin || "");
+    if(v === null) return;
+    SYNC.pin = v.trim();
+  }
   try{ localStorage.setItem(KEY+"-pin", SYNC.pin); localStorage.setItem(KEY+"-scorer","1"); }catch(e){}
-  SYNC.scorer = true; liveBar(); renderAll(); pushState();
+  SYNC.scorer = true; liveBar(); renderAll();
+  if(SYNC.mode === "artifact") publishState(); else pushState();
 });
-function initSync(){
-  if(location.protocol === "file:"){ SYNC.enabled = false; liveBar(); return; }
+async function initSync(){
+  if(EMBED && EMBED.nicks) applyNicks(EMBED.nicks);
   let remembered = false;
   try{ remembered = localStorage.getItem(KEY+"-scorer") === "1"; }catch(e){}
+
+  // 1) běžíme jako artefakt se sdíleným stavem?
+  try{
+    ART = (window.claude && typeof window.claude.use === "function")
+      ? await window.claude.use("artifact") : null;
+  }catch(e){ ART = null; }
+  if(ART){
+    SYNC.enabled = true; SYNC.mode = "artifact"; SYNC.scorer = remembered;
+    liveBar(); renderAll(); return;
+  }
+
+  // 2) běžíme na vlastní doméně s API?
+  if(location.protocol === "file:"){ SYNC.enabled = false; liveBar(); renderAll(); return; }
   SYNC.scorer = remembered;
-  pullState().then(()=>{ if(!SYNC.enabled){ SYNC.scorer = true; liveBar(); renderAll(); } });
-  setInterval(()=>{ if(!SYNC.scorer) pullState(); }, 6000);
+  await pullState();
+  if(SYNC.enabled){ SYNC.mode = "api"; setInterval(()=>{ if(!SYNC.scorer) pullState(); }, 6000); }
+  else { SYNC.scorer = true; }
+  liveBar(); renderAll();
 }
 
-renderTeams(); renderDay(); renderAll(); syncStartInput(); probeFotos(); initSync();
+renderTeams(); renderDay(); renderAll(); syncStartInput(); probeFotos(); restoreView(); initSync();
 </script>
