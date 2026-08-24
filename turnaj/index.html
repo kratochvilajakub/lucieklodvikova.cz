@@ -188,6 +188,40 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
 .dl dt{color:var(--bone-dim); font-size:11px; letter-spacing:.14em; text-transform:uppercase; padding-top:4px}
 .dl dd{margin:0}
 
+/* ---------- start turnaje ---------- */
+.startbox{
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap;
+  border:1px solid var(--rule); border-left:3px solid var(--gold); border-radius:4px;
+  padding:14px 18px; margin-bottom:16px; background:rgba(15,46,61,.55);
+}
+.startbox label{
+  font-size:11px; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:700;
+}
+.startbox input{
+  background:var(--night); color:var(--bone); border:1px solid var(--rule); border-radius:3px;
+  font-family:var(--f-mono); font-size:20px; font-weight:700; padding:7px 10px;
+}
+.startbox input:focus{outline:2px solid var(--gold); outline-offset:1px}
+.startbox span{font-size:13px; color:var(--bone-dim)}
+.startbox b{color:var(--bone); font-family:var(--f-mono)}
+
+/* ---------- živé sdílení ---------- */
+.livebar{
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  border:1px solid var(--rule); border-radius:4px; padding:11px 16px; margin-bottom:16px;
+  background:rgba(15,46,61,.45); font-size:13px; color:var(--bone-dim);
+}
+.livebar .dot{width:8px;height:8px;border-radius:50%;background:var(--bone-dim);flex:none}
+.livebar.live .dot{background:var(--led); box-shadow:0 0 0 3px rgba(111,208,140,.18)}
+.livebar.scorer .dot{background:var(--chequy); box-shadow:0 0 0 3px rgba(214,57,46,.18)}
+.livebar b{color:var(--bone)}
+.livebar .btn{margin-left:auto; padding:8px 14px}
+.viewonly{font-family:var(--f-mono); font-size:19px; font-weight:700; color:var(--bone)}
+body.viewer .startbox input{pointer-events:none; opacity:.6}
+body.viewer .pphoto .shoot{display:none}
+body.viewer .pedit{border-color:transparent; background:none; pointer-events:none}
+body.viewer .pedit:empty{display:none}
+
 /* ---------- profily hráčů ---------- */
 .roster{display:grid; gap:16px; grid-template-columns:repeat(auto-fill,minmax(232px,1fr))}
 .pcard{
@@ -320,7 +354,7 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
     <p class="tagline">Domácí Grand Slam ve čtyřhře. Jeden kurt, devět mužů, jeden Jadranský pohár.</p>
     <div class="mast-meta">
       <span><b>9</b> hráčů</span><span><b>4</b> týmy + Žolík</span>
-      <span><b>8</b> zápasů</span><span>Start <b>12:30</b></span><span>Kurty <b>1</b></span>
+      <span><b>8</b> zápasů</span><span>Start <b><span id="metaStart">12:30</span></b></span><span>Kurty <b>1</b></span>
     </div>
   </div>
 </header>
@@ -332,13 +366,18 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
     <button class="tab" role="tab" data-p="schedule" aria-selected="false">Rozpis &amp; skóre</button>
     <button class="tab" role="tab" data-p="table" aria-selected="false">Tabulka</button>
     <button class="tab" role="tab" data-p="stats" aria-selected="false">Statistiky</button>
-    <button class="tab" role="tab" data-p="money" aria-selected="false">Vklady &amp; ceny</button>
     <button class="tab" role="tab" data-p="brand" aria-selected="false">Brand &amp; ceremoniál</button>
     <button class="tab" role="tab" data-p="rules" aria-selected="false">Pravidla</button>
   </div>
 </nav>
 
 <div class="wrap">
+
+<div class="livebar" id="livebar" hidden>
+  <span class="dot"></span>
+  <span id="liveText">Připojuji se…</span>
+  <button class="btn" id="scorerBtn">Režim rozhodčího</button>
+</div>
 
 <!-- ============ LOS ============ -->
 <section class="panel" id="p-draw">
@@ -376,6 +415,11 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
 <section class="panel" id="p-schedule" hidden>
   <h2 class="sec">Rozpis &amp; zadávání skóre</h2>
   <p class="sec-note">Jeden kurt, zápasy jdou po sobě. Časy počítají 25 minut hry + 5 minut na výměnu a pití. Skóre zapisuj v gamech — tabulka, pavouk i statistiky se přepočítají samy a průběžně se ukládají do prohlížeče.</p>
+  <div class="startbox">
+    <label for="startTime">Start turnaje</label>
+    <input type="time" id="startTime" value="12:30" step="300">
+    <span>Celý program se přepočítá — ceremoniál začíná v <b id="endTime">17:45</b>.</span>
+  </div>
   <div class="btnrow" style="margin-top:0;margin-bottom:24px">
     <button class="btn primary" id="openTv">▶ Spustit TV board</button>
     <button class="btn" id="exportBtn">Export výsledků</button>
@@ -407,38 +451,6 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
   <div class="tablewrap"><table id="playerTbl"></table></div>
   <h3 class="sub">Ocenění mimo pořadí</h3>
   <div class="grid g2" id="awardCards"></div>
-</section>
-
-<!-- ============ PENÍZE ============ -->
-<section class="panel" id="p-money" hidden>
-  <h2 class="sec">Vklady, rozpočet a prize money</h2>
-  <p class="sec-note">Turnaj se financuje sám: startovné hráčů plus dobrovolné divácké vstupné. Prize money jde výhradně z vkladů, provoz z diváckého fondu a zbytku startovného.</p>
-
-  <div class="grid g4">
-    <div class="stat"><div class="k">Startovné / hráč</div><div class="v">500 <small>Kč</small></div></div>
-    <div class="stat"><div class="k">Vklady celkem (9×)</div><div class="v">4 500 <small>Kč</small></div></div>
-    <div class="stat"><div class="k">Divácké vstupné</div><div class="v">100 <small>Kč / os.</small></div></div>
-    <div class="stat"><div class="k">Prize money</div><div class="v">2 800 <small>Kč</small></div></div>
-  </div>
-
-  <h3 class="sub">Kam jdou vklady (4 500 Kč)</h3>
-  <div class="tablewrap"><table>
-    <tr><th>Položka</th><th>Detail</th><th class="num">Kč</th></tr>
-    <tr><td><b>1. místo</b> — Jadranský pohár</td><td>Vítězný tým, 700 Kč na hráče</td><td class="num">1 400</td></tr>
-    <tr><td><b>2. místo</b></td><td>Finalista, 400 Kč na hráče</td><td class="num">800</td></tr>
-    <tr><td><b>3. místo</b></td><td>Vítěz zápasu o bronz, 200 Kč na hráče</td><td class="num">400</td></tr>
-    <tr><td><b>Žolík turnaje</b></td><td>Samostatná cena pro Vlastu dle jeho bilance</td><td class="num">200</td></tr>
-    <tr><td>Míče</td><td>3 tuby, nové na finále</td><td class="num">750</td></tr>
-    <tr><td>Poháry, medaile, plaketa</td><td>1 pohár + 8 medailí + tabule vítězů</td><td class="num">500</td></tr>
-    <tr><td>Občerstvení, led, voda</td><td>Freedom Break ve 14:20</td><td class="num">450</td></tr>
-    <tr><td colspan="2"><b>Celkem</b></td><td class="num"><b>4 500</b></td></tr>
-  </table></div>
-
-  <h3 class="sub">Divácký fond (vstupné 100 Kč)</h3>
-  <div class="card"><p style="margin:0">Vstupné je dobrovolné a jde celé na grill a nápoje po ceremoniálu. Při 8 divácích ≈ 800 Kč. Přebytek se nevrací — převádí se jako základ do ročníku 2027 (<b>fond obhajoby</b>). Kdo přinese vlastní pití nebo maso, má vstup zdarma.</p></div>
-
-  <h3 class="sub">Bonusová sázková kasička (nepovinná)</h3>
-  <div class="card"><p style="margin:0">Každý může před startem vsadit 100 Kč na vítězný tým (na sebe se sázet nesmí). Celý bank bere ten, kdo trefil vítěze; při více trefách se dělí rovným dílem, při žádné trefě propadá do fondu obhajoby.</p></div>
 </section>
 
 <!-- ============ BRAND ============ -->
@@ -492,7 +504,7 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
     <li><span class="t">16:05</span><span><b>Vyhlášení skupiny.</b> Ceremonie nasazení do play-off — kdo je jednička, dostává výběr strany kurtu a nové míče.</span></li>
     <li><span class="t">16:55</span><span><b>Finálový nástup.</b> Hráči nastupují za sebou s ručníkem, hymna, Žolík jako rozhodčí na vysoké židli (štafle).</span></li>
     <li><span class="t">17:45</span><span><b>Ceremoniál.</b> Bronz, stříbro, zlato. Jadranský pohár nad hlavu, prosecco, vyhlášení Žolíka turnaje a cen mimo pořadí. Zápis jmen na tabuli vítězů.</span></li>
-    <li><span class="t">18:15</span><span><b>Afterparty.</b> Sestřihy z telefonů, vsazení fondu obhajoby a losování pořadatele ročníku 2027.</span></li>
+    <li><span class="t">18:15</span><span><b>Afterparty.</b> Sestřihy z telefonů a losování pořadatele ročníku 2027.</span></li>
   </ul>
 
   <h3 class="sub">Co ještě značku drží pohromadě</h3>
@@ -554,7 +566,7 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
 
     <div class="artcl"><div class="no">§ 6</div><div>
       <h4>Vlastní bilance a trofej</h4>
-      <p>Žolíkovi se paralelně počítá <b>osobní bilance V–P a rozdíl gamů</b> ze všech čtyř zápasů — systém ji vede automaticky v záložce Statistiky. Z ní se na ceremoniálu vyhlašuje <b>Žolík turnaje</b>: 200 Kč a páska na paži. Bilance 4–0 se vyhlašuje jako <b>Perfect Round</b> a přidává se k ní lahev.</p></div></div>
+      <p>Žolíkovi se paralelně počítá <b>osobní bilance V–P a rozdíl gamů</b> ze všech čtyř zápasů — systém ji vede automaticky v záložce Statistiky. Z ní se na ceremoniálu vyhlašuje <b>Žolík turnaje</b> — páska na paži a vlastní řádek na tabuli vítězů. Bilance 4–0 se vyhlašuje jako <b>Perfect Round</b>.</p></div></div>
 
     <div class="artcl"><div class="no">§ 7</div><div>
       <h4>Podání, strany, rozehrání</h4>
@@ -570,7 +582,7 @@ ul.clean li .t{font-family:var(--f-mono); font-size:12px; color:var(--gold); min
 
     <div class="artcl"><div class="no">§ 10</div><div>
       <h4>Střet zájmů</h4>
-      <p>Žolík se <b>nesmí účastnit sázkové kasičky</b> — hrál za všechny čtyři týmy a zná je zevnitř. Zároveň nemůže dostat Cenu fair play (tu uděluje hlasování hráčů) a nemůže rozhodovat o vlastní trofeji. Vše ostatní má stejné jako kdokoliv jiný, včetně nároku na podíl z grillu.</p></div></div>
+      <p>Žolík hrál za všechny čtyři týmy a zná je zevnitř — proto <b>nemůže rozhodovat o vlastní trofeji</b> ani hlasovat v Ceně fair play. Když v play-off soudí zápas týmu, se kterým sám vyhrál skupinový zápas, nahlásí to před začátkem a sporný míč se na vyžádání opakuje.</p></div></div>
   </div>
 
   <h3 class="sub">Průběh zápasu s Žolíkem — krok za krokem</h3>
@@ -644,40 +656,50 @@ const NAMES = {
 };
 // joker = id týmu, za který v tom zápase nastupuje Žolík
 const GROUP = [
-  {id:"Z1", t:"12:50", a:1, b:2, joker:1},
-  {id:"Z2", t:"13:20", a:3, b:4, joker:3},
-  {id:"Z3", t:"13:50", a:1, b:3, joker:0},
-  {id:"Z4", t:"14:35", a:2, b:4, joker:4},
-  {id:"Z5", t:"15:05", a:1, b:4, joker:0},
-  {id:"Z6", t:"15:35", a:2, b:3, joker:2}
+  {id:"Z1", off:20,  a:1, b:2, joker:1},
+  {id:"Z2", off:50,  a:3, b:4, joker:3},
+  {id:"Z3", off:80,  a:1, b:3, joker:0},
+  {id:"Z4", off:125, a:2, b:4, joker:4},
+  {id:"Z5", off:155, a:1, b:4, joker:0},
+  {id:"Z6", off:185, a:2, b:3, joker:2}
 ];
 const PO = [
-  {id:"B", t:"16:20", label:"Zápas o 3. místo", from:[3,4], to:6},
-  {id:"F", t:"16:55", label:"FINÁLE — Jadranský pohár", from:[1,2], to:6}
+  {id:"B", off:230, label:"Zápas o 3. místo", from:[3,4], to:6},
+  {id:"F", off:265, label:"FINÁLE — Jadranský pohár", from:[1,2], to:6}
 ];
 const DAY = [
-  ["12:30","Slavnostní zahájení, nástup, los z obálky, foto"],
-  ["12:45","Rozehrání, sportovní slib, páska pro Žolíka"],
-  ["12:50","Z1 — Tým 1 vs Tým 2"],
-  ["13:20","Z2 — Tým 3 vs Tým 4"],
-  ["13:50","Z3 — Tým 1 vs Tým 3"],
-  ["14:20","Freedom Break — grill, voda, průběžná tabulka"],
-  ["14:35","Z4 — Tým 2 vs Tým 4"],
-  ["15:05","Z5 — Tým 1 vs Tým 4"],
-  ["15:35","Z6 — Tým 2 vs Tým 3"],
-  ["16:05","Konec skupiny, vyhlášení nasazení do play-off, kropení kurtu"],
-  ["16:20","Zápas o 3. místo (do 6 gamů)"],
-  ["16:55","FINÁLE (do 6 gamů, tiebreak 6:6)"],
-  ["17:45","Ceremoniál — medaile, Jadranský pohár, Žolík turnaje, ceny mimo pořadí"],
-  ["18:15","Afterparty, fond obhajoby, losování pořadatele ročníku 2027"]
+  [0,  "Slavnostní zahájení, nástup, los z obálky, foto"],
+  [15, "Rozehrání, sportovní slib, páska pro Žolíka"],
+  [20, "Z1 — Tým 1 vs Tým 2"],
+  [50, "Z2 — Tým 3 vs Tým 4"],
+  [80, "Z3 — Tým 1 vs Tým 3"],
+  [110,"Freedom Break — grill, voda, průběžná tabulka"],
+  [125,"Z4 — Tým 2 vs Tým 4"],
+  [155,"Z5 — Tým 1 vs Tým 4"],
+  [185,"Z6 — Tým 2 vs Tým 3"],
+  [215,"Konec skupiny, vyhlášení nasazení do play-off, kropení kurtu"],
+  [230,"Zápas o 3. místo (do 6 gamů)"],
+  [265,"FINÁLE (do 6 gamů, tiebreak 6:6)"],
+  [315,"Ceremoniál — medaile, Jadranský pohár, Žolík turnaje, ceny mimo pořadí"],
+  [345,"Afterparty a losování pořadatele ročníku 2027"]
 ];
 const ALL = [...GROUP, ...PO];
+const START_DEFAULT = "12:30";
+function startTime(){
+  const v = S.__start;
+  return (typeof v === "string" && /^\d{1,2}:\d{2}$/.test(v)) ? v : START_DEFAULT;
+}
+function fmt(off){
+  const [h,m] = startTime().split(":").map(Number);
+  const tot = ((h*60+m+off) % 1440 + 1440) % 1440;
+  return String(Math.floor(tot/60)).padStart(2,"0")+":"+String(tot%60).padStart(2,"0");
+}
 const KEY = "krojs-master-2026";
 
 /* ---------------- stav ---------------- */
 let S = {};
 try{ S = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; }catch(e){ S = {}; }
-function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} schedulePush(); }
 function res(id){ return S[id] || {a:0,b:0,done:false}; }
 function setRes(id,r){ S[id]=r; save(); renderAll(); }
 
@@ -747,10 +769,32 @@ const PKEY = KEY + "-profiles";
 let PRO = {};
 try{ PRO = JSON.parse(localStorage.getItem(PKEY) || "{}") || {}; }catch(e){ PRO = {}; }
 function savePro(){
+  schedulePush();
   try{ localStorage.setItem(PKEY, JSON.stringify(PRO)); }
   catch(e){ alert("Fotky se nevešly do úložiště prohlížeče. Odeber některou starší fotku a zkus to znovu."); }
 }
 function pro(n){ return PRO[n] || (PRO[n]={photo:"",nick:"",motto:""}); }
+
+// fotky uložené přímo v projektu (složka turnaj/foto) — vidí je každý, kdo otevře odkaz
+const SLUG = {
+  "Andy":"andy", "Maison":"maison", "Kužla":"kuzla", "Vlčí":"vlci", "Vlasta":"vlasta",
+  "Kloubek":"kloubek", "Šali":"sali", "Kraťas":"kratas", "Djeržík":"djerzik"
+};
+const REPO = {};
+function probeFotos(){
+  Object.keys(SLUG).forEach(n=>{
+    ["jpg","png","webp"].forEach(ext=>{
+      const url = "foto/"+SLUG[n]+"."+ext, im = new Image();
+      im.onload = () => { if(!REPO[n]){ REPO[n]=url; renderPlayers(); if(tvOn) renderTV(); } };
+      im.src = url;
+    });
+  });
+}
+function photoSrc(n){
+  const p = PRO[n];
+  if(p && p.photo) return p.photo;      // ruční nahrání na tomhle zařízení má přednost
+  return REPO[n] || "";
+}
 
 function roster(){
   const list = [];
@@ -765,9 +809,9 @@ function initials(n){
   return f.full.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
 }
 function faceOf(n){
-  const p = PRO[n];
-  return p && p.photo
-    ? `<figure><img src="${p.photo}" alt="${esc(n)}"></figure>`
+  const src = photoSrc(n);
+  return src
+    ? `<figure><img src="${src}" alt="${esc(n)}"></figure>`
     : `<figure><span>${esc(initials(n))}</span></figure>`;
 }
 function renderPlayers(){
@@ -776,8 +820,9 @@ function renderPlayers(){
     const p = pro(r.name), st = ps.find(x=>x.name===r.name) || {mp:0,w:0,l:0,gf:0,ga:0};
     const nm = NAMES[r.name] || {full:r.name, titul:""};
     const cls = r.kind==="seed" ? "is-seed" : (r.kind==="joker" ? "is-joker" : "");
-    const photo = p.photo
-      ? `<img src="${p.photo}" alt="${esc(nm.full)}">`
+    const src = photoSrc(r.name);
+    const photo = src
+      ? `<img src="${src}" alt="${esc(nm.full)}">`
       : `<div class="mono-init">${esc(initials(r.name))}</div>`;
     return `<article class="pcard ${cls}">
       <div class="pphoto">
@@ -891,16 +936,17 @@ function matchRow(m){
     if(m.joker) note = `Žolík ${JOKER} nastupuje za Tým ${m.joker} — odpočívá ${T(m.joker).partner}`;
   }
   return `<div class="match ${r.done?"done":""}">
-    <div class="slot">${m.t}<small>${m.id}</small></div>
+    <div class="slot">${fmt(m.off)}<small>${m.id}</small></div>
     <div>
       <div class="side">${esc(na)} <span class="vs">vs</span> ${esc(nb)}</div>
       ${note?`<div class="note">${esc(note)}</div>`:""}
     </div>
-    <div class="score-in">
+    <div class="score-in">${SYNC.scorer ? `
       <input type="number" min="0" max="15" value="${r.a}" data-m="${m.id}" data-s="a" aria-label="Gamy ${esc(na)}">
       <span>:</span>
       <input type="number" min="0" max="15" value="${r.b}" data-m="${m.id}" data-s="b" aria-label="Gamy ${esc(nb)}">
-      <button class="btn" data-done="${m.id}">${r.done?"✓ Hotovo":"Uzavřít"}</button>
+      <button class="btn" data-done="${m.id}">${r.done?"✓ Hotovo":"Uzavřít"}</button>`
+      : `<span class="viewonly">${r.done ? r.a+":"+r.b : "—:—"}</span>`}
     </div>
   </div>`;
 }
@@ -926,7 +972,7 @@ function renderTable(){
     const [ta,tb]=poTeams(m); const r=res(m.id);
     const done = r.done && ta;
     return `<div class="match ${done?"done":""}">
-      <div class="slot">${m.t}<small>${m.id}</small></div>
+      <div class="slot">${fmt(m.off)}<small>${m.id}</small></div>
       <div><div class="side">${esc(ta?teamName(ta):m.from[0]+". ze skupiny")} <span class="vs">vs</span> ${esc(tb?teamName(tb):m.from[1]+". ze skupiny")}</div>
       <div class="note">${esc(m.label)}</div></div>
       <div class="score-in"><span class="mono" style="font-size:19px">${done?`${r.a}:${r.b}`:"—:—"}</span></div>
@@ -940,8 +986,8 @@ function renderTable(){
   } else {
     const gold = fR.a>fR.b ? f1 : f2, silver = fR.a>fR.b ? f2 : f1;
     const bronze = bR.a>bR.b ? b3 : b4, four = bR.a>bR.b ? b4 : b3;
-    const order=[[1,gold,"Jadranský pohár · 1 400 Kč"],[2,silver,"800 Kč"],[3,bronze,"400 Kč"],[4,four,"Fond obhajoby"]];
-    fin.innerHTML = `<tr><th>Pořadí</th><th>Tým</th><th>Odměna</th></tr>` +
+    const order=[[1,gold,"Jadranský pohár a titul"],[2,silver,"Stříbrné medaile"],[3,bronze,"Bronzové medaile"],[4,four,"Odveta příští ročník"]];
+    fin.innerHTML = `<tr><th>Pořadí</th><th>Tým</th><th>Zisk</th></tr>` +
       order.map(o=>`<tr class="rank${o[0]}"><td class="mono">${o[0]}.</td><td><b>${esc(teamName(o[1]))}</b></td><td>${esc(o[2])}</td></tr>`).join("");
   }
 }
@@ -979,7 +1025,7 @@ function renderStats(){
   const top = n => { const a=[...ps].filter(p=>p.mp); if(!a.length) return "—"; a.sort(n); return a[0].name+" "; };
   document.getElementById("awardCards").innerHTML = `
     <div class="card"><h3 class="sub" style="margin-top:0">Žolík turnaje</h3>
-      <p style="margin:0;font-size:14.5px"><b>${esc(JOKER)}</b> — bilance ${jk.w}–${jk.l}, gamy ${jk.gf}:${jk.ga}. Odměna 200 Kč a páska. Vítězí vždy, protože je jediný.</p></div>
+      <p style="margin:0;font-size:14.5px"><b>${esc(JOKER)}</b> — bilance ${jk.w}–${jk.l}, gamy ${jk.gf}:${jk.ga}. Páska na paži a řádek na tabuli vítězů. Vítězí vždy, protože je jediný.</p></div>
     <div class="card"><h3 class="sub" style="margin-top:0">Železný muž</h3>
       <p style="margin:0;font-size:14.5px">Nejvíc odehraných gamů: <b>${esc(top((a,b)=>(b.gf+b.ga)-(a.gf+a.ga)))}</b></p></div>
     <div class="card"><h3 class="sub" style="margin-top:0">Nejlepší rozdíl gamů</h3>
@@ -991,7 +1037,7 @@ function renderStats(){
 function renderDay(){
   document.getElementById("dayTbl").innerHTML =
     `<tr><th>Čas</th><th>Program</th></tr>` +
-    DAY.map(d=>`<tr><td class="mono" style="color:var(--gold);white-space:nowrap">${d[0]}</td><td>${esc(d[1])}</td></tr>`).join("");
+    DAY.map(d=>`<tr><td class="mono" style="color:var(--gold);white-space:nowrap">${fmt(d[0])}</td><td>${esc(d[1])}</td></tr>`).join("");
 }
 
 /* ---------------- TV ---------------- */
@@ -1013,7 +1059,7 @@ function renderTV(){
   };
   A.innerHTML = `<div>${faces(na)}<div class="nm">${esc(na)}</div><div class="sub">${esc(subA)}</div></div><div class="gm">${r.a}</div>`;
   B.innerHTML = `<div>${faces(nb)}<div class="nm">${esc(nb)}</div><div class="sub">${esc(subB)}</div></div><div class="gm">${r.b}</div>`;
-  document.getElementById("tvBadge").textContent = r.done ? "● UKONČENO" : `● ${m.id} · ${m.t} · ${m.from ? "SET DO 6" : "SET DO 4"}`;
+  document.getElementById("tvBadge").textContent = r.done ? "● UKONČENO" : `● ${m.id} · ${fmt(m.off)} · ${m.from ? "SET DO 6" : "SET DO 4"}`;
   document.getElementById("tvCtrl").innerHTML = `
     <button class="btn" data-tv="a+">+ game ${esc(na.split(" / ")[0])}</button>
     <button class="btn" data-tv="a-">−</button>
@@ -1022,7 +1068,7 @@ function renderTV(){
     <button class="btn primary" data-tv="done">${r.done?"Znovu otevřít":"Ukončit zápas"}</button>`;
   const idx = ALL.indexOf(m); const nx = ALL[idx+1];
   document.getElementById("tvNext").textContent = nx
-    ? `DALŠÍ · ${nx.t} ${nx.id} — ${nx.from ? nx.label : lineup(nx.id,nx.a)+" vs "+lineup(nx.id,nx.b)}`
+    ? `DALŠÍ · ${fmt(nx.off)} ${nx.id} — ${nx.from ? nx.label : lineup(nx.id,nx.a)+" vs "+lineup(nx.id,nx.b)}`
     : "POSLEDNÍ ZÁPAS TURNAJE — po něm ceremoniál v 17:45";
 
   const st = standings();
@@ -1044,7 +1090,7 @@ function renderTV(){
 }
 
 /* ---------------- události ---------------- */
-function renderAll(){ renderSchedule(); renderTable(); renderStats(); renderPlayers(); if(tvOn) renderTV(); }
+function renderAll(){ renderSchedule(); renderTable(); renderStats(); renderPlayers(); renderDay(); if(tvOn) renderTV(); }
 let tvOn=false, tvTimer=null;
 
 document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
@@ -1095,5 +1141,113 @@ document.getElementById("importBtn").addEventListener("click",()=>{
   try{ S=JSON.parse(v)||{}; save(); renderAll(); }catch(err){ alert("Data se nepodařilo přečíst. Zkontroluj, že jsi vložil celý text z exportu."); }
 });
 
-renderTeams(); renderDay(); renderAll();
+
+/* ---------------- start turnaje ---------------- */
+function syncStartInput(){
+  const el = document.getElementById("startTime"); if(el && el.value !== startTime()) el.value = startTime();
+  const ms = document.getElementById("metaStart"); if(ms) ms.textContent = startTime();
+  const et = document.getElementById("endTime");  if(et) et.textContent = fmt(315);
+}
+document.getElementById("startTime").addEventListener("change", e=>{
+  const v = e.target.value;
+  if(!/^\d{1,2}:\d{2}$/.test(v)){ syncStartInput(); return; }
+  S.__start = v; save(); renderAll(); syncStartInput();
+});
+
+/* ---------------- živé sdílení ---------------- */
+const SYNC = {enabled:false, scorer:true, pin:""};
+try{
+  SYNC.pin = localStorage.getItem(KEY+"-pin") || "";
+}catch(e){}
+
+function nickBundle(){
+  const o = {};
+  Object.keys(PRO).forEach(k=>{ const v = PRO[k]; if(v && (v.nick || v.motto)) o[k] = {nick:v.nick||"", motto:v.motto||""}; });
+  return o;
+}
+function applyNicks(nk){
+  if(!nk) return;
+  Object.keys(nk).forEach(k=>{ const t = pro(k); t.nick = nk[k].nick || ""; t.motto = nk[k].motto || ""; });
+  try{ localStorage.setItem(PKEY, JSON.stringify(PRO)); }catch(e){}
+}
+function liveBar(){
+  const bar = document.getElementById("livebar"), txt = document.getElementById("liveText"),
+        btn = document.getElementById("scorerBtn");
+  bar.hidden = false;
+  bar.classList.toggle("live", SYNC.enabled && !SYNC.scorer);
+  bar.classList.toggle("scorer", SYNC.enabled && SYNC.scorer);
+  document.body.classList.toggle("viewer", SYNC.enabled && !SYNC.scorer);
+  if(!SYNC.enabled){
+    txt.innerHTML = "<b>Offline režim.</b> Výsledky se ukládají jen v tomhle prohlížeči a nikam se neodesílají.";
+    btn.hidden = true;
+  } else if(SYNC.scorer){
+    txt.innerHTML = "<b>Režim rozhodčího.</b> Co zapíšeš, uvidí během pár vteřin všichni na odkazu.";
+    btn.hidden = false; btn.textContent = "Přepnout na diváka";
+  } else {
+    txt.innerHTML = "<b>Živý přenos.</b> Sleduješ zápis rozhodčího, obnovuje se každých 6 vteřin.";
+    btn.hidden = false; btn.textContent = "Režim rozhodčího";
+  }
+}
+async function pullState(){
+  try{
+    const r = await fetch("api/state", {cache:"no-store"});
+    if(!r.ok) throw new Error("http "+r.status);
+    const j = await r.json();
+    if(j.disabled){ SYNC.enabled = false; liveBar(); return; }
+    SYNC.enabled = true;
+    if(!SYNC.scorer){
+      const inc = JSON.stringify(j.state || {});
+      if(inc !== JSON.stringify(S)){
+        S = j.state || {};
+        try{ localStorage.setItem(KEY, inc); }catch(e){}
+        applyNicks(j.nicks); renderAll(); syncStartInput();
+      } else applyNicks(j.nicks);
+    }
+    liveBar();
+  }catch(e){ SYNC.enabled = false; liveBar(); }
+}
+let pushTimer = null;
+function schedulePush(){
+  if(!SYNC.enabled || !SYNC.scorer) return;
+  clearTimeout(pushTimer);
+  pushTimer = setTimeout(pushState, 600);
+}
+async function pushState(){
+  try{
+    const r = await fetch("api/state", {
+      method:"POST",
+      headers:{"Content-Type":"application/json", "x-pin":SYNC.pin},
+      body: JSON.stringify({state:S, nicks:nickBundle()})
+    });
+    if(r.status === 403){
+      SYNC.scorer = false;
+      try{ localStorage.removeItem(KEY+"-scorer"); }catch(e){}
+      alert("Kód rozhodčího neplatí. Přepínám tě zpátky na diváka.");
+      liveBar(); renderAll();
+    }
+  }catch(e){}
+}
+document.getElementById("scorerBtn").addEventListener("click", ()=>{
+  if(SYNC.scorer){
+    SYNC.scorer = false;
+    try{ localStorage.removeItem(KEY+"-scorer"); }catch(e){}
+    liveBar(); renderAll(); pullState();
+    return;
+  }
+  const v = prompt("Kód rozhodčího:", SYNC.pin || "");
+  if(v === null) return;
+  SYNC.pin = v.trim();
+  try{ localStorage.setItem(KEY+"-pin", SYNC.pin); localStorage.setItem(KEY+"-scorer","1"); }catch(e){}
+  SYNC.scorer = true; liveBar(); renderAll(); pushState();
+});
+function initSync(){
+  if(location.protocol === "file:"){ SYNC.enabled = false; liveBar(); return; }
+  let remembered = false;
+  try{ remembered = localStorage.getItem(KEY+"-scorer") === "1"; }catch(e){}
+  SYNC.scorer = remembered;
+  pullState().then(()=>{ if(!SYNC.enabled){ SYNC.scorer = true; liveBar(); renderAll(); } });
+  setInterval(()=>{ if(!SYNC.scorer) pullState(); }, 6000);
+}
+
+renderTeams(); renderDay(); renderAll(); syncStartInput(); probeFotos(); initSync();
 </script>
