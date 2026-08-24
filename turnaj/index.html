@@ -1069,7 +1069,7 @@ function renderTV(){
   const idx = ALL.indexOf(m); const nx = ALL[idx+1];
   document.getElementById("tvNext").textContent = nx
     ? `DALŠÍ · ${fmt(nx.off)} ${nx.id} — ${nx.from ? nx.label : lineup(nx.id,nx.a)+" vs "+lineup(nx.id,nx.b)}`
-    : "POSLEDNÍ ZÁPAS TURNAJE — po něm ceremoniál v 17:45";
+    : `POSLEDNÍ ZÁPAS TURNAJE — po něm ceremoniál v ${fmt(315)}`;
 
   const st = standings();
   document.getElementById("tvStand").innerHTML =
