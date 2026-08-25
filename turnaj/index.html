@@ -351,10 +351,10 @@ body.viewer .pedit:empty{display:none}
   <div class="mast-txt">
     <p class="eyebrow">Domácí Grand Slam · Masters série · Ročník 2026</p>
     <h1 class="mark">Freedom <em>Open</em></h1>
-    <p class="tagline">Domácí Grand Slam ve čtyřhře. Jeden kurt, devět mužů, jeden Jadranský pohár.</p>
+    <p class="tagline">Domácí Grand Slam ve čtyřhře. Jeden kurt, osm mužů, jeden Jadranský pohár.</p>
     <div class="mast-meta">
-      <span><b>9</b> hráčů</span><span><b>4</b> týmy + Žolík</span>
-      <span><b>8</b> zápasů</span><span>Start <b><span id="metaStart">12:30</span></b></span><span>Kurty <b>1</b></span>
+      <span><b>8</b> hráčů</span><span><b>4</b> týmy</span>
+      <span><b>8</b> zápasů</span><span>Start <b><span id="metaStart">17:00</span></b></span><span>Kurty <b>1</b></span>
     </div>
   </div>
 </header>
@@ -382,14 +382,14 @@ body.viewer .pedit:empty{display:none}
 <!-- ============ LOS ============ -->
 <section class="panel" id="p-draw">
   <h2 class="sec">Los ročníku 2026</h2>
-  <p class="sec-note">Nasazená čtyřka (Andy, Maison, Kužla, Vlčí) se podle rozpisu nesmí potkat v jednom páru — každý nasazený proto dostal losem jednoho nenasazeného partnera. Devátý hráč zůstal bez týmu a dostal roli, která z lichého počtu udělala přednost: <b>Žolík</b>.</p>
+  <p class="sec-note">Nasazená čtyřka se podle rozpisu nesmí potkat v jednom páru — každý nasazený proto dostal losem jednoho nenasazeného partnera. Po odhlášení Kužly naskočil na jeho místo Vlasta a převzal i jeho nasazení, takže turnaj hrají čtyři pevné dvojice.</p>
 
   <div class="teams" id="teamCards"></div>
 
-  <h3 class="sub">Role Žolíka</h3>
+  <h3 class="sub">Změna v sestavě</h3>
   <div class="card">
-    <p style="margin-top:0"><b>Vlasta</b> nemá vlastní tým — odehraje <b>jeden zápas ve skupině za každý ze čtyř týmů</b>. V daném zápase za něj odpočívá kmenový partner nasazeného. Vlasta tak nastoupí do čtyř zápasů (nejvíc ze všech), sbírá vlastní bilanci a hraje o samostatnou trofej <b>Žolík turnaje</b>. V play-off nastupují týmy v základních dvojicích a Vlasta dělá hlavního rozhodčího finále.</p>
-    <p style="margin-bottom:0"><span class="pill gold">Proč to funguje</span> Devět hráčů nejde rozdělit do čtyřher. Místo jednoho hráče navíc, který celý den sedí, má turnaj postavu, která se protočí všemi týmy a rozhoduje o tabulce každého z nich.</p>
+    <p style="margin-top:0"><b>Kužla se odhlásil.</b> Na jeho místo v Týmu 3 naskočil <b>Vlasta</b>, který měl původně roli Žolíka, a přebírá po něm i nasazení číslo 3. Partnerem zůstává Šali.</p>
+    <p style="margin-bottom:0"><span class="pill gold">Co to zjednodušilo</span> Osm hráčů vyjde přesně na čtyři dvojice, takže odpadá rotující Žolík. Každý hráč odehraje tři zápasy ve skupině, sestavy se během dne nemění a v play-off nastupují ty samé dvojice jako ve skupině.</p>
   </div>
 
   <h3 class="sub">Rozdělení minut na kurtu</h3>
@@ -417,8 +417,8 @@ body.viewer .pedit:empty{display:none}
   <p class="sec-note">Jeden kurt, zápasy jdou po sobě. Časy počítají 25 minut hry + 5 minut na výměnu a pití. Skóre zapisuj v gamech — tabulka, pavouk i statistiky se přepočítají samy a průběžně se ukládají do prohlížeče.</p>
   <div class="startbox">
     <label for="startTime">Start turnaje</label>
-    <input type="time" id="startTime" value="12:30" step="300">
-    <span>Celý program se přepočítá — ceremoniál začíná v <b id="endTime">17:45</b>.</span>
+    <input type="time" id="startTime" value="17:00" step="300">
+    <span>Celý program se přepočítá — ceremoniál začíná v <b id="endTime">22:15</b>.</span>
   </div>
   <div class="btnrow" style="margin-top:0;margin-bottom:24px">
     <button class="btn primary" id="openTv">▶ Spustit TV board</button>
@@ -445,7 +445,7 @@ body.viewer .pedit:empty{display:none}
 <!-- ============ STATISTIKY ============ -->
 <section class="panel" id="p-stats" hidden>
   <h2 class="sec">Statistiky</h2>
-  <p class="sec-note">Individuální bilance napříč všemi zápasy — u Žolíka se počítají všechny čtyři týmy, za které nastoupil.</p>
+  <p class="sec-note">Individuální bilance napříč všemi zápasy. Oba hráči dvojice mají stejná čísla — je to čtyřhra, výsledek je společný.</p>
   <div class="grid g4" id="statCards"></div>
   <h3 class="sub">Hráči</h3>
   <div class="tablewrap"><table id="playerTbl"></table></div>
@@ -464,10 +464,10 @@ body.viewer .pedit:empty{display:none}
       <dl class="dl">
         <dt>Název</dt><dd>Freedom Open 2026</dd>
         <dt>Série</dt><dd>Freedom Open — Masters série</dd>
-        <dt>Claim</dt><dd>„Jeden kurt. Devět mužů. Jeden pohár.“</dd>
+        <dt>Claim</dt><dd>„Jeden kurt. Osm mužů. Jeden pohár.“</dd>
         <dt>Trofej</dt><dd>Jadranský pohár</dd>
         <dt>Kurt</dt><dd>Centre Court „Jadran“</dd>
-        <dt>Pauza</dt><dd>Freedom Break (14:20)</dd>
+        <dt>Pauza</dt><dd>Freedom Break (po třetím zápase)</dd>
         <dt>Hymna</dt><dd>Jedna skladba z roku 2006, pouští se před finále</dd>
         <dt>Hashtag</dt><dd>#FreedomOpen2026</dd>
       </dl>
@@ -494,17 +494,17 @@ body.viewer .pedit:empty{display:none}
     <div class="card"><div style="font-family:var(--f-disp);font-size:34px;line-height:1.1">Instrument Serif</div><p style="font-size:13.5px;color:var(--bone-dim);margin:6px 0 0">Displej: jména hráčů, nadpisy, trofej. Nese tu grandslamovou vážnost.</p></div>
     <div class="card"><div style="font-family:var(--f-ui);font-weight:900;font-size:30px;letter-spacing:-.01em">Archivo Black</div><p style="font-size:13.5px;color:var(--bone-dim);margin:6px 0 0">Rozhraní a skóre na TV. Číslice tabulkové, aby gamy neposkakovaly.</p></div>
   </div>
-  <div class="card" style="margin-top:14px"><div style="font-family:var(--f-mono);font-size:19px">SPACE MONO — 12:50 · CENTRE COURT JADRAN</div><p style="font-size:13.5px;color:var(--bone-dim);margin:6px 0 0">Datová vrstva: časy, kódy zápasů, popisky. Dělá z rozpisu oficiální dokument.</p></div>
+  <div class="card" style="margin-top:14px"><div style="font-family:var(--f-mono);font-size:19px">SPACE MONO — 17:20 · CENTRE COURT JADRAN</div><p style="font-size:13.5px;color:var(--bone-dim);margin:6px 0 0">Datová vrstva: časy, kódy zápasů, popisky. Dělá z rozpisu oficiální dokument.</p></div>
 
   <h3 class="sub">Ceremoniál a doprovodný program</h3>
   <ul class="clean">
-    <li><span class="t">12:30</span><span><b>Slavnostní zahájení.</b> Nástup devíti hráčů na základní čáru, přivítání, přečtení losu z obálky, společné foto pod znakem. Krátká hymna.</span></li>
-    <li><span class="t">12:45</span><span><b>Rozehrání a slib.</b> Nejmladší hráč pronese sportovní slib („budeme hlásit auty poctivě“), Žolík dostane pásku na paži.</span></li>
-    <li><span class="t">14:20</span><span><b>Freedom Break.</b> Grill, dolití vody, průběžné vyhlášení tabulky nahlas z TV boardu.</span></li>
-    <li><span class="t">16:05</span><span><b>Vyhlášení skupiny.</b> Ceremonie nasazení do play-off — kdo je jednička, dostává výběr strany kurtu a nové míče.</span></li>
-    <li><span class="t">16:55</span><span><b>Finálový nástup.</b> Hráči nastupují za sebou s ručníkem, hymna, Žolík jako rozhodčí na vysoké židli (štafle).</span></li>
-    <li><span class="t">17:45</span><span><b>Ceremoniál.</b> Bronz, stříbro, zlato. Jadranský pohár nad hlavu, prosecco, vyhlášení Žolíka turnaje a cen mimo pořadí. Zápis jmen na tabuli vítězů.</span></li>
-    <li><span class="t">18:15</span><span><b>Afterparty.</b> Sestřihy z telefonů a losování pořadatele ročníku 2027.</span></li>
+    <li><span class="t">Start</span><span><b>Slavnostní zahájení.</b> Nástup devíti hráčů na základní čáru, přivítání, přečtení losu z obálky, společné foto pod znakem. Krátká hymna.</span></li>
+    <li><span class="t">+15</span><span><b>Rozehrání a slib.</b> Nejmladší hráč pronese sportovní slib („budeme hlásit auty poctivě“).</span></li>
+    <li><span class="t">+110</span><span><b>Freedom Break.</b> Grill, dolití vody, průběžné vyhlášení tabulky nahlas z TV boardu.</span></li>
+    <li><span class="t">+215</span><span><b>Vyhlášení skupiny.</b> Ceremonie nasazení do play-off — kdo je jednička, dostává výběr strany kurtu a nové míče.</span></li>
+    <li><span class="t">+265</span><span><b>Finálový nástup.</b> Hráči nastupují za sebou s ručníkem, hymna, rozhodčí na vysoké židli (štafle).</span></li>
+    <li><span class="t">+315</span><span><b>Ceremoniál.</b> Bronz, stříbro, zlato. Jadranský pohár nad hlavu, prosecco, ceny mimo pořadí. Zápis jmen na tabuli vítězů.</span></li>
+    <li><span class="t">+345</span><span><b>Afterparty.</b> Sestřihy z telefonů a losování pořadatele ročníku 2027.</span></li>
   </ul>
 
   <h3 class="sub">Co ještě značku drží pohromadě</h3>
@@ -529,69 +529,61 @@ body.viewer .pedit:empty{display:none}
     <div class="card">
       <h3 class="sub" style="margin-top:0">Play-off</h3>
       <p style="font-size:14.5px">Ze skupiny postupují všichni. <b>Zápas o 3. místo</b> hraje 3. proti 4., <b>finále</b> 1. proti 2. Finále je set do 6 gamů, tiebreak za stavu 6:6, bez časového limitu. V play-off nastupují jen základní dvojice.</p>
-      <p style="font-size:14.5px;margin-bottom:0">Nové míče do finále. Rozhoduje Žolík, jeho slovo je konečné.</p>
+      <p style="font-size:14.5px;margin-bottom:0">Nové míče do finále. Finále soudí dvojice, která skončila v zápase o bronz poslední.</p>
     </div>
     <div class="card">
       <h3 class="sub" style="margin-top:0">Servis a dvorec</h3>
       <p style="font-size:14.5px;margin-bottom:0">Jedno podání navíc se nedává, druhé podání platí normálně. Nety při podání se opakují. Auty hlásí strana, na které míč dopadl; při sporu se bod opakuje. Střídání stran po lichých gamech, bez sezení.</p>
     </div>
     <div class="card">
-      <h3 class="sub" style="margin-top:0">Žolík — ve zkratce</h3>
-      <p style="font-size:14.5px;margin-bottom:0">Vlasta odehraje právě jeden zápas za každý tým, podle rozpisu (Z1, Z2, Z4, Z6). Odpočívající partner v tu dobu nesmí radit od lajny. Body ze zápasu patří týmu, ne Žolíkovi — Žolík si vede vlastní bilanci pro svou trofej. Úplný statut je níže.</p>
+      <h3 class="sub" style="margin-top:0">Sestavy</h3>
+      <p style="font-size:14.5px;margin-bottom:0">Čtyři pevné dvojice, každá hraje třikrát ve skupině a pak play-off ve stejném složení. Po odhlášení Kužly nastupuje v Týmu 3 Vlasta. Co dělat, když někdo vypadne během dne, řeší statut níže.</p>
     </div>
   </div>
 
-  <h2 class="sec" style="margin-top:52px">Statut Žolíka</h2>
-  <p class="sec-note">Deset článků, které řeší každou situaci, jaká může kolem devátého hráče nastat — od nástupu přes body a spory až po zranění a play-off. Když se během dne o něčem strhne debata, platí to, co je tady.</p>
+  <h2 class="sec" style="margin-top:52px">Statut turnaje</h2>
+  <p class="sec-note">Osm článků, které řeší situace, na kterých se během dne dá pohádat — od odhlášení hráče přes sporné míče až po to, kdo soudí finále. Když se o něčem strhne debata, platí to, co je tady.</p>
   <div class="card" style="padding:6px 22px 10px">
     <div class="artcl"><div class="no">§ 1</div><div>
-      <h4>Kdo je Žolík a proč existuje</h4>
-      <p>Devět hráčů nejde rozdělit do čtyřher. Devátý hráč — <b>Vlasta</b> — proto nemá stálý tým a stává se Žolíkem: samostatnou funkcí s vlastním rozpisem, vlastní bilancí a vlastní trofejí. Role je na celý turnaj, nedá se během dne předat ani vyměnit.</p></div></div>
+      <h4>Sestavy</h4>
+      <p>Turnaj hrají <b>čtyři pevné dvojice</b> — nasazený hráč a jeho partner z losu. Sestavy se během dne nemění, ve skupině i v play-off nastupuje stejná dvojice. Nasazení se podle losu nemohou potkat v jednom páru.</p></div></div>
 
     <div class="artcl"><div class="no">§ 2</div><div>
-      <h4>Nasazení do zápasů — pevný rozpis</h4>
-      <p>Žolík nastupuje do <b>právě čtyř zápasů skupiny</b> a v každém za jiný tým: <b>Z1 za Tým 1</b> (Andy), <b>Z2 za Tým 3</b> (Kužla), <b>Z4 za Tým 4</b> (Vlčí), <b>Z6 za Tým 2</b> (Maison). Pořadí vzešlo z losu a během turnaje se nemění ani po dohodě — jinak by se dal ovlivnit průběh tabulky.</p></div></div>
+      <h4>Odhlášení a náhradník</h4>
+      <p>Před turnajem se odhlásil <b>Kužla</b>. Na jeho místo v Týmu 3 nastoupil <b>Vlasta</b> a převzal i jeho nasazení číslo 3 — pořadí týmů v rozpisu se tím nemění. Kdyby někdo vypadl <b>v průběhu dne</b>, jeho tým může dohrát s náhradníkem z řad přítomných, ale za snížený zisk <b>1 bodu za výhru</b>. Bez náhradníka se zbylé zápasy toho týmu kontumují 4:0 a odehrané výsledky zůstávají v platnosti.</p></div></div>
 
     <div class="artcl"><div class="no">§ 3</div><div>
-      <h4>Koho nahrazuje</h4>
-      <p>Vždy <b>nenasazeného partnera</b>, nikdy nasazeného. Nasazený hráč je kapitán týmu a odehraje všechny tři zápasy skupiny bez výjimky. Zápasy Z3 a Z5 se hrají v základních dvojicích — v nich Žolík nenastupuje a je k dispozici jako čárový.</p></div></div>
+      <h4>Body a pořadí</h4>
+      <p>Výhra <b>2 body</b>, prohra 0. Při rovnosti rozhoduje v tomto pořadí: <b>vzájemný zápas</b>, pak rozdíl gamů, pak počet vyhraných gamů. Tabulku počítá systém průběžně, není o čem diskutovat.</p></div></div>
 
     <div class="artcl"><div class="no">§ 4</div><div>
-      <h4>Odpočívající partner</h4>
-      <p>Hráč, za kterého Žolík nastoupil, sedí za lavičkou. <b>Nesmí koučovat, radit ani komentovat sporné míče</b> — může podávat míče a nosit vodu. Za porušení dostane jeho tým po napomenutí jeden trestný game. Sledovat a fandit smí kdokoliv.</p></div></div>
+      <h4>Podání a strany</h4>
+      <p>Podání otevírá <b>nasazený hráč</b> toho týmu, který si vylosoval podání. Stranu kurtu losí soupeř mincí. Střídání stran po lichých gamech, bez sezení. Jedno podání navíc se nedává, druhé podání platí normálně, nety při podání se opakují.</p></div></div>
 
     <div class="artcl"><div class="no">§ 5</div><div>
-      <h4>Komu patří body</h4>
-      <p>Výsledek zápasu patří <b>týmu</b>, za který Žolík zrovna hrál — body i gamy jdou do tabulky týmu úplně stejně, jako by hrála základní dvojice. Žolík sám do tabulky skupiny nezasahuje a nemůže v ní skončit.</p></div></div>
+      <h4>Sporné míče</h4>
+      <p>Auty hlásí <b>strana, na které míč dopadl</b> — má to lepší z ruky a nikdo jí to nerozporuje. Když si dvojice není jistá, míč je dobrý. Při sporu mezi stranami se <b>bod opakuje</b>, nedohaduje se.</p></div></div>
 
     <div class="artcl"><div class="no">§ 6</div><div>
-      <h4>Vlastní bilance a trofej</h4>
-      <p>Žolíkovi se paralelně počítá <b>osobní bilance V–P a rozdíl gamů</b> ze všech čtyř zápasů — systém ji vede automaticky v záložce Statistiky. Z ní se na ceremoniálu vyhlašuje <b>Žolík turnaje</b> — páska na paži a vlastní řádek na tabuli vítězů. Bilance 4–0 se vyhlašuje jako <b>Perfect Round</b>.</p></div></div>
+      <h4>Koučování a lavička</h4>
+      <p>Hráči, kteří zrovna nehrají, smějí <b>fandit, ne koučovat</b>. Radit od lajny hrající dvojici nebo komentovat sporné míče se nesmí; po napomenutí to stojí jeden trestný game. Podávat míče a nosit vodu smí kdokoliv.</p></div></div>
 
     <div class="artcl"><div class="no">§ 7</div><div>
-      <h4>Podání, strany, rozehrání</h4>
-      <p>V zápase s Žolíkem otevírá podání <b>nasazený hráč jeho týmu</b>, Žolík podává jako druhý v pořadí své strany — aby si tým nemusel kvůli střídání přehazovat rozestavení. Stranu kurtu losí soupeř mincí. Žolík má nárok na <b>3 minuty rozehrání navíc</b>, pokud jde do zápasu přímo z předchozího (Z1 → Z2); ostatní na něj počkají.</p></div></div>
+      <h4>Play-off a rozhodčí</h4>
+      <p>Ze skupiny postupují všichni: <b>3. hraje se 4. o bronz</b>, <b>1. s 2. o Jadranský pohár</b>. Finále je set do 6 gamů s tiebreakem za stavu 6:6, bez časového limitu, s novými míči. <b>Finále soudí dvojice, která prohrála zápas o bronz</b> — sedí na štaflích, hlásí stav a její výrok je konečný.</p></div></div>
 
     <div class="artcl"><div class="no">§ 8</div><div>
-      <h4>Zranění a výpadky</h4>
-      <p>Když nemůže <b>Žolík</b>, zápas se odehraje v základní dvojici a Žolíkovi se do bilance nezapíše nic. Když nemůže <b>kmenový partner</b>, může za něj Žolík nastoupit i mimo svůj rozpis — nejvýš jednou za turnaj a jen se souhlasem soupeře; takový zápas se mu do bilance počítá normálně. Když vypadne <b>nasazený</b>, jeho tým dohrává s Žolíkem a partnerem, ale za snížený zisk 1 bodu za výhru.</p></div></div>
-
-    <div class="artcl"><div class="no">§ 9</div><div>
-      <h4>Play-off a role rozhodčího</h4>
-      <p>V play-off Žolík <b>nehraje</b> — zápas o 3. místo i finále se hrají v základních dvojicích. Místo toho dělá <b>hlavního rozhodčího</b>: sedí na štaflích, hlásí stav, rozhoduje sporné míče a jeho výrok je konečný. Zároveň obsluhuje TV board a odstartuje hymnu.</p></div></div>
-
-    <div class="artcl"><div class="no">§ 10</div><div>
-      <h4>Střet zájmů</h4>
-      <p>Žolík hrál za všechny čtyři týmy a zná je zevnitř — proto <b>nemůže rozhodovat o vlastní trofeji</b> ani hlasovat v Ceně fair play. Když v play-off soudí zápas týmu, se kterým sám vyhrál skupinový zápas, nahlásí to před začátkem a sporný míč se na vyžádání opakuje.</p></div></div>
+      <h4>Fair play</h4>
+      <p>Cenu fair play uděluje <b>hlasování hráčů</b> na ceremoniálu a <b>nemůže ji dostat vítězná dvojice</b>. Kdo během dne zvedne hlas na soupeře kvůli autu, ztrácí na ni nárok automaticky.</p></div></div>
   </div>
 
-  <h3 class="sub">Průběh zápasu s Žolíkem — krok za krokem</h3>
+  <h3 class="sub">Průběh zápasu — krok za krokem</h3>
   <ul class="clean">
-    <li><span class="t">−5 min</span><span>Hlášení z TV boardu: kdo hraje, za jaký tým Žolík nastupuje a kdo odpočívá.</span></li>
-    <li><span class="t">−3 min</span><span>Odpočívající partner odevzdá Žolíkovi pásku a odchází za lavičku.</span></li>
-    <li><span class="t">−2 min</span><span>Los stran mincí, rozehrání. Nasazený hráč Žolíkova týmu si bere první podání.</span></li>
+    <li><span class="t">−5 min</span><span>Hlášení z TV boardu: kdo hraje a na jaký čas je zápas nasazený.</span></li>
+    <li><span class="t">−3 min</span><span>Rozehrání, obě dvojice na kurtu.</span></li>
+    <li><span class="t">−1 min</span><span>Los stran mincí. Nasazený hráč podávajícího týmu si bere první podání.</span></li>
     <li><span class="t">0</span><span>Zápas — set do 4 gamů, bez výhod, limit 25 minut.</span></li>
-    <li><span class="t">Konec</span><span>Zápis skóre do boardu, fotka vítězné dvojice u sítě, Žolíkovi se připíše bilance.</span></li>
+    <li><span class="t">Konec</span><span>Zápis skóre do boardu a fotka vítězné dvojice u sítě.</span></li>
   </ul>
 
   <h3 class="sub">Časový harmonogram dne</h3>
@@ -641,15 +633,13 @@ const PRISTINE = "<!doctype html>\n" + document.documentElement.outerHTML;
 const TEAMS = [
   {id:1, seed:"Andy",   sn:1, partner:"Kraťas",  pn:8},
   {id:2, seed:"Maison", sn:2, partner:"Kloubek", pn:6},
-  {id:3, seed:"Kužla",  sn:3, partner:"Šali",    pn:7},
+  {id:3, seed:"Vlasta", sn:3, partner:"Šali",    pn:7},
   {id:4, seed:"Vlčí",   sn:4, partner:"Djeržík", pn:9}
 ];
-const JOKER = "Vlasta";
 // celá jména podle startovní listiny
 const NAMES = {
   "Andy":    {full:"Ondřej Vícha",       titul:"EFA"},
   "Maison":  {full:"Ondřej Maison",      titul:""},
-  "Kužla":   {full:"Lukáš Kužel",        titul:"Ing., EFP"},
   "Vlčí":    {full:"Jan Vlček",          titul:"EFA"},
   "Vlasta":  {full:"Vlastimil Drábek",   titul:"PFP"},
   "Kloubek": {full:"Petr Klobouk",       titul:"Mgr., PFP"},
@@ -657,14 +647,13 @@ const NAMES = {
   "Kraťas":  {full:"Jakub Kratochvíla",  titul:"Ing., EFP"},
   "Djeržík": {full:"Martin Dzierža",     titul:"Ing., EFP"}
 };
-// joker = id týmu, za který v tom zápase nastupuje Žolík
 const GROUP = [
-  {id:"Z1", off:20,  a:1, b:2, joker:1},
-  {id:"Z2", off:50,  a:3, b:4, joker:3},
-  {id:"Z3", off:80,  a:1, b:3, joker:0},
-  {id:"Z4", off:125, a:2, b:4, joker:4},
-  {id:"Z5", off:155, a:1, b:4, joker:0},
-  {id:"Z6", off:185, a:2, b:3, joker:2}
+  {id:"Z1", off:20,  a:1, b:2},
+  {id:"Z2", off:50,  a:3, b:4},
+  {id:"Z3", off:80,  a:1, b:3},
+  {id:"Z4", off:125, a:2, b:4},
+  {id:"Z5", off:155, a:1, b:4},
+  {id:"Z6", off:185, a:2, b:3}
 ];
 const PO = [
   {id:"B", off:230, label:"Zápas o 3. místo", from:[3,4], to:6},
@@ -672,7 +661,7 @@ const PO = [
 ];
 const DAY = [
   [0,  "Slavnostní zahájení, nástup, los z obálky, foto"],
-  [15, "Rozehrání, sportovní slib, páska pro Žolíka"],
+  [15, "Rozehrání a sportovní slib"],
   [20, "Z1 — Tým 1 vs Tým 2"],
   [50, "Z2 — Tým 3 vs Tým 4"],
   [80, "Z3 — Tým 1 vs Tým 3"],
@@ -683,11 +672,11 @@ const DAY = [
   [215,"Konec skupiny, vyhlášení nasazení do play-off, kropení kurtu"],
   [230,"Zápas o 3. místo (do 6 gamů)"],
   [265,"FINÁLE (do 6 gamů, tiebreak 6:6)"],
-  [315,"Ceremoniál — medaile, Jadranský pohár, Žolík turnaje, ceny mimo pořadí"],
+  [315,"Ceremoniál — medaile, Jadranský pohár, ceny mimo pořadí"],
   [345,"Afterparty a losování pořadatele ročníku 2027"]
 ];
 const ALL = [...GROUP, ...PO];
-const START_DEFAULT = "12:30";
+const START_DEFAULT = "17:00";
 function startTime(){
   const v = S.__start;
   return (typeof v === "string" && /^\d{1,2}:\d{2}$/.test(v)) ? v : START_DEFAULT;
@@ -697,7 +686,7 @@ function fmt(off){
   const tot = ((h*60+m+off) % 1440 + 1440) % 1440;
   return String(Math.floor(tot/60)).padStart(2,"0")+":"+String(tot%60).padStart(2,"0");
 }
-const KEY = "krojs-master-2026";
+const KEY = "freedom-open-2026";
 
 /* ---------------- stav ---------------- */
 let S = {}, EMBED = null;
@@ -715,12 +704,7 @@ function setRes(id,r){ S[id]=r; save(); renderAll(); }
 /* ---------------- pomocné ---------------- */
 const T = id => TEAMS.find(t=>t.id===id);
 const teamName = id => { const t=T(id); return t ? `${t.seed} / ${t.partner}` : "—"; };
-function lineup(mid, teamId){
-  const t = T(teamId); if(!t) return "—";
-  const m = ALL.find(x=>x.id===mid);
-  if(m && m.joker === teamId) return `${t.seed} / ${JOKER}`;
-  return `${t.seed} / ${t.partner}`;
-}
+function lineup(mid, teamId){ return teamName(teamId); }
 function esc(s){ return String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
 
 /* ---------------- tabulka skupiny ---------------- */
@@ -755,18 +739,16 @@ function poTeams(m){
 /* ---------------- statistiky hráčů ---------------- */
 function playerStats(){
   const P = {};
-  const add = n => P[n] || (P[n]={name:n, mp:0, w:0, l:0, gf:0, ga:0, joker:0});
-  TEAMS.forEach(t=>{ add(t.seed); add(t.partner); }); add(JOKER);
+  const add = n => P[n] || (P[n]={name:n, mp:0, w:0, l:0, gf:0, ga:0});
+  TEAMS.forEach(t=>{ add(t.seed); add(t.partner); });
   ALL.forEach(m=>{
     const r = res(m.id); if(!r.done) return;
     let ta, tb;
     if(m.from){ [ta,tb] = poTeams(m); if(!ta) return; } else { ta=m.a; tb=m.b; }
     const side = (tid, gf, ga) => {
       const t=T(tid); if(!t) return;
-      const names = (m.joker===tid) ? [t.seed, JOKER] : [t.seed, t.partner];
-      names.forEach(n=>{ const p=add(n); p.mp++; p.gf+=gf; p.ga+=ga;
-        if(gf>ga) p.w++; else if(ga>gf) p.l++;
-        if(n===JOKER) p.joker++; });
+      [t.seed, t.partner].forEach(n=>{ const p=add(n); p.mp++; p.gf+=gf; p.ga+=ga;
+        if(gf>ga) p.w++; else if(ga>gf) p.l++; });
     };
     side(ta, r.a, r.b); side(tb, r.b, r.a);
   });
@@ -786,7 +768,7 @@ function pro(n){ return PRO[n] || (PRO[n]={photo:"",nick:"",motto:""}); }
 
 // fotky uložené přímo v projektu (složka turnaj/foto) — vidí je každý, kdo otevře odkaz
 const SLUG = {
-  "Andy":"andy", "Maison":"maison", "Kužla":"kuzla", "Vlčí":"vlci", "Vlasta":"vlasta",
+  "Andy":"andy", "Maison":"maison", "Vlčí":"vlci", "Vlasta":"vlasta",
   "Kloubek":"kloubek", "Šali":"sali", "Kraťas":"kratas", "Djeržík":"djerzik"
 };
 const REPO = {};
@@ -807,9 +789,8 @@ function photoSrc(n){
 
 function roster(){
   const list = [];
-  TEAMS.forEach(t=>list.push({name:t.seed, kind:"seed", label:"Nasazený "+t.sn, mp:3}));
-  TEAMS.forEach(t=>list.push({name:t.partner, kind:"partner", label:"Tým "+t.id, mp:2}));
-  list.push({name:JOKER, kind:"joker", label:"Žolík", mp:4});
+  TEAMS.forEach(t=>list.push({name:t.seed, kind:"seed", label:"Nasazený "+t.sn, mp:4}));
+  TEAMS.forEach(t=>list.push({name:t.partner, kind:"partner", label:"Tým "+t.id, mp:4}));
   return list;
 }
 function initials(n){
@@ -913,18 +894,11 @@ function renderTeams(){
       <div class="role" style="text-transform:none;letter-spacing:0;font-size:12px;color:var(--bone-dim);margin-bottom:6px">
         ${esc(NAMES[t.seed].full)} · ${esc(NAMES[t.partner].full)}</div>
       <div class="role">Nasazení ${t.sn} · los č. ${t.pn}</div>
-    </div>`).join("") + `
-    <div class="team joker">
-      <div class="tno">BEZ TÝMU</div>
-      <div class="players">${esc(JOKER)}</div>
-      <div class="role" style="text-transform:none;letter-spacing:0;font-size:12px;color:var(--bone-dim);margin-bottom:6px">${esc(NAMES[JOKER].full)}</div>
-      <div class="role">Žolík · hraje za všechny čtyři</div>
-    </div>`;
+    </div>`).join("");
 
   const rows = [
     ...TEAMS.map(t=>[t.seed, `Nasazený ${t.sn}`, "Tým "+t.id, 3]),
-    ...TEAMS.map(t=>[t.partner, "Partner", "Tým "+t.id, 2]),
-    [JOKER, "Žolík", "Tým 1–4", 4]
+    ...TEAMS.map(t=>[t.partner, "Partner", "Tým "+t.id, 3])
   ];
   document.getElementById("loadTbl").innerHTML =
     `<tr><th>Hráč</th><th>Role</th><th>Tým</th><th class="num">Zápasů ve skupině</th></tr>` +
@@ -942,7 +916,6 @@ function matchRow(m){
     note = m.label + " · set do 6 gamů";
   } else {
     na = lineup(m.id, m.a); nb = lineup(m.id, m.b);
-    if(m.joker) note = `Žolík ${JOKER} nastupuje za Tým ${m.joker} — odpočívá ${T(m.joker).partner}`;
   }
   return `<div class="match ${r.done?"done":""}">
     <div class="slot">${fmt(m.off)}<small>${m.id}</small></div>
@@ -1006,23 +979,22 @@ function renderStats(){
   const played = ALL.filter(m=>res(m.id).done).length;
   const games = ALL.reduce((s,m)=>{const r=res(m.id); return s + (r.done ? r.a+r.b : 0);},0);
   const best = ps[0];
-  const jk = ps.find(p=>p.name===JOKER);
+  const byDiff = [...ps].filter(p=>p.mp).sort((a,b)=>(b.gf-b.ga)-(a.gf-a.ga))[0];
   document.getElementById("statCards").innerHTML = `
     <div class="stat"><div class="k">Odehráno zápasů</div><div class="v">${played} <small>/ 8</small></div>
       <div class="bar"><i style="width:${played/8*100}%"></i></div></div>
     <div class="stat"><div class="k">Gamů celkem</div><div class="v">${games}</div></div>
     <div class="stat"><div class="k">Nejlepší bilance</div><div class="v" style="font-size:26px">${played?esc(best.name):"—"}
       <small>${played?best.w+"–"+best.l:""}</small></div></div>
-    <div class="stat"><div class="k">Žolík ${esc(JOKER)}</div><div class="v" style="font-size:26px">${jk.w}–${jk.l}
-      <small>${jk.mp} zápasů</small></div></div>`;
+    <div class="stat"><div class="k">Nejlepší rozdíl gamů</div><div class="v" style="font-size:26px">${byDiff?esc(byDiff.name):"—"}
+      <small>${byDiff?(byDiff.gf-byDiff.ga>0?"+":"")+(byDiff.gf-byDiff.ga):""}</small></div></div>`;
 
   document.getElementById("playerTbl").innerHTML =
     `<tr><th>Hráč</th><th>Role</th><th class="num">Z</th><th class="num">V</th><th class="num">P</th><th class="num">Úspěšnost</th><th class="num">Gamy</th><th class="num">±</th></tr>` +
     ps.map(p=>{
       const t = TEAMS.find(x=>x.seed===p.name);
       const t2 = TEAMS.find(x=>x.partner===p.name);
-      const role = p.name===JOKER ? `<span class="pill gold">Žolík</span>` :
-        t ? `<span class="pill red">Nasazený ${t.sn}</span>` : `<span class="pill">Tým ${t2?t2.id:"—"}</span>`;
+      const role = t ? `<span class="pill red">Nasazený ${t.sn}</span>` : `<span class="pill">Tým ${t2?t2.id:"—"}</span>`;
       const pct = p.mp ? Math.round(p.w/p.mp*100) : 0;
       const fn = NAMES[p.name];
       return `<tr><td><b>${esc(p.name)}</b>${fn?`<div style="font-size:11.5px;color:var(--bone-dim)">${esc(fn.full)}</div>`:""}</td><td>${role}</td><td class="num">${p.mp}</td>
@@ -1033,8 +1005,8 @@ function renderStats(){
 
   const top = n => { const a=[...ps].filter(p=>p.mp); if(!a.length) return "—"; a.sort(n); return a[0].name+" "; };
   document.getElementById("awardCards").innerHTML = `
-    <div class="card"><h3 class="sub" style="margin-top:0">Žolík turnaje</h3>
-      <p style="margin:0;font-size:14.5px"><b>${esc(JOKER)}</b> — bilance ${jk.w}–${jk.l}, gamy ${jk.gf}:${jk.ga}. Páska na paži a řádek na tabuli vítězů. Vítězí vždy, protože je jediný.</p></div>
+    <div class="card"><h3 class="sub" style="margin-top:0">Cena náhradníka</h3>
+      <p style="margin:0;font-size:14.5px"><b>Vlasta</b> naskočil za odhlášeného Kužlu a vzal si jeho nasazení. Řádek na tabuli vítězů má jistý bez ohledu na výsledek.</p></div>
     <div class="card"><h3 class="sub" style="margin-top:0">Železný muž</h3>
       <p style="margin:0;font-size:14.5px">Nejvíc odehraných gamů: <b>${esc(top((a,b)=>(b.gf+b.ga)-(a.gf+a.ga)))}</b></p></div>
     <div class="card"><h3 class="sub" style="margin-top:0">Nejlepší rozdíl gamů</h3>
@@ -1058,8 +1030,8 @@ function renderTV(){
   let ta, tb, na, nb;
   if(m.from){ [ta,tb]=poTeams(m); na = ta?teamName(ta):`${m.from[0]}. ze skupiny`; nb = tb?teamName(tb):`${m.from[1]}. ze skupiny`; }
   else { ta=m.a; tb=m.b; na=lineup(m.id,m.a); nb=lineup(m.id,m.b); }
-  const subA = m.from ? m.label : (m.joker===ta ? "s Žolíkem "+JOKER : "Tým "+ta);
-  const subB = m.from ? m.label : (m.joker===tb ? "s Žolíkem "+JOKER : "Tým "+tb);
+  const subA = m.from ? m.label : "Tým "+ta;
+  const subB = m.from ? m.label : "Tým "+tb;
   const A=document.getElementById("tvA"), B=document.getElementById("tvB");
   A.className = "tv-side"+(r.a>r.b?" lead":""); B.className = "tv-side"+(r.b>r.a?" lead":"");
   const faces = s => {
